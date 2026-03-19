@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import { FilterBar, useListingFilters } from "./FilterBar"
 import { ListingGrid } from "./ListingGrid"
 import { LocationSearch } from "./LocationSearch"
+import { SaveSearchButton } from "./SaveSearchButton"
 import type { ListingCard } from "@/lib/listings-query"
 import { useRouter } from "next/navigation"
 
@@ -81,9 +82,12 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
             </button>
           </div>
 
-          {/* Location search */}
-          <div className="flex-1 max-w-sm">
-            <LocationSearch onSelect={handleLocationSelect} />
+          {/* Location search + Save search */}
+          <div className="flex items-center gap-3 flex-1 justify-end">
+            <div className="max-w-sm flex-1">
+              <LocationSearch onSelect={handleLocationSelect} />
+            </div>
+            <SaveSearchButton states={filters.states} />
           </div>
         </div>
       </div>
