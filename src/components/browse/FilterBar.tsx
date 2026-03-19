@@ -34,6 +34,7 @@ const TIME_OPEN_OPTIONS = [
 
 export function useListingFilters() {
   return useQueryStates({
+    query: parseAsString.withDefault(""),
     types: parseAsArrayOf(parseAsString).withDefault([]),
     states: parseAsArrayOf(parseAsString).withDefault([]),
     minPrice: parseAsInteger,
@@ -47,6 +48,7 @@ export function FilterBar() {
   const [filters, setFilters] = useListingFilters()
 
   const hasActiveFilters =
+    !!filters.query ||
     filters.types.length > 0 ||
     filters.states.length > 0 ||
     filters.minPrice !== null ||
@@ -71,6 +73,7 @@ export function FilterBar() {
 
   function clearAll() {
     setFilters({
+      query: null,
       types: [],
       states: [],
       minPrice: null,
@@ -84,6 +87,18 @@ export function FilterBar() {
     <div className="bg-white border-b sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex flex-wrap items-center gap-3">
+          {/* Search */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-700">Search:</span>
+            <input
+              type="text"
+              value={filters.query}
+              onChange={(e) => setFilters({ query: e.target.value || null })}
+              placeholder="Location, city..."
+              className="text-sm border border-gray-300 rounded-md px-3 py-1 w-40 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            />
+          </div>
+
           {/* Type filter */}
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-gray-700">Type:</span>
