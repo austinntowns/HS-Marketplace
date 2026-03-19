@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Google Workspace SSO, role system, database schema, and email infrastructure (completed 2026-03-19)
 - [x] **Phase 2: Listings and Moderation** - Seller listing creation for all types, admin approval queue, and status notifications (completed 2026-03-19)
 - [x] **Phase 3: Discovery and Contact** - Buyer browse, filters, listing detail, contact form, and area alerts (gap closure in progress) (completed 2026-03-19)
-- [ ] **Phase 4: Live KPI Integration** - Internal API proxy, live KPI cards on listing detail, trend charts, and bundle rollups
+- [x] **Phase 4: Live KPI Integration** - Internal API proxy, live KPI cards on listing detail, trend charts, and bundle rollups (completed 2026-03-19)
 
 ## Phase Details
 
@@ -81,7 +81,7 @@ Plans:
 **Goal**: Listing detail pages display live operational data from Hello Sugar's internal API, making the financial picture complete and verified
 **Depends on**: Phase 3
 **Requirements**: LIST-17, LIST-18, LIST-19
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 **Success Criteria** (what must be TRUE):
   1. Listing detail for an open salon shows live KPI cards (revenue, new clients, bookings, membership conversion) sourced from the internal API — labeled as API-verified, not seller-entered
   2. Each KPI card has a 12-month trend chart showing historical trajectory
@@ -103,4 +103,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
 | 2. Listings and Moderation | 4/4 | Complete   | 2026-03-19 |
 | 3. Discovery and Contact | 8/8 | Complete   | 2026-03-19 |
-| 4. Live KPI Integration | 2/3 | In Progress|  |
+| 4. Live KPI Integration | 3/3 | Complete   | 2026-03-19 |
