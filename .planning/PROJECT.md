@@ -18,16 +18,16 @@ Franchisees can quickly find buyers for their locations with verified performanc
 - [x] Unopened territories show basic info only (location, size, price) — *Validated in Phase 2*
 - [x] Corporate approves listings before they go live — *Validated in Phase 2*
 - [x] Admin dashboard: approve/reject listings, view all activity, manage users, edit any listing — *Validated in Phase 2*
+- [x] Buyers can browse listings in list view or map view — *Validated in Phase 3: Discovery & Contact*
+- [x] Filters: time open, price, location/state, location type, text search — *Validated in Phase 3*
+- [x] Buyers can set area/state alerts for new listings — *Validated in Phase 3*
+- [x] Buyer submits contact form → seller notified — *Validated in Phase 3*
 
 ### Active
 
 - [ ] Live operational data pulled from internal API (revenue, new clients, bookings, membership conversion)
 - [ ] KPI summary cards with 12-month trend drill-down
 - [ ] Cumulative + per-location views for multi-location bundles
-- [ ] Buyers can browse listings in list view or map view
-- [ ] Filters: time open, price, location/state, location type
-- [ ] Buyers can set area/state alerts for new listings
-- [ ] Buyer submits contact form → seller notified
 
 ### Out of Scope
 
@@ -54,11 +54,12 @@ Franchisees can quickly find buyers for their locations with verified performanc
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Lead capture only, not full transactions | Reduces complexity, v1 can ship faster | — Pending |
+| Lead capture only, not full transactions | Reduces complexity, v1 can ship faster | ✓ Phase 3 |
 | Authenticated access only | Protects sensitive financial data, keeps it internal | ✓ Phase 1 |
 | Corporate moderation required | Quality control, prevent bad listings | ✓ Phase 2 |
 | Next.js + Neon + Vercel | Fast to build, familiar stack | ✓ Phase 1 |
 | Min 1 photo per listing (not 3) | Lower friction for initial listing creation | ✓ Phase 2 |
+| State-only alert criteria | Simple matching, avoid over-engineering v1 | ✓ Phase 3 |
 
 ---
-*Last updated: 2026-03-19 after Phase 2 completion*
+*Last updated: 2026-03-19 after Phase 3 completion*
