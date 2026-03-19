@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-04-PLAN.md (1 task)
-last_updated: "2026-03-19T23:44:05.665Z"
+stopped_at: Completed 04-05-PLAN.md (all 3 tasks)
+last_updated: "2026-03-19T23:44:32.442Z"
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 21
-  completed_plans: 20
+  completed_plans: 21
 ---
 
 # Project State
@@ -65,6 +65,7 @@ Plan: 1 of 3
 | Phase 04-live-kpi-integration P02 | 4 | 6 tasks | 12 files |
 | Phase 04-live-kpi-integration P03 | 3 | 7 tasks | 8 files |
 | Phase 04-live-kpi-integration P04 | 8 | 1 tasks | 2 files |
+| Phase 04-live-kpi-integration P05 | 2 | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -124,6 +125,8 @@ Recent decisions affecting current work:
 - [Phase 04-live-kpi-integration]: BundleKpiSection is a separate Client Component — KpiSection stays as a Server Component for async data fetching
 - [Phase 04-live-kpi-integration]: locationId passed as undefined for territory/bundle types — KpiSection handles null returns internally
 - [Phase 04-live-kpi-integration]: Salon locations in bundles mapped to type=suite (conservative) — KpiSection only uses type to filter territories
+- [Phase 04-live-kpi-integration]: Preserved existing mock-data.ts exports when adding server-only guard — mockBundleKpi kept intact since fetch.ts already imported it
+- [Phase 04-live-kpi-integration]: All KPI lib files now start with import server-only as established pattern
 
 ### Pending Todos
 
@@ -138,6 +141,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T23:44:05.662Z
-Stopped at: Completed 04-04-PLAN.md (1 task)
+Last session: 2026-03-19T23:44:32.440Z
+Stopped at: Completed 04-05-PLAN.md (all 3 tasks)
 Resume file: None
