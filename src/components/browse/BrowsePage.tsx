@@ -38,6 +38,7 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
     minPrice: rawFilters.minPrice ?? undefined,
     maxPrice: rawFilters.maxPrice ?? undefined,
     sort: rawFilters.sort as "newest" | "price-asc" | "price-desc",
+    minYearsOpen: rawFilters.minYearsOpen ?? undefined,
   }
 
   function handleLocationSelect(location: { lng: number; lat: number; name: string }) {
