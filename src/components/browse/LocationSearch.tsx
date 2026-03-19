@@ -9,7 +9,9 @@ interface LocationSearchProps {
 }
 
 export function LocationSearch({ onSelect }: LocationSearchProps) {
-  function handlePick(feature: Feature | undefined) {
+  // onPick receives { feature: Feature | undefined } per the geocoding control API
+  function handlePick(event: { feature: Feature | undefined }) {
+    const feature = event.feature
     if (!feature) return
     if (feature.geometry.type === "Point") {
       const [lng, lat] = feature.geometry.coordinates as [number, number]

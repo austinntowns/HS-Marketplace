@@ -5,7 +5,6 @@ import dynamic from "next/dynamic"
 import { FilterBar, useListingFilters } from "./FilterBar"
 import { ListingGrid } from "./ListingGrid"
 import { LocationSearch } from "./LocationSearch"
-import { SaveSearchButton } from "./SaveSearchButton"
 import type { ListingCard } from "@/lib/listings-query"
 import { useRouter } from "next/navigation"
 
@@ -86,9 +85,6 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
           <div className="flex-1 max-w-sm">
             <LocationSearch onSelect={handleLocationSelect} />
           </div>
-
-          {/* Save search — STATES ONLY per CONTEXT.md */}
-          <SaveSearchButton states={rawFilters.states} />
         </div>
       </div>
 
