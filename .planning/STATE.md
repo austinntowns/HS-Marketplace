@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-03-19T21:44:31.993Z"
+stopped_at: Completed 02-04-PLAN.md
+last_updated: "2026-03-19T21:45:25.979Z"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 16
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -53,6 +53,7 @@ Plan: 3 of 4
 | Phase 01-foundation P02 | 5 | 5 tasks | 17 files |
 | Phase 01-foundation P03 | 20 | 4 tasks | 10 files |
 | Phase 02-listings-moderation P03 | 4 | 4 tasks | 16 files |
+| Phase 02-listings-moderation P04 | 5 | 4 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,8 @@ Recent decisions affecting current work:
 - [Phase 02-listings-moderation]: async searchParams as Promise in Next.js 16.2.0 pages — same requirement as async params
 - [Phase 02-listings-moderation]: jose JWT action tokens for no-login email links — createActionToken + executeAction with status-machine validation
 - [Phase 02-listings-moderation]: updateListing auto-resubmits rejected listings — checks status === rejected after saveDraft, sets to pending and clears rejectionReason
+- [Phase 02-listings-moderation]: ListingEditForm extended with isAdmin prop to use adminUpdateListing and route to admin views when editing as admin
+- [Phase 02-listings-moderation]: Next.js 16 async params/searchParams required for all dynamic route pages - typed as Promise and awaited
 
 ### Pending Todos
 
@@ -99,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:44:31.990Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-03-19T21:45:25.976Z
+Stopped at: Completed 02-04-PLAN.md
 Resume file: None

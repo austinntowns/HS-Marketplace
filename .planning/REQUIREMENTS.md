@@ -62,15 +62,15 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Admin
 
-- [ ] **ADMN-01**: Admin can view queue of listings pending approval
-- [ ] **ADMN-02**: Admin can approve a listing (moves to active) after verifying seller ownership
-- [ ] **ADMN-03**: Admin can reject a listing with reason (including ownership issues)
-- [ ] **ADMN-04**: Seller receives email notification on approval/rejection
-- [ ] **ADMN-05**: Admin can view all listings and their statuses
-- [ ] **ADMN-06**: Admin can view all buyer inquiries
-- [ ] **ADMN-07**: Admin can manage users (add non-franchisees, remove users, set roles)
-- [ ] **ADMN-08**: Admin can edit any listing
-- [ ] **ADMN-09**: Admin can mark any listing as sold
+- [x] **ADMN-01**: Admin can view queue of listings pending approval
+- [x] **ADMN-02**: Admin can approve a listing (moves to active) after verifying seller ownership
+- [x] **ADMN-03**: Admin can reject a listing with reason (including ownership issues)
+- [x] **ADMN-04**: Seller receives email notification on approval/rejection
+- [x] **ADMN-05**: Admin can view all listings and their statuses
+- [x] **ADMN-06**: Admin can view all buyer inquiries
+- [x] **ADMN-07**: Admin can manage users (add non-franchisees, remove users, set roles)
+- [x] **ADMN-08**: Admin can edit any listing
+- [x] **ADMN-09**: Admin can mark any listing as sold
 
 ## v2 Requirements
 
@@ -153,15 +153,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-14 | Phase 3 | Pending |
 | DISC-15 | Phase 3 | Pending |
 | DISC-16 | Phase 3 | Pending |
-| ADMN-01 | Phase 2 | Pending |
-| ADMN-02 | Phase 2 | Pending |
-| ADMN-03 | Phase 2 | Pending |
-| ADMN-04 | Phase 2 | Pending |
-| ADMN-05 | Phase 2 | Pending |
-| ADMN-06 | Phase 2 | Pending |
-| ADMN-07 | Phase 2 | Pending |
-| ADMN-08 | Phase 2 | Pending |
-| ADMN-09 | Phase 2 | Pending |
+| ADMN-01 | Phase 2 | Complete |
+| ADMN-02 | Phase 2 | Complete |
+| ADMN-03 | Phase 2 | Complete |
+| ADMN-04 | Phase 2 | Complete |
+| ADMN-05 | Phase 2 | Complete |
+| ADMN-06 | Phase 2 | Complete |
+| ADMN-07 | Phase 2 | Complete |
+| ADMN-08 | Phase 2 | Complete |
+| ADMN-09 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 53 total
