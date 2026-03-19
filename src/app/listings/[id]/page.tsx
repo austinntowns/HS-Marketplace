@@ -7,7 +7,7 @@ import { ListingPhotos } from './ListingPhotos'
 import { ContactForm } from './ContactForm'
 import { FinancialsGrid } from '@/components/listing-detail/FinancialsGrid'
 import { DetailMap } from '@/components/listing-detail/DetailMap'
-import { KpiPlaceholder } from '@/components/listing-detail/KpiPlaceholder'
+import { KpiSection } from '@/components/kpi/KpiSection'
 import { FloatingContactCta } from '@/components/listing-detail/FloatingContactCta'
 
 type Props = {
@@ -96,10 +96,24 @@ export default async function ListingDetailPage({ params }: Props) {
             <FinancialsGrid listing={listing} />
           </section>
 
-          {/* KPI Placeholder */}
-          <section>
-            <KpiPlaceholder />
-          </section>
+          {/* Live KPI Section — renders nothing if territory or API unavailable */}
+          <KpiSection
+            listingType={listing.type}
+            locationId={
+              listing.type !== 'bundle' && listing.type !== 'territory'
+                ? (listing.locations.find(l => l.locationType === 'salon') ?? listing.locations[0])?.id
+                : undefined
+            }
+            bundleLocations={
+              listing.type === 'bundle'
+                ? listing.locations.map(loc => ({
+                    id: loc.id,
+                    name: loc.name,
+                    type: loc.locationType === 'territory' ? 'territory' : 'suite',
+                  }))
+                : undefined
+            }
+          />
 
           {/* About / Notes */}
           {listing.notes && (
