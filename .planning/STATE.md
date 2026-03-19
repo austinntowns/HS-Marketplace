@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-08-PLAN.md
-last_updated: "2026-03-19T22:52:31.111Z"
+stopped_at: Completed 03-06-PLAN.md
+last_updated: "2026-03-19T22:54:21.752Z"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 19
-  completed_plans: 14
+  completed_plans: 16
 ---
 
 # Project State
@@ -60,6 +60,8 @@ Plan: 1 of 5
 | Phase 03-discovery-and-contact P05 | 5 | 3 tasks | 9 files |
 | Phase 03-discovery-and-contact P02 | 5 | 3 tasks | 9 files |
 | Phase 03-discovery-and-contact P08 | 5 | 2 tasks | 2 files |
+| Phase 03-discovery-and-contact P06 | 3 | 3 tasks | 4 files |
+| Phase 03-discovery-and-contact P07 | 3 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -108,6 +110,7 @@ Recent decisions affecting current work:
 - [Phase 03-discovery-and-contact]: MapView dynamically imported (ssr: false) — MapTiler SDK browser-only WebGL APIs crash SSR
 - [Phase 03-discovery-and-contact]: nuqs parseAsInteger returns null; ListingFilters uses undefined — coerce with ?? undefined in BrowsePage
 - [Phase 03-discovery-and-contact]: LocationSearch onPick event is { feature } object not Feature directly — matched to actual geocoding-control@2.1.7 API
+- [Phase 03-discovery-and-contact]: query field coerced with || undefined in BrowsePage — empty string from nuqs default becomes undefined for getListings ilike condition
 
 ### Pending Todos
 
@@ -121,6 +124,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T22:52:31.108Z
-Stopped at: Completed 03-08-PLAN.md
+Last session: 2026-03-19T22:54:21.750Z
+Stopped at: Completed 03-06-PLAN.md
 Resume file: None
