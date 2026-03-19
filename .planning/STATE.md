@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-03-19T21:50:35.309Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-03-19T22:23:37.821Z"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 16
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** Franchisees can quickly find buyers for their locations with verified performance data that builds trust and accelerates deals.
-**Current focus:** Phase 02 — listings-moderation
+**Current focus:** Phase 03 — discovery-and-contact
 
 ## Current Position
 
-Phase: 02 (listings-moderation) — EXECUTING
-Plan: 3 of 4
+Phase: 03 (discovery-and-contact) — EXECUTING
+Plan: 1 of 5
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Plan: 3 of 4
 | Phase 01-foundation P03 | 20 | 4 tasks | 10 files |
 | Phase 02-listings-moderation P03 | 4 | 4 tasks | 16 files |
 | Phase 02-listings-moderation P04 | 5 | 4 tasks | 14 files |
+| Phase 03-discovery-and-contact P01 | 3 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,8 @@ Recent decisions affecting current work:
 - [Phase 02-listings-moderation]: updateListing auto-resubmits rejected listings — checks status === rejected after saveDraft, sets to pending and clears rejectionReason
 - [Phase 02-listings-moderation]: ListingEditForm extended with isAdmin prop to use adminUpdateListing and route to admin views when editing as admin
 - [Phase 02-listings-moderation]: Next.js 16 async params/searchParams required for all dynamic route pages - typed as Promise and awaited
+- [Phase 03-discovery-and-contact]: getListings joins listingLocations (displayOrder=0) for city/state — Phase 2 schema stores location data in separate table, not on listings
+- [Phase 03-discovery-and-contact]: vi.hoisted() pattern required for vitest mock factories that reference outer variables — adopted for all listings-query tests
 
 ### Pending Todos
 
@@ -102,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:45:25.976Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-03-19T22:23:37.818Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

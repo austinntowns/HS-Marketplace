@@ -43,9 +43,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Discovery
 
-- [ ] **DISC-01**: Buyer can browse listings in list view (default sort: newest first)
+- [x] **DISC-01**: Buyer can browse listings in list view (default sort: newest first)
 - [ ] **DISC-02**: Buyer can browse listings in map view
-- [ ] **DISC-14**: Buyer can search listings by text (location name, city, description)
+- [x] **DISC-14**: Buyer can search listings by text (location name, city, description)
 - [ ] **DISC-03**: Buyer can filter by listing type (suite, flagship, territory, bundle)
 - [ ] **DISC-04**: Buyer can filter by state/region
 - [ ] **DISC-05**: Buyer can filter by price range
@@ -137,7 +137,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-21 | Phase 2 | Complete |
 | LIST-22 | Phase 2 | Pending |
 | LIST-23 | Phase 2 | Pending |
-| DISC-01 | Phase 3 | Pending |
+| DISC-01 | Phase 3 | Complete |
 | DISC-02 | Phase 3 | Pending |
 | DISC-03 | Phase 3 | Pending |
 | DISC-04 | Phase 3 | Pending |
@@ -150,7 +150,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-11 | Phase 3 | Pending |
 | DISC-12 | Phase 3 | Pending |
 | DISC-13 | Phase 3 | Pending |
-| DISC-14 | Phase 3 | Pending |
+| DISC-14 | Phase 3 | Complete |
 | DISC-15 | Phase 3 | Pending |
 | DISC-16 | Phase 3 | Pending |
 | ADMN-01 | Phase 2 | Complete |
