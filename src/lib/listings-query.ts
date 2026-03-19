@@ -2,7 +2,7 @@
 
 import { db } from "@/db"
 import { listings, listingLocations, listingPhotos } from "@/db/schema/listings"
-import { and, desc, asc, lt, inArray, gte, lte, eq } from "drizzle-orm"
+import { and, desc, asc, lt, inArray, gte, lte, eq, ilike, or } from "drizzle-orm"
 
 const PAGE_SIZE = 12
 
@@ -13,6 +13,8 @@ export interface ListingFilters {
   maxPrice?: number
   cursor?: string // ISO timestamp from createdAt
   sort?: "newest" | "price-asc" | "price-desc"
+  query?: string // text search: location name, city, or notes
+  minYearsOpen?: number // minimum years a location has been open
 }
 
 export interface ListingCard {
@@ -34,7 +36,7 @@ export interface ListingsResult {
 }
 
 export async function getListings(filters: ListingFilters): Promise<ListingsResult> {
-  const { types, states, minPrice, maxPrice, cursor, sort = "newest" } = filters
+  const { types, states, minPrice, maxPrice, cursor, sort = "newest", query, minYearsOpen } = filters
 
   // Build WHERE conditions
   const conditions = [
@@ -44,6 +46,16 @@ export async function getListings(filters: ListingFilters): Promise<ListingsResu
     minPrice !== undefined ? gte(listings.askingPrice, minPrice) : undefined,
     maxPrice !== undefined ? lte(listings.askingPrice, maxPrice) : undefined,
     cursor ? lt(listings.createdAt, new Date(cursor)) : undefined,
+    query && query.trim()
+      ? or(
+          ilike(listingLocations.name, `%${query.trim()}%`),
+          ilike(listingLocations.city, `%${query.trim()}%`),
+          ilike(listings.notes, `%${query.trim()}%`)
+        )
+      : undefined,
+    minYearsOpen && minYearsOpen > 0
+      ? lte(listingLocations.openingDate, new Date(Date.now() - minYearsOpen * 365.25 * 24 * 60 * 60 * 1000))
+      : undefined,
   ].filter((c): c is NonNullable<typeof c> => c !== undefined)
 
   // Determine sort order
