@@ -23,7 +23,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: The platform accepts authenticated Hello Sugar users and the database is ready to hold every object the product needs
 **Depends on**: Nothing (first phase)
 **Requirements**: AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05
-**Plans:** 4 plans in 3 waves
+**Plans:** 2/4 plans executed
 **Success Criteria** (what must be TRUE):
   1. A franchisee with a hellosugar.salon Google account can log in and land on the marketplace — no manual setup required
   2. A personal Gmail account is rejected at the login screen and cannot access any page
@@ -95,7 +95,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/4 | Ready to execute | - |
+| 1. Foundation | 2/4 | In Progress|  |
 | 2. Listings and Moderation | 0/3 | Not started | - |
 | 3. Discovery and Contact | 0/4 | Not started | - |
 | 4. Live KPI Integration | 0/3 | Not started | - |
