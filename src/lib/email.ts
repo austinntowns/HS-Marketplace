@@ -50,6 +50,7 @@ export interface ReminderEmailData {
   listingTitle: string
   listingId: string
   daysSinceUpdate: number
+  markSoldUrl?: string
 }
 
 /**
@@ -202,15 +203,23 @@ export async function sendAlertMatchEmail(data: AlertMatchData) {
  * Send 30-day reminder to seller when listing needs attention
  */
 export async function sendReminderEmail(data: ReminderEmailData) {
-  const { sellerEmail, sellerName, listingTitle, listingId, daysSinceUpdate } = data
-  const listingUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://marketplace.hellosugar.salon"}/listings/${listingId}/edit`
+  const { sellerEmail, sellerName, listingTitle, listingId, daysSinceUpdate, markSoldUrl } = data
+  const listingUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://marketplace.hellosugar.salon"}/seller/listings/${listingId}/edit`
 
   const html = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-      <h1 style="color: #db2777;">Time for a Listing Update?</h1>
+      <h1 style="color: #db2777;">Is Your Listing Still Active?</h1>
       <p>Hi ${sellerName},</p>
       <p>Your listing <strong>${listingTitle}</strong> has been active for ${daysSinceUpdate} days without an update.</p>
-      <p>Keeping your listing current helps attract serious buyers. Consider updating:</p>
+      <p>Has this location sold? If so, you can mark it sold with one click — no login required:</p>
+      ${markSoldUrl ? `
+      <p>
+        <a href="${markSoldUrl}" style="display: inline-block; background: #16a34a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">
+          Mark as Sold
+        </a>
+      </p>
+      ` : ''}
+      <p style="margin-top: 16px;">Still looking for a buyer? Keep your listing current to attract serious buyers:</p>
       <ul>
         <li>Recent financials or performance data</li>
         <li>New photos</li>
@@ -231,7 +240,7 @@ export async function sendReminderEmail(data: ReminderEmailData) {
 
   return sendEmail({
     to: sellerEmail,
-    subject: `Reminder: Update your listing - ${listingTitle}`,
+    subject: `Reminder: Is your listing still active? - ${listingTitle}`,
     html,
   })
 }

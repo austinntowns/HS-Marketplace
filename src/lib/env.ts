@@ -12,6 +12,8 @@ export const env = createEnv({
     INITIAL_ADMIN_EMAIL: z.string().email().optional(),
     GOOGLE_WORKSPACE_DOMAIN: z.string().default("hellosugar.salon"),
     BLOB_READ_WRITE_TOKEN: z.string().min(1),
+    ACTION_TOKEN_SECRET: z.string().min(32),
+    CRON_SECRET: z.string().min(16),
   },
   experimental__runtimeEnv: {},
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
