@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-foundation/01-02-PLAN.md
-last_updated: "2026-03-19T21:03:27.056Z"
+stopped_at: Completed 01-foundation/01-03-PLAN.md
+last_updated: "2026-03-19T21:08:51.403Z"
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State
@@ -49,6 +49,7 @@ Plan: 4 of 4 (plans 01, 04 complete; 02, 03 pending)
 
 *Updated after each plan completion*
 | Phase 01-foundation P02 | 5 | 5 tasks | 17 files |
+| Phase 01-foundation P03 | 20 | 4 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,10 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: proxy.ts used instead of middleware.ts — Next.js 16 renamed middleware to proxy; route protection behavior identical
 - [Phase 01-foundation]: Edge-split auth config: auth.config.ts (edge-safe, no adapter) for proxy.ts; auth.ts (Node.js) adds DrizzleAdapter — prevents edge runtime Node.js module errors
 - [Phase 01-foundation]: First-admin bootstrap in createUser event (not signIn callback) — user row must exist before role can be set; createUser fires after adapter creates the row
+- [Phase 01-foundation]: Enums in separate enums.ts file for correct Drizzle migration ordering
+- [Phase 01-foundation]: monthlyExpenses as typed JSON (not separate table) for v1 simplicity
+- [Phase 01-foundation]: Buyer info snapshot on contacts table for data immutability
+- [Phase 01-foundation]: migrate.ts uses DATABASE_URL_DIRECT (non-pooled) per Neon migration requirements
 
 ### Pending Todos
 
@@ -81,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:03:27.053Z
-Stopped at: Completed 01-foundation/01-02-PLAN.md
+Last session: 2026-03-19T21:08:51.401Z
+Stopped at: Completed 01-foundation/01-03-PLAN.md
 Resume file: None
