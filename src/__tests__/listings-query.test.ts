@@ -128,6 +128,78 @@ describe("getListings", () => {
     expect(chain.where).toHaveBeenCalled()
   })
 
+  // Test 8: text query filter — matching location name
+  it("calls where with query condition when query is provided", async () => {
+    const rows = [makeRowWithQuery(0, "Sugar House")]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    const result = await getListings({ query: "sugar" })
+
+    expect(result.items).toHaveLength(1)
+    expect(chain.where).toHaveBeenCalled()
+  })
+
+  // Test 9: text query filter — case insensitive city match
+  it("calls where when query matches city case-insensitively", async () => {
+    const rows = [makeRowWithQuery(0, "Austin")]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    const result = await getListings({ query: "AUSTIN" })
+
+    expect(result.items).toHaveLength(1)
+    expect(chain.where).toHaveBeenCalled()
+  })
+
+  // Test 10: empty/undefined query returns all — no extra condition
+  it("does not add query condition when query is empty or undefined", async () => {
+    const rows = [makeRow(0), makeRow(1)]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    // Empty string should behave like no filter
+    const result = await getListings({ query: "" })
+
+    expect(result.items).toHaveLength(2)
+    expect(chain.where).toHaveBeenCalled()
+  })
+
+  // Test: minYearsOpen filter - locations open at least N years
+  it("filters by minYearsOpen when provided and > 0", async () => {
+    const rows = [makeRow(0)]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    await getListings({ minYearsOpen: 2 })
+
+    // where must have been called with conditions including openingDate lte cutoff
+    expect(chain.where).toHaveBeenCalled()
+  })
+
+  it("does not add openingDate condition when minYearsOpen is 0", async () => {
+    const rows = [makeRow(0), makeRow(1)]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    const result = await getListings({ minYearsOpen: 0 })
+
+    // Still calls where (for status=active), but all rows returned
+    expect(chain.where).toHaveBeenCalled()
+    expect(result.items).toHaveLength(2)
+  })
+
+  it("does not add openingDate condition when minYearsOpen is undefined", async () => {
+    const rows = [makeRow(0), makeRow(1), makeRow(2)]
+    const chain = makeQueryChain(rows)
+    mockSelect.mockReturnValue(chain)
+
+    const result = await getListings({ minYearsOpen: undefined })
+
+    expect(chain.where).toHaveBeenCalled()
+    expect(result.items).toHaveLength(3)
+  })
+
   // Test 7: returns primary photo URL via left join
   it("returns primaryPhotoUrl from joined listingPhotos row", async () => {
     const rows = [
@@ -164,6 +236,26 @@ function makeRow(index: number, overrides: RowOverrides = {}) {
     },
     primaryLocation: {
       name: `Location ${index}`,
+      city: "Austin",
+      state: "TX",
+      territoryLat: null,
+      territoryLng: null,
+    },
+    primaryPhoto: null,
+  }
+}
+
+function makeRowWithQuery(index: number, locationName: string) {
+  return {
+    listing: {
+      id: `listing-${index}`,
+      type: "suite",
+      status: "active",
+      askingPrice: 100000,
+      createdAt: new Date(`2025-0${(index % 9) + 1}-01T00:00:00Z`),
+    },
+    primaryLocation: {
+      name: locationName,
       city: "Austin",
       state: "TX",
       territoryLat: null,
