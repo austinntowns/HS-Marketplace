@@ -1,0 +1,16 @@
+import { createEnv } from "@t3-oss/env-nextjs"
+import { z } from "zod"
+
+export const env = createEnv({
+  server: {
+    DATABASE_URL: z.string().url(),
+    DATABASE_URL_DIRECT: z.string().url(),
+    AUTH_SECRET: z.string().min(32),
+    AUTH_GOOGLE_ID: z.string().min(1),
+    AUTH_GOOGLE_SECRET: z.string().min(1),
+    RESEND_API_KEY: z.string().startsWith("re_"),
+    INITIAL_ADMIN_EMAIL: z.string().email().optional(),
+    GOOGLE_WORKSPACE_DOMAIN: z.string().default("hellosugar.salon"),
+  },
+  experimental__runtimeEnv: {},
+})
