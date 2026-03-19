@@ -23,19 +23,19 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: The platform accepts authenticated Hello Sugar users and the database is ready to hold every object the product needs
 **Depends on**: Nothing (first phase)
 **Requirements**: AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05
+**Plans:** 4 plans in 3 waves
 **Success Criteria** (what must be TRUE):
   1. A franchisee with a hellosugar.salon Google account can log in and land on the marketplace — no manual setup required
   2. A personal Gmail account is rejected at the login screen and cannot access any page
   3. Admin can assign or revoke the admin role for any user from the user management screen
   4. A non-franchisee added by admin can log in; a non-franchisee not added by admin is denied
   5. The listing state machine (draft, pending, active, rejected, sold, delisted) is represented as a Postgres enum and all tables exist in the schema
-**Plans**: TBD
 
 Plans:
-- [ ] 01-01: Scaffold Next.js project, configure Neon database, and deploy skeleton to Vercel
-- [ ] 01-02: Implement Auth.js v5 Google Workspace SSO with hd restriction and role assignment
-- [ ] 01-03: Write complete Drizzle schema (users, listings, photos, contacts, alerts) and run initial migration
-- [ ] 01-04: Configure Resend transactional email and verify DNS records (SPF/DKIM)
+- [ ] 01-01-PLAN.md — Scaffold Next.js project with Neon/Drizzle/Vitest (Wave 1)
+- [ ] 01-02-PLAN.md — Auth.js v5 Google Workspace SSO with role system (Wave 2, AUTH-01 through AUTH-05)
+- [ ] 01-03-PLAN.md — Complete Drizzle schema and initial migration (Wave 3, depends on 01-02)
+- [ ] 01-04-PLAN.md — Resend transactional email configuration (Wave 2, parallel to 01-02)
 
 ### Phase 2: Listings and Moderation
 **Goal**: Sellers can create and manage listings for all location types, and admins can approve or reject them before they go live
@@ -95,7 +95,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/4 | Not started | - |
+| 1. Foundation | 0/4 | Ready to execute | - |
 | 2. Listings and Moderation | 0/3 | Not started | - |
 | 3. Discovery and Contact | 0/4 | Not started | - |
 | 4. Live KPI Integration | 0/3 | Not started | - |
