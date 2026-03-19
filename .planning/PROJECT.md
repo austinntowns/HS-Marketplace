@@ -13,21 +13,21 @@ Franchisees can quickly find buyers for their locations with verified performanc
 ### Validated
 
 - [x] Google Workspace SSO authentication — *Validated in Phase 1: Foundation*
+- [x] Franchisees can create listings for suites, flagships, unopened territories, or bundles — *Validated in Phase 2: Listings & Moderation*
+- [x] Sellers enter financials (TTM profit, asking price, etc.) — *Validated in Phase 2*
+- [x] Unopened territories show basic info only (location, size, price) — *Validated in Phase 2*
+- [x] Corporate approves listings before they go live — *Validated in Phase 2*
+- [x] Admin dashboard: approve/reject listings, view all activity, manage users, edit any listing — *Validated in Phase 2*
 
 ### Active
 
-- [ ] Franchisees can create listings for suites, flagships, unopened territories, or bundles
-- [ ] Sellers enter financials (TTM profit, asking price, etc.)
 - [ ] Live operational data pulled from internal API (revenue, new clients, bookings, membership conversion)
 - [ ] KPI summary cards with 12-month trend drill-down
 - [ ] Cumulative + per-location views for multi-location bundles
-- [ ] Unopened territories show basic info only (location, size, price)
-- [ ] Corporate approves listings before they go live
 - [ ] Buyers can browse listings in list view or map view
 - [ ] Filters: time open, price, location/state, location type
 - [ ] Buyers can set area/state alerts for new listings
 - [ ] Buyer submits contact form → seller notified
-- [ ] Admin dashboard: approve/reject listings, view all activity, manage users, edit any listing
 
 ### Out of Scope
 
@@ -56,8 +56,9 @@ Franchisees can quickly find buyers for their locations with verified performanc
 |----------|-----------|---------|
 | Lead capture only, not full transactions | Reduces complexity, v1 can ship faster | — Pending |
 | Authenticated access only | Protects sensitive financial data, keeps it internal | ✓ Phase 1 |
-| Corporate moderation required | Quality control, prevent bad listings | — Pending |
+| Corporate moderation required | Quality control, prevent bad listings | ✓ Phase 2 |
 | Next.js + Neon + Vercel | Fast to build, familiar stack | ✓ Phase 1 |
+| Min 1 photo per listing (not 3) | Lower friction for initial listing creation | ✓ Phase 2 |
 
 ---
-*Last updated: 2026-03-19 after Phase 1 completion*
+*Last updated: 2026-03-19 after Phase 2 completion*
