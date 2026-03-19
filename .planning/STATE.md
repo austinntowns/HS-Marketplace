@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 01-foundation/01-04-PLAN.md
-last_updated: "2026-03-19T21:00:16.264Z"
+stopped_at: Completed 01-foundation/01-02-PLAN.md
+last_updated: "2026-03-19T21:03:27.056Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 4
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State
@@ -48,6 +48,7 @@ Plan: 4 of 4 (plans 01, 04 complete; 02, 03 pending)
 | 01-foundation P04 | 3 min | 3 tasks / 3 files | 3 min |
 
 *Updated after each plan completion*
+| Phase 01-foundation P02 | 5 | 5 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: SKIP_ENV_VALIDATION pattern added to t3-env config — vitest.config.ts sets this env var so npm run test works without real credentials
 - [Phase 01-foundation]: Inline HTML email templates chosen over React Email for v1 — simpler, sufficient; email-templates.tsx documents migration path
 - [Phase 01-foundation]: All email functions return { success: boolean } — consistent error handling without throwing
+- [Phase 01-foundation]: proxy.ts used instead of middleware.ts — Next.js 16 renamed middleware to proxy; route protection behavior identical
+- [Phase 01-foundation]: Edge-split auth config: auth.config.ts (edge-safe, no adapter) for proxy.ts; auth.ts (Node.js) adds DrizzleAdapter — prevents edge runtime Node.js module errors
+- [Phase 01-foundation]: First-admin bootstrap in createUser event (not signIn callback) — user row must exist before role can be set; createUser fires after adapter creates the row
 
 ### Pending Todos
 
@@ -77,6 +81,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:00:16.261Z
-Stopped at: Completed 01-foundation/01-04-PLAN.md
+Last session: 2026-03-19T21:03:27.053Z
+Stopped at: Completed 01-foundation/01-02-PLAN.md
 Resume file: None

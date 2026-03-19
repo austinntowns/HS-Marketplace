@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can log in with Google Workspace SSO (hellosugar.salon domain)
-- [ ] **AUTH-02**: Existing franchisees are auto-authorized on first login
-- [ ] **AUTH-03**: Non-franchisees must be manually added by admin before they can log in
-- [ ] **AUTH-04**: Users have roles: buyer, seller, admin (users can have multiple)
-- [ ] **AUTH-05**: Admin can set/revoke admin status for any user
+- [x] **AUTH-01**: User can log in with Google Workspace SSO (hellosugar.salon domain)
+- [x] **AUTH-02**: Existing franchisees are auto-authorized on first login
+- [x] **AUTH-03**: Non-franchisees must be manually added by admin before they can log in
+- [x] **AUTH-04**: Users have roles: buyer, seller, admin (users can have multiple)
+- [x] **AUTH-05**: Admin can set/revoke admin status for any user
 
 ### Listings
 
@@ -109,11 +109,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | Phase 1 | Pending |
-| AUTH-02 | Phase 1 | Pending |
-| AUTH-03 | Phase 1 | Pending |
-| AUTH-04 | Phase 1 | Pending |
-| AUTH-05 | Phase 1 | Pending |
+| AUTH-01 | Phase 1 | Complete |
+| AUTH-02 | Phase 1 | Complete |
+| AUTH-03 | Phase 1 | Complete |
+| AUTH-04 | Phase 1 | Complete |
+| AUTH-05 | Phase 1 | Complete |
 | LIST-01 | Phase 2 | Pending |
 | LIST-02 | Phase 2 | Pending |
 | LIST-03 | Phase 2 | Pending |
