@@ -15,6 +15,12 @@ export const env = createEnv({
     ACTION_TOKEN_SECRET: z.string().min(32),
     CRON_SECRET: z.string().min(16),
   },
-  experimental__runtimeEnv: {},
+  client: {
+    // Public key exposed to client — domain-restricted in MapTiler Cloud dashboard
+    NEXT_PUBLIC_MAPTILER_API_KEY: z.string().min(1),
+  },
+  experimental__runtimeEnv: {
+    NEXT_PUBLIC_MAPTILER_API_KEY: process.env.NEXT_PUBLIC_MAPTILER_API_KEY,
+  },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 })
