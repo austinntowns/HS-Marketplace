@@ -40,19 +40,20 @@ Plans:
 ### Phase 2: Listings and Moderation
 **Goal**: Sellers can create and manage listings for all location types, and admins can approve or reject them before they go live
 **Depends on**: Phase 1
-**Requirements**: LIST-01, LIST-02, LIST-03, LIST-04, LIST-05, LIST-06, LIST-07, LIST-08, LIST-09, LIST-10, LIST-11, LIST-12, LIST-13, LIST-14, LIST-15, LIST-16, LIST-20, LIST-21, LIST-22, LIST-23, ADMN-01, ADMN-02, ADMN-03, ADMN-04, ADMN-05, ADMN-06, ADMN-07, ADMN-08, ADMN-09
+**Requirements**: LIST-01, LIST-02, LIST-03, LIST-04, LIST-05, LIST-06, LIST-07, LIST-08, LIST-10, LIST-11, LIST-12, LIST-13, LIST-14, LIST-15, LIST-16, LIST-20, LIST-21, LIST-22, LIST-23, ADMN-01, ADMN-02, ADMN-03, ADMN-04, ADMN-05, ADMN-06, ADMN-07, ADMN-08, ADMN-09
+**Plans:** 4 plans
 **Success Criteria** (what must be TRUE):
   1. Seller can create a listing for a suite, flagship, territory, or bundle — open salons pre-populate from system data; territories use manual entry
-  2. Seller can enter asking price, TTM profit, monthly expenses, reason for selling, included assets, notes, and upload 3–10 photos
-  3. Seller sees their listing move through draft → pending → active or rejected, with an email arriving on each status change
+  2. Seller can enter asking price, TTM profit, reason for selling, included assets, notes, and upload 1-10 photos
+  3. Seller sees their listing move through draft -> pending -> active or rejected, with an email arriving on each status change
   4. Admin sees all pending listings in an approval queue, can approve or reject with a reason, and can edit or mark any listing as sold
   5. Seller receives a reminder email when their listing has been active 30+ days without an update
-**Plans**: TBD
 
 Plans:
-- [ ] 02-01: Seller listing creation form — all four types, seller-entered fields, photo upload, draft save
-- [ ] 02-02: Listing status management — seller status view, edit, delist, mark sold flows
-- [ ] 02-03: Admin moderation — approval queue, approve/reject with email notification, user management, admin listing edit
+- [ ] 02-01-PLAN.md — Drizzle schema, Zod validation, status machine, upload endpoint (Wave 1, LIST-05/06/07/08/10/11/12/13/22/23)
+- [ ] 02-02-PLAN.md — Seller listing creation wizard with multi-step form, photo upload, territory map (Wave 2, LIST-01/02/03/04, depends on 02-01)
+- [ ] 02-03-PLAN.md — Seller listing management: dashboard, edit, status actions, 30-day reminder (Wave 3, LIST-14/15/16/20/21, depends on 02-02)
+- [ ] 02-04-PLAN.md — Admin moderation: queue, approve/reject, all listings view, admin overrides (Wave 3, ADMN-01-09, depends on 02-02)
 
 ### Phase 3: Discovery and Contact
 **Goal**: Buyers can find listings that match their criteria and submit contact requests to sellers
@@ -91,11 +92,11 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
-| 2. Listings and Moderation | 0/3 | Not started | - |
+| 2. Listings and Moderation | 0/4 | Ready | - |
 | 3. Discovery and Contact | 0/4 | Not started | - |
 | 4. Live KPI Integration | 0/3 | Not started | - |
