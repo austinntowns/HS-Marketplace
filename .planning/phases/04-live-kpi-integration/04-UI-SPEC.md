@@ -53,17 +53,17 @@ Exceptions:
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
 | Body | 14px | 400 (regular) | 1.5 |
-| Label | 12px | 500 (medium) | 1.4 |
+| Label | 12px | 400 (regular) | 1.4 |
 | Heading | 20px | 600 (semibold) | 1.2 |
-| Display | 28px | 700 (bold) | 1.1 |
+| Display | 28px | 600 (semibold) | 1.1 |
 
 **Applied to KPI components (source: Claude's Discretion, consistent with existing codebase):**
 - KPI section heading ("Live Performance Data"): 20px, weight 600, line-height 1.2 — matches existing `text-lg font-semibold` pattern
-- KPI card metric name (e.g. "Revenue"): 12px, weight 500, color `text-gray-500` — matches existing label style
-- KPI card primary value (e.g. "$45,230"): 28px, weight 700, color `text-gray-900` — display role
+- KPI card metric name (e.g. "Revenue"): 12px, weight 400, color `text-gray-500` — label role
+- KPI card primary value (e.g. "$45,230"): 28px, weight 600, color `text-gray-900` — display role
 - KPI card MoM change (e.g. "+12% ↑"): 14px, weight 400, color `text-gray-600` — body role
 - KPI card freshness timestamp (e.g. "Updated 2 hours ago"): 12px, weight 400, color `text-gray-400` — label role
-- Bundle table header: 12px, weight 500, uppercase, `text-gray-500` — matches existing `th` style
+- Bundle table header: 12px, weight 600, uppercase, `text-gray-500` — heading emphasis role; use `font-semibold` Tailwind class
 - Bundle table cell: 14px, weight 400, `text-gray-900` — body role
 - Modal title (e.g. "Revenue — 12-Month Trend"): 20px, weight 600 — heading role
 - Tooltip text inside chart: 14px, weight 400 — body role (Recharts default, styled via `contentStyle`)
@@ -121,8 +121,8 @@ These are the components Phase 4 must implement. Referenced from RESEARCH.md §A
 - Dimensions: `min-h-[120px]` width auto (flex child in 4-column grid), `rounded-lg`, `border border-gray-200`, `bg-white`, `shadow-sm`
 - Cursor: `cursor-pointer` with `hover:border-pink-300 hover:shadow-md` transition
 - Badge (top-right of card): pill shape, `bg-pink-600 text-white text-xs px-2 py-0.5 rounded-full` containing SVG checkmark + "Live" text
-- Metric name: `text-xs font-medium text-gray-500 uppercase tracking-wide`
-- Primary value: `text-3xl font-bold text-gray-900` (28px maps to Tailwind `text-3xl`)
+- Metric name: `text-xs font-normal text-gray-500 uppercase tracking-wide`
+- Primary value: `text-3xl font-semibold text-gray-900` (28px maps to Tailwind `text-3xl`)
 - MoM change: `text-sm text-gray-600` with Unicode arrow — "↑ +12%" or "↓ -3%" — arrow and percentage on same line, no color change per locked decision
 - Freshness timestamp: `text-xs text-gray-400` — "Updated 2 hours ago"
 - On click: opens `KpiTrendModal` with this KPI's 12-month trend data
@@ -150,7 +150,7 @@ These are the components Phase 4 must implement. Referenced from RESEARCH.md §A
 
 ### BundleKpiTable (Client Component — needs sort state)
 - Layout: `overflow-x-auto` wrapper, `min-w-full` table
-- Header row: `bg-gray-50`, cells `px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase` — matches existing admin table style
+- Header row: `bg-gray-50`, cells `px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase` — matches existing `th` style
 - Sortable columns: all four KPI columns + location name — click header to sort asc/desc; active column shows `↑` or `↓` in `text-pink-600` beside header label
 - Default sort: location name ascending
 - Body rows: `bg-white divide-y divide-gray-200`, `px-6 py-4 text-sm text-gray-900`
