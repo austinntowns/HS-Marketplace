@@ -1,4 +1,11 @@
-import { pgTable, text, timestamp, integer, decimal, date, json } from "drizzle-orm/pg-core"
+import {
+  pgTable,
+  text,
+  timestamp,
+  integer,
+  boolean,
+  real,
+} from "drizzle-orm/pg-core"
 import { relations } from "drizzle-orm"
 import { listingStatusEnum, listingTypeEnum } from "./enums"
 import { users } from "./auth"
@@ -11,53 +18,107 @@ export const listings = pgTable("listings", {
   type: listingTypeEnum("type").notNull(),
   status: listingStatusEnum("status").default("draft").notNull(),
 
-  // Location info
-  locationName: text("location_name"),
-  city: text("city"),
-  state: text("state"),
-  latitude: decimal("latitude", { precision: 10, scale: 7 }),
-  longitude: decimal("longitude", { precision: 10, scale: 7 }),
-  squareFootage: integer("square_footage"),
-  openingDate: date("opening_date"),
+  // Display title (generated from locations)
+  title: text("title"),
 
   // Financials (stored in cents for precision)
-  askingPrice: integer("asking_price"),
+  askingPrice: integer("asking_price").notNull(),
   ttmProfit: integer("ttm_profit"),
-  monthlyExpenses: json("monthly_expenses").$type<{
-    rent?: number
-    labor?: number
-    supplies?: number
-    utilities?: number
-    marketing?: number
-    other?: number
-  }>(),
 
   // Seller content
-  reasonForSelling: text("reason_for_selling"),
-  assets: text("assets"),
-  notes: text("notes"),
+  reasonForSelling: text("reason_for_selling"), // max 500 chars enforced at app level
+  notes: text("notes"), // max 2000 chars enforced at app level
+
+  // Assets included
+  inventoryIncluded: boolean("inventory_included").default(false).notNull(),
+  laserIncluded: boolean("laser_included").default(false).notNull(),
+  otherAssets: text("other_assets"),
 
   // Admin fields
   rejectionReason: text("rejection_reason"),
+  lastReminderSent: timestamp("last_reminder_sent"),
 
-  // Bundle support (array of listing IDs for bundle type)
-  bundledListingIds: json("bundled_listing_ids").$type<string[]>(),
+  // Analytics
+  viewCount: integer("view_count").default(0).notNull(),
+  inquiryCount: integer("inquiry_count").default(0).notNull(),
 
   // Timestamps
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull().$onUpdate(() => new Date()),
-  submittedAt: timestamp("submitted_at"),
-  approvedAt: timestamp("approved_at"),
-  soldAt: timestamp("sold_at"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 })
 
-export const listingsRelations = relations(listings, ({ one }) => ({
+export const listingLocations = pgTable("listing_locations", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  listingId: text("listing_id").notNull().references(() => listings.id, { onDelete: "cascade" }),
+
+  // Type of location
+  locationType: text("location_type", { enum: ["salon", "territory"] }).notNull(),
+
+  // For salon locations (from internal API mock)
+  externalId: text("external_id"),
+  name: text("name").notNull(),
+  address: text("address"),
+  city: text("city"),
+  state: text("state"), // 2-letter code
+  zipCode: text("zip_code"),
+  squareFootage: integer("square_footage"),
+  openingDate: timestamp("opening_date"),
+
+  // Auto-populated from API mock
+  ttmRevenue: integer("ttm_revenue"), // cents
+  mcr: real("mcr"), // monthly conversion rate
+
+  // For territory locations
+  territoryLat: real("territory_lat"),
+  territoryLng: real("territory_lng"),
+  territoryRadius: integer("territory_radius"), // meters
+
+  // Display ordering
+  displayOrder: integer("display_order").default(0).notNull(),
+})
+
+export const listingPhotos = pgTable("listing_photos", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  listingId: text("listing_id").notNull().references(() => listings.id, { onDelete: "cascade" }),
+
+  // Vercel Blob URL
+  url: text("url").notNull(),
+  filename: text("filename").notNull(),
+
+  // first = 0 = cover photo
+  displayOrder: integer("display_order").notNull(),
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+})
+
+// Relations
+export const listingsRelations = relations(listings, ({ one, many }) => ({
   seller: one(users, {
     fields: [listings.sellerId],
     references: [users.id],
   }),
+  locations: many(listingLocations),
+  photos: many(listingPhotos),
 }))
 
-// Type exports for use in app code
+export const listingLocationsRelations = relations(listingLocations, ({ one }) => ({
+  listing: one(listings, {
+    fields: [listingLocations.listingId],
+    references: [listings.id],
+  }),
+}))
+
+export const listingPhotosRelations = relations(listingPhotos, ({ one }) => ({
+  listing: one(listings, {
+    fields: [listingPhotos.listingId],
+    references: [listings.id],
+  }),
+}))
+
+// Type exports
 export type Listing = typeof listings.$inferSelect
 export type NewListing = typeof listings.$inferInsert
+export type ListingLocation = typeof listingLocations.$inferSelect
+export type NewListingLocation = typeof listingLocations.$inferInsert
+export type ListingPhoto = typeof listingPhotos.$inferSelect
+export type NewListingPhoto = typeof listingPhotos.$inferInsert
