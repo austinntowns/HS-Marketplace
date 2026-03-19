@@ -50,7 +50,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **DISC-04**: Buyer can filter by state/region
 - [ ] **DISC-05**: Buyer can filter by price range
 - [ ] **DISC-06**: Buyer can filter by time location has been open
-- [ ] **DISC-07**: Buyer can view listing detail page with all seller data and live KPIs
+- [x] **DISC-07**: Buyer can view listing detail page with all seller data and live KPIs
 - [ ] **DISC-08**: Buyer can submit contact form to express interest in a listing (one per listing)
 - [ ] **DISC-09**: Contact form auto-fills buyer info from profile
 - [ ] **DISC-10**: Contact form includes free-form message field
@@ -143,7 +143,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-04 | Phase 3 | Pending |
 | DISC-05 | Phase 3 | Pending |
 | DISC-06 | Phase 3 | Pending |
-| DISC-07 | Phase 3 | Pending |
+| DISC-07 | Phase 3 | Complete |
 | DISC-08 | Phase 3 | Pending |
 | DISC-09 | Phase 3 | Pending |
 | DISC-10 | Phase 3 | Pending |
