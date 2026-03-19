@@ -2,7 +2,9 @@ import { auth } from '@/auth'
 import { redirect, notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getListingById } from '@/lib/listing-detail'
+import { hasContactedListing } from '@/lib/contact-actions'
 import { ListingPhotos } from './ListingPhotos'
+import { ContactForm } from './ContactForm'
 import { FinancialsGrid } from '@/components/listing-detail/FinancialsGrid'
 import { DetailMap } from '@/components/listing-detail/DetailMap'
 import { KpiPlaceholder } from '@/components/listing-detail/KpiPlaceholder'
@@ -38,6 +40,8 @@ export default async function ListingDetailPage({ params }: Props) {
   if (!listing) {
     notFound()
   }
+
+  const contacted = await hasContactedListing(listing.id)
 
   // Primary salon location for display
   const primaryLocation = listing.locations.find(l => l.locationType === 'salon') ?? listing.locations[0]
@@ -148,10 +152,17 @@ export default async function ListingDetailPage({ params }: Props) {
       {/* Floating Contact CTA */}
       <FloatingContactCta />
 
-      {/* Contact Form Section (placeholder for Plan 04) */}
+      {/* Contact Form Section */}
       <section id="contact" className="mt-12 pt-8 border-t border-gray-200">
         <h2 className="text-xl font-semibold mb-4 text-gray-900">Contact Seller</h2>
-        <p className="text-gray-500">Contact form will be available soon.</p>
+        <div className="max-w-md">
+          <ContactForm
+            listingId={listing.id}
+            buyerName={session.user.name ?? null}
+            buyerEmail={session.user.email ?? null}
+            hasContacted={contacted}
+          />
+        </div>
       </section>
     </div>
   )
