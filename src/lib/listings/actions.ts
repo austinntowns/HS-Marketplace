@@ -5,7 +5,8 @@ import { db } from '@/db'
 import { listings, listingLocations, listingPhotos } from '@/db/schema/listings'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
-import type { ListingFormData } from './types'
+import type { ListingFormData, ListingStatus } from './types'
+import { canTransition } from './status-machine'
 
 async function requireSellerAccess() {
   const session = await auth()
@@ -108,6 +109,79 @@ export async function submitListing(listingId: string) {
 
   revalidatePath('/seller/listings')
   revalidatePath('/admin/queue')
+
+  return { success: true }
+}
+
+export async function updateListing(listingId: string, data: Partial<ListingFormData>) {
+  const user = await requireSellerAccess()
+
+  const [listing] = await db.select()
+    .from(listings)
+    .where(eq(listings.id, listingId))
+
+  if (!listing) throw new Error('Listing not found')
+  if (listing.sellerId !== user.id && user.role !== 'admin') {
+    throw new Error('Not authorized')
+  }
+
+  // Save the updates
+  await saveDraft(data, listingId)
+
+  // If rejected, auto-resubmit for review
+  if (listing.status === 'rejected') {
+    await db.update(listings)
+      .set({
+        status: 'pending',
+        rejectionReason: null,
+        updatedAt: new Date(),
+      })
+      .where(eq(listings.id, listingId))
+  }
+
+  revalidatePath(`/seller/listings/${listingId}`)
+  revalidatePath('/seller/listings')
+  revalidatePath('/admin/queue')
+
+  return { success: true }
+}
+
+export async function changeListingStatus(
+  listingId: string,
+  targetStatus: ListingStatus,
+  reason?: string
+) {
+  const user = await requireSellerAccess()
+  const userRole = user.role === 'admin' ? 'admin' : 'seller'
+
+  const [listing] = await db.select()
+    .from(listings)
+    .where(eq(listings.id, listingId))
+
+  if (!listing) throw new Error('Listing not found')
+
+  // Sellers can only modify their own listings
+  if (userRole === 'seller' && listing.sellerId !== user.id) {
+    throw new Error('Not authorized')
+  }
+
+  // Validate transition
+  if (!canTransition(listing.status as ListingStatus, targetStatus, userRole)) {
+    throw new Error(`Cannot transition from ${listing.status} to ${targetStatus}`)
+  }
+
+  await db.update(listings)
+    .set({
+      status: targetStatus,
+      rejectionReason: targetStatus === 'rejected' ? reason : null,
+      updatedAt: new Date(),
+    })
+    .where(eq(listings.id, listingId))
+
+  revalidatePath(`/seller/listings/${listingId}`)
+  revalidatePath('/seller/listings')
+  revalidatePath('/admin/queue')
+  revalidatePath('/admin/listings')
 
   return { success: true }
 }

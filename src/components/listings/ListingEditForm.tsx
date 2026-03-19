@@ -1,0 +1,197 @@
+'use client'
+
+import { useState } from 'react'
+import { useForm, FormProvider, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { PhotoUploader } from './PhotoUploader'
+import { PhotoGrid } from './PhotoGrid'
+import { listingSchema } from '@/lib/listings/schemas'
+import { updateListing } from '@/lib/listings/actions'
+import type { ListingFormData, Photo } from '@/lib/listings/types'
+
+interface ListingEditFormProps {
+  listingId: string
+  initialData: ListingFormData
+  isRejected: boolean
+}
+
+export function ListingEditForm({ listingId, initialData, isRejected }: ListingEditFormProps) {
+  const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const methods = useForm<ListingFormData>({
+    resolver: zodResolver(listingSchema),
+    defaultValues: initialData,
+  })
+
+  const { register, control, watch, formState: { errors } } = methods
+  const photos = watch('photos') || []
+
+  const handleSubmit = async (data: ListingFormData) => {
+    setIsSubmitting(true)
+    try {
+      await updateListing(listingId, data)
+      router.push(`/seller/listings/${listingId}`)
+      router.refresh()
+    } catch (error) {
+      alert((error as Error).message)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(handleSubmit)} className="space-y-6">
+        {isRejected && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <p className="text-yellow-800 text-sm">
+              <span className="font-medium">Note:</span> Saving changes will automatically resubmit this listing for review.
+            </p>
+          </div>
+        )}
+
+        {/* Financials */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-medium mb-4">Financials</h3>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Asking Price
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">$</span>
+                <input
+                  type="number"
+                  {...register('askingPrice', { valueAsNumber: true })}
+                  className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg"
+                />
+              </div>
+              {errors.askingPrice && (
+                <p className="mt-1 text-sm text-red-600">{errors.askingPrice.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                TTM Profit
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-2 text-gray-500">$</span>
+                <input
+                  type="number"
+                  {...register('ttmProfit', { valueAsNumber: true })}
+                  className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Reason for Selling
+            </label>
+            <textarea
+              {...register('reasonForSelling')}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+        </div>
+
+        {/* Photos */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-medium mb-4">Photos</h3>
+          <Controller
+            name="photos"
+            control={control}
+            render={({ field }) => (
+              <>
+                <PhotoUploader
+                  onUploadComplete={(photo: Photo) => {
+                    field.onChange([...(field.value || []), photo])
+                  }}
+                  currentCount={photos.length}
+                  maxCount={10}
+                />
+                <PhotoGrid
+                  photos={field.value || []}
+                  onReorder={field.onChange}
+                  onRemove={(photoId) => {
+                    field.onChange((field.value || []).filter((p: Photo) => p.id !== photoId))
+                  }}
+                />
+              </>
+            )}
+          />
+          {errors.photos && (
+            <p className="mt-2 text-sm text-red-600">{errors.photos.message}</p>
+          )}
+        </div>
+
+        {/* Assets */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-medium mb-4">Included Assets</h3>
+          <div className="space-y-3">
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                {...register('inventoryIncluded')}
+                className="w-4 h-4 text-pink-600 rounded"
+              />
+              <span>Inventory included</span>
+            </label>
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                {...register('laserIncluded')}
+                className="w-4 h-4 text-pink-600 rounded"
+              />
+              <span>Laser device included</span>
+            </label>
+          </div>
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Other Assets
+            </label>
+            <input
+              type="text"
+              {...register('otherAssets')}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-medium mb-4">Notes</h3>
+          <textarea
+            {...register('notes')}
+            rows={4}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+          />
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-end gap-4">
+          <button
+            type="button"
+            onClick={() => router.back()}
+            className="px-6 py-2 border border-gray-300 rounded-lg font-medium"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium disabled:opacity-50"
+          >
+            {isSubmitting ? 'Saving...' : isRejected ? 'Save & Resubmit' : 'Save Changes'}
+          </button>
+        </div>
+      </form>
+    </FormProvider>
+  )
+}
