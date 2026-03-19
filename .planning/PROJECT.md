@@ -12,7 +12,7 @@ Franchisees can quickly find buyers for their locations with verified performanc
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Google Workspace SSO authentication — *Validated in Phase 1: Foundation*
 
 ### Active
 
@@ -23,7 +23,6 @@ Franchisees can quickly find buyers for their locations with verified performanc
 - [ ] Cumulative + per-location views for multi-location bundles
 - [ ] Unopened territories show basic info only (location, size, price)
 - [ ] Corporate approves listings before they go live
-- [ ] Google Workspace SSO authentication
 - [ ] Buyers can browse listings in list view or map view
 - [ ] Filters: time open, price, location/state, location type
 - [ ] Buyers can set area/state alerts for new listings
@@ -56,9 +55,9 @@ Franchisees can quickly find buyers for their locations with verified performanc
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Lead capture only, not full transactions | Reduces complexity, v1 can ship faster | — Pending |
-| Authenticated access only | Protects sensitive financial data, keeps it internal | — Pending |
+| Authenticated access only | Protects sensitive financial data, keeps it internal | ✓ Phase 1 |
 | Corporate moderation required | Quality control, prevent bad listings | — Pending |
-| Next.js + Neon + Vercel | Fast to build, familiar stack | — Pending |
+| Next.js + Neon + Vercel | Fast to build, familiar stack | ✓ Phase 1 |
 
 ---
-*Last updated: 2026-03-19 after initialization*
+*Last updated: 2026-03-19 after Phase 1 completion*
