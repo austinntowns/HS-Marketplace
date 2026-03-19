@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 03-04-PLAN.md
-last_updated: "2026-03-19T22:32:25.839Z"
+stopped_at: Completed 03-05-PLAN.md
+last_updated: "2026-03-19T22:33:24.129Z"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 16
-  completed_plans: 11
+  completed_plans: 13
 ---
 
 # Project State
@@ -57,6 +57,8 @@ Plan: 1 of 5
 | Phase 03-discovery-and-contact P01 | 3 | 2 tasks | 7 files |
 | Phase 03-discovery-and-contact P03-03 | 5 | 4 tasks | 11 files |
 | Phase 03-discovery-and-contact P04 | 3 | 3 tasks | 7 files |
+| Phase 03-discovery-and-contact P05 | 5 | 3 tasks | 9 files |
+| Phase 03-discovery-and-contact P02 | 5 | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -99,6 +101,12 @@ Recent decisions affecting current work:
 - [Phase 03-discovery-and-contact]: DetailMap uses dynamic import for MapTiler SDK to avoid SSR issues
 - [Phase 03-discovery-and-contact]: listingTitle fallback chain in admin inquiries: listings.title → listingLocations.name → city/state → short ID
 - [Phase 03-discovery-and-contact]: hasContactedListing called in Server Component, passed as prop to ContactForm — avoids client-side data fetching for initial duplicate state
+- [Phase 03-discovery-and-contact]: Alert criteria: State/region only (no listingTypes/price) — locked in CONTEXT.md
+- [Phase 03-discovery-and-contact]: triggerAlertMatching receives listing param object for Phase 2 flexibility
+- [Phase 03-discovery-and-contact]: Server Actions passed as props to AlertsManager so Server Component handles data fetching
+- [Phase 03-discovery-and-contact]: MapView dynamically imported (ssr: false) — MapTiler SDK browser-only WebGL APIs crash SSR
+- [Phase 03-discovery-and-contact]: nuqs parseAsInteger returns null; ListingFilters uses undefined — coerce with ?? undefined in BrowsePage
+- [Phase 03-discovery-and-contact]: LocationSearch onPick event is { feature } object not Feature directly — matched to actual geocoding-control@2.1.7 API
 
 ### Pending Todos
 
@@ -112,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T22:32:25.836Z
-Stopped at: Completed 03-04-PLAN.md
+Last session: 2026-03-19T22:33:12.308Z
+Stopped at: Completed 03-05-PLAN.md
 Resume file: None

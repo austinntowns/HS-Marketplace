@@ -55,10 +55,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **DISC-09**: Contact form auto-fills buyer info from profile
 - [x] **DISC-10**: Contact form includes free-form message field
 - [x] **DISC-11**: Seller receives email notification when buyer expresses interest
-- [ ] **DISC-12**: Buyer can set area/state alerts for new listings
-- [ ] **DISC-13**: Buyer receives email when new listing matches their alert criteria
-- [ ] **DISC-15**: Buyer can edit their alert criteria
-- [ ] **DISC-16**: Buyer can delete their alerts
+- [x] **DISC-12**: Buyer can set area/state alerts for new listings
+- [x] **DISC-13**: Buyer receives email when new listing matches their alert criteria
+- [x] **DISC-15**: Buyer can edit their alert criteria
+- [x] **DISC-16**: Buyer can delete their alerts
 
 ### Admin
 
@@ -148,11 +148,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DISC-09 | Phase 3 | Complete |
 | DISC-10 | Phase 3 | Complete |
 | DISC-11 | Phase 3 | Complete |
-| DISC-12 | Phase 3 | Pending |
-| DISC-13 | Phase 3 | Pending |
+| DISC-12 | Phase 3 | Complete |
+| DISC-13 | Phase 3 | Complete |
 | DISC-14 | Phase 3 | Complete |
-| DISC-15 | Phase 3 | Pending |
-| DISC-16 | Phase 3 | Pending |
+| DISC-15 | Phase 3 | Complete |
+| DISC-16 | Phase 3 | Complete |
 | ADMN-01 | Phase 2 | Complete |
 | ADMN-02 | Phase 2 | Complete |
 | ADMN-03 | Phase 2 | Complete |
