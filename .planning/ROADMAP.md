@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Google Workspace SSO, role system, database schema, and email infrastructure (completed 2026-03-19)
 - [x] **Phase 2: Listings and Moderation** - Seller listing creation for all types, admin approval queue, and status notifications (completed 2026-03-19)
 - [x] **Phase 3: Discovery and Contact** - Buyer browse, filters, listing detail, contact form, and area alerts (gap closure in progress) (completed 2026-03-19)
-- [x] **Phase 4: Live KPI Integration** - Internal API proxy, live KPI cards on listing detail, trend charts, and bundle rollups (completed 2026-03-19)
+- [ ] **Phase 4: Live KPI Integration** - Internal API proxy, live KPI cards on listing detail, trend charts, and bundle rollups (gap closure in progress)
 
 ## Phase Details
 
@@ -81,7 +81,7 @@ Plans:
 **Goal**: Listing detail pages display live operational data from Hello Sugar's internal API, making the financial picture complete and verified
 **Depends on**: Phase 3
 **Requirements**: LIST-17, LIST-18, LIST-19
-**Plans:** 3/3 plans complete
+**Plans:** 5 plans (3 complete + 2 gap closure)
 **Success Criteria** (what must be TRUE):
   1. Listing detail for an open salon shows live KPI cards (revenue, new clients, bookings, membership conversion) sourced from the internal API — labeled as API-verified, not seller-entered
   2. Each KPI card has a 12-month trend chart showing historical trajectory
@@ -92,6 +92,8 @@ Plans:
 - [ ] 04-01-PLAN.md — Internal API discovery spike: obtain credentials, explore endpoints, document contract, create Zod schema and mock fixture (Wave 1, LIST-17)
 - [ ] 04-02-PLAN.md — Server-side API proxy with 5-minute cache, Route Handlers, fetch layer, aggregation logic, KPI cards on listing detail (Wave 2, LIST-17/LIST-19, depends on 04-01)
 - [ ] 04-03-PLAN.md — 12-month trend charts with Recharts, KPI modal, bundle per-location table, overlay chart (Wave 3, LIST-18/LIST-19, depends on 04-02)
+- [ ] 04-04-PLAN.md — GAP CLOSURE: Wire KpiSection into listing detail page, replace KpiPlaceholder (Wave 1, LIST-17/18/19)
+- [ ] 04-05-PLAN.md — GAP CLOSURE: Add server-only guard to schema.ts, create mock data fixture, document API contract (Wave 1, LIST-17)
 
 ## Progress
 
@@ -103,4 +105,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
 | 2. Listings and Moderation | 4/4 | Complete   | 2026-03-19 |
 | 3. Discovery and Contact | 8/8 | Complete   | 2026-03-19 |
-| 4. Live KPI Integration | 3/3 | Complete   | 2026-03-19 |
+| 4. Live KPI Integration | 3/5 | Gap closure in progress | — |
