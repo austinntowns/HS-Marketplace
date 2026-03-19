@@ -41,7 +41,7 @@ Plans:
 **Goal**: Sellers can create and manage listings for all location types, and admins can approve or reject them before they go live
 **Depends on**: Phase 1
 **Requirements**: LIST-01, LIST-02, LIST-03, LIST-04, LIST-05, LIST-06, LIST-07, LIST-08, LIST-10, LIST-11, LIST-12, LIST-13, LIST-14, LIST-15, LIST-16, LIST-20, LIST-21, LIST-22, LIST-23, ADMN-01, ADMN-02, ADMN-03, ADMN-04, ADMN-05, ADMN-06, ADMN-07, ADMN-08, ADMN-09
-**Plans:** 4 plans
+**Plans:** 2/4 plans executed
 **Success Criteria** (what must be TRUE):
   1. Seller can create a listing for a suite, flagship, territory, or bundle — open salons pre-populate from system data; territories use manual entry
   2. Seller can enter asking price, TTM profit, reason for selling, included assets, notes, and upload 1-10 photos
@@ -98,6 +98,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
-| 2. Listings and Moderation | 1/4 | Executing | - |
+| 2. Listings and Moderation | 2/4 | In Progress|  |
 | 3. Discovery and Contact | 0/5 | Planning complete | - |
 | 4. Live KPI Integration | 0/3 | Planning complete | - |

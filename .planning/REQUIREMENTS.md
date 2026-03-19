@@ -17,10 +17,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Listings
 
-- [ ] **LIST-01**: Seller can create listing for a suite location
-- [ ] **LIST-02**: Seller can create listing for a flagship location
-- [ ] **LIST-03**: Seller can create listing for an unopened territory
-- [ ] **LIST-04**: Seller can create a bundle listing (multiple locations/territories)
+- [x] **LIST-01**: Seller can create listing for a suite location
+- [x] **LIST-02**: Seller can create listing for a flagship location
+- [x] **LIST-03**: Seller can create listing for an unopened territory
+- [x] **LIST-04**: Seller can create a bundle listing (multiple locations/territories)
 - [x] **LIST-05**: Open salons are auto-populated from system data (dropdown selection)
 - [x] **LIST-06**: Unopened territories require manual entry
 - [x] **LIST-07**: Seller can enter asking price
@@ -114,10 +114,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
 | AUTH-05 | Phase 1 | Complete |
-| LIST-01 | Phase 2 | Pending |
-| LIST-02 | Phase 2 | Pending |
-| LIST-03 | Phase 2 | Pending |
-| LIST-04 | Phase 2 | Pending |
+| LIST-01 | Phase 2 | Complete |
+| LIST-02 | Phase 2 | Complete |
+| LIST-03 | Phase 2 | Complete |
+| LIST-04 | Phase 2 | Complete |
 | LIST-05 | Phase 2 | Pending |
 | LIST-06 | Phase 2 | Pending |
 | LIST-07 | Phase 2 | Pending |
