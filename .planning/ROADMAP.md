@@ -59,7 +59,7 @@ Plans:
 **Goal**: Buyers can find listings that match their criteria and submit contact requests to sellers
 **Depends on**: Phase 2
 **Requirements**: DISC-01, DISC-02, DISC-03, DISC-04, DISC-05, DISC-06, DISC-07, DISC-08, DISC-09, DISC-10, DISC-11, DISC-12, DISC-13, DISC-14, DISC-15, DISC-16
-**Plans:** 4 plans
+**Plans:** 5 plans
 **Success Criteria** (what must be TRUE):
   1. Buyer can browse active listings in list view (default: newest first) and map view, and switch between them without losing filter state
   2. Buyer can filter by listing type, state, price range, and time open — and search by text — with all filters reflected in the URL
@@ -68,10 +68,11 @@ Plans:
   5. Buyer can create, edit, and delete area/state alerts — and receives an email when a new matching listing goes live
 
 Plans:
-- [ ] 03-01-PLAN.md — Browse page with list/map views, filters, URL-synced state, infinite scroll (Wave 1, DISC-01/02/03/04/05/06/14)
-- [ ] 03-02-PLAN.md — Listing detail page with photos, financials, KPI placeholder (Wave 1, DISC-07)
-- [ ] 03-03-PLAN.md — Contact form, seller notification, admin inquiry log (Wave 2, DISC-08/09/10/11, depends on 03-02)
-- [ ] 03-04-PLAN.md — Alert management and email notification on listing match (Wave 2, DISC-12/13/15/16, depends on 03-01)
+- [ ] 03-01-PLAN.md — Install browse dependencies, create listings query with filters and cursor pagination (Wave 1, DISC-01/14)
+- [ ] 03-02-PLAN.md — Browse page UI: FilterBar, ListingCard, ListingGrid, MapView, LocationSearch (Wave 2, DISC-02/03/04/05/06, depends on 03-01)
+- [ ] 03-03-PLAN.md — Listing detail page with photos, financials, floating contact CTA, KPI placeholder (Wave 1, DISC-07)
+- [ ] 03-04-PLAN.md — Contact form, seller notification, admin inquiry log (Wave 2, DISC-08/09/10/11, depends on 03-03)
+- [ ] 03-05-PLAN.md — Alert management with states-only criteria, email notification on listing match (Wave 2, DISC-12/13/15/16, depends on 03-02)
 
 ### Phase 4: Live KPI Integration
 **Goal**: Listing detail pages display live operational data from Hello Sugar's internal API, making the financial picture complete and verified
@@ -98,5 +99,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
 | 2. Listings and Moderation | 0/4 | Ready | - |
-| 3. Discovery and Contact | 0/4 | Not started | - |
+| 3. Discovery and Contact | 0/5 | Planning complete | - |
 | 4. Live KPI Integration | 0/3 | Planning complete | - |
