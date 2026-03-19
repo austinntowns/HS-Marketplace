@@ -21,17 +21,17 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **LIST-02**: Seller can create listing for a flagship location
 - [ ] **LIST-03**: Seller can create listing for an unopened territory
 - [ ] **LIST-04**: Seller can create a bundle listing (multiple locations/territories)
-- [ ] **LIST-05**: Open salons are auto-populated from system data (dropdown selection)
-- [ ] **LIST-06**: Unopened territories require manual entry
-- [ ] **LIST-07**: Seller can enter asking price
-- [ ] **LIST-08**: Seller can enter TTM profit
+- [x] **LIST-05**: Open salons are auto-populated from system data (dropdown selection)
+- [x] **LIST-06**: Unopened territories require manual entry
+- [x] **LIST-07**: Seller can enter asking price
+- [x] **LIST-08**: Seller can enter TTM profit
 - [ ] **LIST-09**: Seller can enter monthly expenses breakdown
-- [ ] **LIST-10**: Seller can enter reason for selling
-- [ ] **LIST-11**: Seller can enter included assets
-- [ ] **LIST-12**: Seller can add free-form notes/description
-- [ ] **LIST-13**: Seller must upload minimum 3 photos per listing (max 10)
-- [ ] **LIST-22**: Listing displays square footage (from system data or seller-entered)
-- [ ] **LIST-23**: Listing displays opening date (from system data)
+- [x] **LIST-10**: Seller can enter reason for selling
+- [x] **LIST-11**: Seller can enter included assets
+- [x] **LIST-12**: Seller can add free-form notes/description
+- [x] **LIST-13**: Seller must upload minimum 3 photos per listing (max 10)
+- [x] **LIST-22**: Listing displays square footage (from system data or seller-entered)
+- [x] **LIST-23**: Listing displays opening date (from system data)
 - [ ] **LIST-14**: Seller can view their listing status (draft, pending, active, rejected, sold)
 - [ ] **LIST-15**: Seller can edit their listing at any time (no re-approval needed)
 - [ ] **LIST-16**: Seller can mark their listing as sold

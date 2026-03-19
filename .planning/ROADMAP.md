@@ -50,7 +50,7 @@ Plans:
   5. Seller receives a reminder email when their listing has been active 30+ days without an update
 
 Plans:
-- [ ] 02-01-PLAN.md — Drizzle schema, Zod validation, status machine, upload endpoint (Wave 1, LIST-05/06/07/08/10/11/12/13/22/23)
+- [x] 02-01-PLAN.md — Drizzle schema, Zod validation, status machine, upload endpoint (Wave 1, LIST-05/06/07/08/10/11/12/13/22/23)
 - [ ] 02-02-PLAN.md — Seller listing creation wizard with multi-step form, photo upload, territory map (Wave 2, LIST-01/02/03/04, depends on 02-01)
 - [ ] 02-03-PLAN.md — Seller listing management: dashboard, edit, status actions, 30-day reminder (Wave 3, LIST-14/15/16/20/21, depends on 02-02)
 - [ ] 02-04-PLAN.md — Admin moderation: queue, approve/reject, all listings view, admin overrides (Wave 3, ADMN-01-09, depends on 02-02)
@@ -98,6 +98,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
-| 2. Listings and Moderation | 0/4 | Ready | - |
+| 2. Listings and Moderation | 1/4 | Executing | - |
 | 3. Discovery and Contact | 0/5 | Planning complete | - |
 | 4. Live KPI Integration | 0/3 | Planning complete | - |

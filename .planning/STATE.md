@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 4 UI-SPEC approved
-last_updated: "2026-03-19T21:13:01.094Z"
+stopped_at: "Completed 02-01-PLAN.md"
+last_updated: "2026-03-19T21:27:30Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 9
-  completed_plans: 4
+  total_plans: 15
+  completed_plans: 5
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-19)
 
 **Core value:** Franchisees can quickly find buyers for their locations with verified performance data that builds trust and accelerates deals.
-**Current focus:** Phase 01 — foundation
+**Current focus:** Phase 02 — listings-moderation
 
 ## Current Position
 
-Phase: 01 (foundation) — EXECUTING
-Plan: 4 of 4 (plans 01, 04 complete; 02, 03 pending)
+Phase: 02 (listings-moderation) — EXECUTING
+Plan: 2 of 4
 
 ## Performance Metrics
 
@@ -39,6 +39,7 @@ Plan: 4 of 4 (plans 01, 04 complete; 02, 03 pending)
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation P01 | 6 min | 3 tasks / 14 files | 6 min |
+| 02-listings-moderation P01 | 3 min | 4 tasks / 10 files | 3 min |
 
 **Recent Trend:**
 
@@ -73,6 +74,10 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: monthlyExpenses as typed JSON (not separate table) for v1 simplicity
 - [Phase 01-foundation]: Buyer info snapshot on contacts table for data immutability
 - [Phase 01-foundation]: migrate.ts uses DATABASE_URL_DIRECT (non-pooled) per Neon migration requirements
+- [Phase 02-listings-moderation P01]: Phase 1 listings.ts replaced — expanded to listingLocations + listingPhotos tables; enums stay in enums.ts
+- [Phase 02-listings-moderation P01]: Vercel Blob chosen for photo storage — upload endpoint at /api/upload with seller auth check
+- [Phase 02-listings-moderation P01]: Territory validation uses superRefine — checks lat/lng/radius only on territory-type locations, supports mixed bundles
+- [Phase 02-listings-moderation P01]: Status machine as TRANSITIONS array — canTransition + getAvailableActions derived from single source of truth
 
 ### Pending Todos
 
@@ -82,10 +87,10 @@ None yet.
 
 - Hello Sugar internal API contract is unknown (endpoint shape, auth, rate limits, KPI fields) — Phase 4 requires a discovery spike before work can be scoped; proxy layer should accept a mock during Phases 1-3
 - Hello Sugar Workspace domain name needs confirmation (assumed hellosugar.salon — verify before writing auth config)
-- Photo storage provider not decided (Vercel Blob vs Cloudinary) — decision needed before Phase 2 listing form work
+- Photo storage provider not decided (Vercel Blob vs Cloudinary) — RESOLVED: Vercel Blob chosen, upload endpoint created in 02-01
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:11:25.498Z
-Stopped at: Phase 4 UI-SPEC approved
-Resume file: .planning/phases/04-live-kpi-integration/04-UI-SPEC.md
+Last session: 2026-03-19T21:27:30Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-listings-moderation/02-02-PLAN.md
