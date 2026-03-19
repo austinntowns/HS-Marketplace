@@ -33,6 +33,7 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
 
   // nuqs returns null for unset parseAsInteger values; ListingFilters uses undefined
   const filters = {
+    query: rawFilters.query || undefined,
     types: rawFilters.types,
     states: rawFilters.states,
     minPrice: rawFilters.minPrice ?? undefined,
