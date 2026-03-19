@@ -13,4 +13,5 @@ export const env = createEnv({
     GOOGLE_WORKSPACE_DOMAIN: z.string().default("hellosugar.salon"),
   },
   experimental__runtimeEnv: {},
+  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 })
