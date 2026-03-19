@@ -22,12 +22,13 @@ Franchisees can quickly find buyers for their locations with verified performanc
 - [x] Filters: time open, price, location/state, location type, text search — *Validated in Phase 3*
 - [x] Buyers can set area/state alerts for new listings — *Validated in Phase 3*
 - [x] Buyer submits contact form → seller notified — *Validated in Phase 3*
+- [x] Live operational data pulled from internal API (revenue, new clients, bookings, membership conversion) — *Validated in Phase 4: Live KPI Integration*
+- [x] KPI summary cards with 12-month trend drill-down — *Validated in Phase 4*
+- [x] Cumulative + per-location views for multi-location bundles — *Validated in Phase 4*
 
 ### Active
 
-- [ ] Live operational data pulled from internal API (revenue, new clients, bookings, membership conversion)
-- [ ] KPI summary cards with 12-month trend drill-down
-- [ ] Cumulative + per-location views for multi-location bundles
+None — v1.0 Milestone Complete!
 
 ### Out of Scope
 
@@ -60,6 +61,7 @@ Franchisees can quickly find buyers for their locations with verified performanc
 | Next.js + Neon + Vercel | Fast to build, familiar stack | ✓ Phase 1 |
 | Min 1 photo per listing (not 3) | Lower friction for initial listing creation | ✓ Phase 2 |
 | State-only alert criteria | Simple matching, avoid over-engineering v1 | ✓ Phase 3 |
+| KPI data cached server-side (5min) | Reduce API load, improve page speed | ✓ Phase 4 |
 
 ---
-*Last updated: 2026-03-19 after Phase 3 completion*
+*Last updated: 2026-03-19 after Phase 4 completion — v1.0 Milestone Complete*
