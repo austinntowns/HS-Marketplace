@@ -77,17 +77,17 @@ Plans:
 **Goal**: Listing detail pages display live operational data from Hello Sugar's internal API, making the financial picture complete and verified
 **Depends on**: Phase 3
 **Requirements**: LIST-17, LIST-18, LIST-19
+**Plans:** 3 plans
 **Success Criteria** (what must be TRUE):
   1. Listing detail for an open salon shows live KPI cards (revenue, new clients, bookings, membership conversion) sourced from the internal API — labeled as API-verified, not seller-entered
   2. Each KPI card has a 12-month trend chart showing historical trajectory
   3. A bundle listing shows cumulative KPIs across all included locations plus a per-location breakdown toggle
   4. When the internal API is unavailable, the listing detail page still loads and KPI cards display a clear "data temporarily unavailable" state rather than an error
-**Plans**: TBD
 
 Plans:
-- [ ] 04-01: Internal API discovery spike — validate endpoint shape, auth, rate limits, and available KPI fields
-- [ ] 04-02: Server-side API proxy with 5-minute cache, transforms layer, graceful fallback, and KPI cards on listing detail
-- [ ] 04-03: 12-month trend charts and bundle cumulative/per-location breakdown
+- [ ] 04-01-PLAN.md — Internal API discovery spike: obtain credentials, explore endpoints, document contract, create Zod schema and mock fixture (Wave 1, LIST-17)
+- [ ] 04-02-PLAN.md — Server-side API proxy with 5-minute cache, Route Handlers, fetch layer, aggregation logic, KPI cards on listing detail (Wave 2, LIST-17/LIST-19, depends on 04-01)
+- [ ] 04-03-PLAN.md — 12-month trend charts with Recharts, KPI modal, bundle per-location table, overlay chart (Wave 3, LIST-18/LIST-19, depends on 04-02)
 
 ## Progress
 
@@ -99,4 +99,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
 | 2. Listings and Moderation | 0/4 | Ready | - |
 | 3. Discovery and Contact | 0/4 | Not started | - |
-| 4. Live KPI Integration | 0/3 | Not started | - |
+| 4. Live KPI Integration | 0/3 | Planning complete | - |
