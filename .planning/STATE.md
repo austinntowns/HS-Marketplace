@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: "Completed 02-02-PLAN.md"
-last_updated: "2026-03-19T21:35:47Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-19T21:44:31.993Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 15
-  completed_plans: 6
+  total_plans: 16
+  completed_plans: 7
 ---
 
 # Project State
@@ -52,6 +52,7 @@ Plan: 3 of 4
 *Updated after each plan completion*
 | Phase 01-foundation P02 | 5 | 5 tasks | 17 files |
 | Phase 01-foundation P03 | 20 | 4 tasks | 10 files |
+| Phase 02-listings-moderation P03 | 4 | 4 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -82,6 +83,9 @@ Recent decisions affecting current work:
 - [Phase 02-listings-moderation P02]: MapClickHandler extracted as separate dynamic component — react-leaflet useMapEvents hook must run inside MapContainer context; MapContainer onClick prop is not supported
 - [Phase 02-listings-moderation P02]: params typed as Promise<{id}> in Next.js 15+ — async params required; all dynamic route pages must await params
 - [Phase 02-listings-moderation P02]: Seller listings index page (/seller/listings) deferred — needed for "My Listings" nav link; not in this plan's scope
+- [Phase 02-listings-moderation]: async searchParams as Promise in Next.js 16.2.0 pages — same requirement as async params
+- [Phase 02-listings-moderation]: jose JWT action tokens for no-login email links — createActionToken + executeAction with status-machine validation
+- [Phase 02-listings-moderation]: updateListing auto-resubmits rejected listings — checks status === rejected after saveDraft, sets to pending and clears rejectionReason
 
 ### Pending Todos
 
@@ -95,6 +99,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T21:35:47Z
-Stopped at: Completed 02-02-PLAN.md
-Resume file: .planning/phases/02-listings-moderation/02-03-PLAN.md
+Last session: 2026-03-19T21:44:31.990Z
+Stopped at: Completed 02-03-PLAN.md
+Resume file: None

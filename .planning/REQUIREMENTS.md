@@ -32,11 +32,11 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **LIST-13**: Seller must upload minimum 3 photos per listing (max 10)
 - [x] **LIST-22**: Listing displays square footage (from system data or seller-entered)
 - [x] **LIST-23**: Listing displays opening date (from system data)
-- [ ] **LIST-14**: Seller can view their listing status (draft, pending, active, rejected, sold)
-- [ ] **LIST-15**: Seller can edit their listing at any time (no re-approval needed)
-- [ ] **LIST-16**: Seller can mark their listing as sold
-- [ ] **LIST-20**: Seller can delist (withdraw) their listing at any time
-- [ ] **LIST-21**: System sends reminder email to seller when listing has been active 30+ days without update
+- [x] **LIST-14**: Seller can view their listing status (draft, pending, active, rejected, sold)
+- [x] **LIST-15**: Seller can edit their listing at any time (no re-approval needed)
+- [x] **LIST-16**: Seller can mark their listing as sold
+- [x] **LIST-20**: Seller can delist (withdraw) their listing at any time
+- [x] **LIST-21**: System sends reminder email to seller when listing has been active 30+ days without update
 - [ ] **LIST-17**: Listing displays live KPI data from internal API (revenue, new clients, bookings, membership conversion)
 - [ ] **LIST-18**: Listing displays 12-month trend charts for KPIs
 - [ ] **LIST-19**: Bundle listings show cumulative KPIs and per-location breakdown
@@ -127,14 +127,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-11 | Phase 2 | Pending |
 | LIST-12 | Phase 2 | Pending |
 | LIST-13 | Phase 2 | Pending |
-| LIST-14 | Phase 2 | Pending |
-| LIST-15 | Phase 2 | Pending |
-| LIST-16 | Phase 2 | Pending |
+| LIST-14 | Phase 2 | Complete |
+| LIST-15 | Phase 2 | Complete |
+| LIST-16 | Phase 2 | Complete |
 | LIST-17 | Phase 4 | Pending |
 | LIST-18 | Phase 4 | Pending |
 | LIST-19 | Phase 4 | Pending |
-| LIST-20 | Phase 2 | Pending |
-| LIST-21 | Phase 2 | Pending |
+| LIST-20 | Phase 2 | Complete |
+| LIST-21 | Phase 2 | Complete |
 | LIST-22 | Phase 2 | Pending |
 | LIST-23 | Phase 2 | Pending |
 | DISC-01 | Phase 3 | Pending |
