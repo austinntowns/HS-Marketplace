@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-03-PLAN.md (all 7 tasks)
-last_updated: "2026-03-19T23:25:37.547Z"
+stopped_at: Completed 04-04-PLAN.md (1 task)
+last_updated: "2026-03-19T23:44:05.665Z"
 progress:
   total_phases: 4
-  completed_phases: 4
-  total_plans: 19
-  completed_plans: 19
+  completed_phases: 3
+  total_plans: 21
+  completed_plans: 20
 ---
 
 # Project State
@@ -64,6 +64,7 @@ Plan: 1 of 3
 | Phase 03-discovery-and-contact P07 | 3 | 3 tasks | 4 files |
 | Phase 04-live-kpi-integration P02 | 4 | 6 tasks | 12 files |
 | Phase 04-live-kpi-integration P03 | 3 | 7 tasks | 8 files |
+| Phase 04-live-kpi-integration P04 | 8 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -121,6 +122,8 @@ Recent decisions affecting current work:
 - [Phase 04-live-kpi-integration]: KpiCardRow extracted as separate client component to avoid mixing server/client boundaries
 - [Phase 04-live-kpi-integration]: KpiSection interface changed from bundleLocationIds (string[]) to bundleLocations (Location[]) to pass names/types to BundleKpiSection
 - [Phase 04-live-kpi-integration]: BundleKpiSection is a separate Client Component — KpiSection stays as a Server Component for async data fetching
+- [Phase 04-live-kpi-integration]: locationId passed as undefined for territory/bundle types — KpiSection handles null returns internally
+- [Phase 04-live-kpi-integration]: Salon locations in bundles mapped to type=suite (conservative) — KpiSection only uses type to filter territories
 
 ### Pending Todos
 
@@ -135,6 +138,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T23:25:37.545Z
-Stopped at: Completed 04-03-PLAN.md (all 7 tasks)
+Last session: 2026-03-19T23:44:05.662Z
+Stopped at: Completed 04-04-PLAN.md (1 task)
 Resume file: None
