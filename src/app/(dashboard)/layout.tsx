@@ -22,10 +22,21 @@ export default async function DashboardLayout({
               <Link href="/" className="text-xl font-bold text-pink-600">
                 HS Marketplace
               </Link>
+              <Link href="/browse" className="text-gray-600 hover:text-gray-900">
+                Browse Listings
+              </Link>
+              <Link href="/account/alerts" className="text-gray-600 hover:text-gray-900">
+                Alerts
+              </Link>
               {session.user.role === "admin" && (
-                <Link href="/admin/users" className="text-gray-600 hover:text-gray-900">
-                  User Management
-                </Link>
+                <>
+                  <Link href="/admin/users" className="text-gray-600 hover:text-gray-900">
+                    User Management
+                  </Link>
+                  <Link href="/admin/inquiries" className="text-gray-600 hover:text-gray-900">
+                    Inquiries
+                  </Link>
+                </>
               )}
             </div>
 
