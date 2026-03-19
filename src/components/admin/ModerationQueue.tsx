@@ -5,12 +5,13 @@ import { useRouter } from 'next/navigation'
 import { AdminListingCard } from './AdminListingCard'
 import { RejectionModal } from './RejectionModal'
 import { approveListing, rejectListing } from '@/lib/admin/actions'
+import type { ListingStatus, ListingType } from '@/lib/listings/types'
 
 interface Listing {
   id: string
   title: string | null
-  type: 'suite' | 'flagship' | 'territory' | 'bundle'
-  status: 'pending'
+  type: ListingType
+  status: ListingStatus
   askingPrice: number
   createdAt: Date
   photos: { url: string }[]

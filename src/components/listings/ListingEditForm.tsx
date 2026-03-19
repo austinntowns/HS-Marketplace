@@ -8,15 +8,17 @@ import { PhotoUploader } from './PhotoUploader'
 import { PhotoGrid } from './PhotoGrid'
 import { listingSchema } from '@/lib/listings/schemas'
 import { updateListing } from '@/lib/listings/actions'
+import { adminUpdateListing } from '@/lib/admin/actions'
 import type { ListingFormData, Photo } from '@/lib/listings/types'
 
 interface ListingEditFormProps {
   listingId: string
   initialData: ListingFormData
   isRejected: boolean
+  isAdmin?: boolean
 }
 
-export function ListingEditForm({ listingId, initialData, isRejected }: ListingEditFormProps) {
+export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = false }: ListingEditFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -31,8 +33,13 @@ export function ListingEditForm({ listingId, initialData, isRejected }: ListingE
   const handleSubmit = async (data: ListingFormData) => {
     setIsSubmitting(true)
     try {
-      await updateListing(listingId, data)
-      router.push(`/seller/listings/${listingId}`)
+      if (isAdmin) {
+        await adminUpdateListing(listingId, data)
+        router.push(`/admin/listings/${listingId}`)
+      } else {
+        await updateListing(listingId, data)
+        router.push(`/seller/listings/${listingId}`)
+      }
       router.refresh()
     } catch (error) {
       alert((error as Error).message)
