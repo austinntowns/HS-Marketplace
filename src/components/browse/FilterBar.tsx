@@ -24,6 +24,14 @@ const SORT_OPTIONS = [
   { label: "Price: High to low", value: "price-desc" },
 ]
 
+const TIME_OPEN_OPTIONS = [
+  { label: "Any", value: 0 },
+  { label: "1+ years", value: 1 },
+  { label: "2+ years", value: 2 },
+  { label: "3+ years", value: 3 },
+  { label: "5+ years", value: 5 },
+]
+
 export function useListingFilters() {
   return useQueryStates({
     types: parseAsArrayOf(parseAsString).withDefault([]),
@@ -31,6 +39,7 @@ export function useListingFilters() {
     minPrice: parseAsInteger,
     maxPrice: parseAsInteger,
     sort: parseAsString.withDefault("newest"),
+    minYearsOpen: parseAsInteger,
   })
 }
 
@@ -41,7 +50,8 @@ export function FilterBar() {
     filters.types.length > 0 ||
     filters.states.length > 0 ||
     filters.minPrice !== null ||
-    filters.maxPrice !== null
+    filters.maxPrice !== null ||
+    (filters.minYearsOpen !== null && filters.minYearsOpen > 0)
 
   function toggleType(value: string) {
     const current = filters.types
@@ -66,6 +76,7 @@ export function FilterBar() {
       minPrice: null,
       maxPrice: null,
       sort: "newest",
+      minYearsOpen: null,
     })
   }
 
@@ -148,6 +159,24 @@ export function FilterBar() {
             >
               <option value="">Max</option>
               {PRICE_OPTIONS.filter((o) => o.value !== undefined).map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Time open */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-700">Open:</span>
+            <select
+              value={filters.minYearsOpen ?? 0}
+              onChange={(e) =>
+                setFilters({ minYearsOpen: Number(e.target.value) || null })
+              }
+              className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            >
+              {TIME_OPEN_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
                 </option>
