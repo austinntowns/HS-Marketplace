@@ -32,10 +32,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. The listing state machine (draft, pending, active, rejected, sold, delisted) is represented as a Postgres enum and all tables exist in the schema
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Next.js project with Neon/Drizzle/Vitest (Wave 1)
-- [ ] 01-02-PLAN.md — Auth.js v5 Google Workspace SSO with role system (Wave 2, AUTH-01 through AUTH-05)
-- [ ] 01-03-PLAN.md — Complete Drizzle schema and initial migration (Wave 3, depends on 01-02)
-- [ ] 01-04-PLAN.md — Resend transactional email configuration (Wave 2, parallel to 01-02)
+- [x] 01-01-PLAN.md — Scaffold Next.js project with Neon/Drizzle/Vitest (Wave 1)
+- [x] 01-02-PLAN.md — Auth.js v5 Google Workspace SSO with role system (Wave 2, AUTH-01 through AUTH-05)
+- [x] 01-03-PLAN.md — Complete Drizzle schema and initial migration (Wave 3, depends on 01-02)
+- [x] 01-04-PLAN.md — Resend transactional email configuration (Wave 2, parallel to 01-02)
 
 ### Phase 2: Listings and Moderation
 **Goal**: Sellers can create and manage listings for all location types, and admins can approve or reject them before they go live
@@ -58,19 +58,19 @@ Plans:
 **Goal**: Buyers can find listings that match their criteria and submit contact requests to sellers
 **Depends on**: Phase 2
 **Requirements**: DISC-01, DISC-02, DISC-03, DISC-04, DISC-05, DISC-06, DISC-07, DISC-08, DISC-09, DISC-10, DISC-11, DISC-12, DISC-13, DISC-14, DISC-15, DISC-16
+**Plans:** 4 plans
 **Success Criteria** (what must be TRUE):
   1. Buyer can browse active listings in list view (default: newest first) and map view, and switch between them without losing filter state
   2. Buyer can filter by listing type, state, price range, and time open — and search by text — with all filters reflected in the URL
   3. Buyer can view a listing detail page showing all seller-entered financials, photos, and location info (KPI cards show a placeholder pending Phase 4)
   4. Buyer can submit one contact form per listing with their info auto-filled; seller receives an email notification immediately
   5. Buyer can create, edit, and delete area/state alerts — and receives an email when a new matching listing goes live
-**Plans**: TBD
 
 Plans:
-- [ ] 03-01: Browse — list view with filters, text search, URL-synced state, and map view
-- [ ] 03-02: Listing detail page — seller financials, photos, placeholder KPI section
-- [ ] 03-03: Contact form, seller email notification, and admin inquiry log
-- [ ] 03-04: Area/state alert management and email notification on matching listing approval
+- [ ] 03-01-PLAN.md — Browse page with list/map views, filters, URL-synced state, infinite scroll (Wave 1, DISC-01/02/03/04/05/06/14)
+- [ ] 03-02-PLAN.md — Listing detail page with photos, financials, KPI placeholder (Wave 1, DISC-07)
+- [ ] 03-03-PLAN.md — Contact form, seller notification, admin inquiry log (Wave 2, DISC-08/09/10/11, depends on 03-02)
+- [ ] 03-04-PLAN.md — Alert management and email notification on listing match (Wave 2, DISC-12/13/15/16, depends on 03-01)
 
 ### Phase 4: Live KPI Integration
 **Goal**: Listing detail pages display live operational data from Hello Sugar's internal API, making the financial picture complete and verified
