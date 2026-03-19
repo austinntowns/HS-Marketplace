@@ -59,7 +59,7 @@ Plans:
 **Goal**: Buyers can find listings that match their criteria and submit contact requests to sellers
 **Depends on**: Phase 2
 **Requirements**: DISC-01, DISC-02, DISC-03, DISC-04, DISC-05, DISC-06, DISC-07, DISC-08, DISC-09, DISC-10, DISC-11, DISC-12, DISC-13, DISC-14, DISC-15, DISC-16
-**Plans:** 2/5 plans executed
+**Plans:** 3/5 plans executed
 **Success Criteria** (what must be TRUE):
   1. Buyer can browse active listings in list view (default: newest first) and map view, and switch between them without losing filter state
   2. Buyer can filter by listing type, state, price range, and time open — and search by text — with all filters reflected in the URL
@@ -99,5 +99,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-19 |
 | 2. Listings and Moderation | 4/4 | Complete   | 2026-03-19 |
-| 3. Discovery and Contact | 2/5 | In Progress|  |
+| 3. Discovery and Contact | 3/5 | In Progress|  |
 | 4. Live KPI Integration | 0/3 | Planning complete | - |
