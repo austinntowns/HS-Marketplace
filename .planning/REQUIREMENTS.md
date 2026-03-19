@@ -37,9 +37,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **LIST-16**: Seller can mark their listing as sold
 - [x] **LIST-20**: Seller can delist (withdraw) their listing at any time
 - [x] **LIST-21**: System sends reminder email to seller when listing has been active 30+ days without update
-- [ ] **LIST-17**: Listing displays live KPI data from internal API (revenue, new clients, bookings, membership conversion)
+- [x] **LIST-17**: Listing displays live KPI data from internal API (revenue, new clients, bookings, membership conversion)
 - [ ] **LIST-18**: Listing displays 12-month trend charts for KPIs
-- [ ] **LIST-19**: Bundle listings show cumulative KPIs and per-location breakdown
+- [x] **LIST-19**: Bundle listings show cumulative KPIs and per-location breakdown
 
 ### Discovery
 
@@ -130,9 +130,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-14 | Phase 2 | Complete |
 | LIST-15 | Phase 2 | Complete |
 | LIST-16 | Phase 2 | Complete |
-| LIST-17 | Phase 4 | Pending |
+| LIST-17 | Phase 4 | Complete |
 | LIST-18 | Phase 4 | Pending |
-| LIST-19 | Phase 4 | Pending |
+| LIST-19 | Phase 4 | Complete |
 | LIST-20 | Phase 2 | Complete |
 | LIST-21 | Phase 2 | Complete |
 | LIST-22 | Phase 2 | Pending |
