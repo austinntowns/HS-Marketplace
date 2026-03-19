@@ -1,11 +1,14 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
 
-// Mock the db module before importing the module under test
-const mockSelect = vi.fn()
-const mockDb = {
-  select: mockSelect,
-}
-vi.mock("@/db", () => ({ db: mockDb }))
+// Hoist mock variables so they are available in the vi.mock factory
+const { mockSelect } = vi.hoisted(() => {
+  const mockSelect = vi.fn()
+  return { mockSelect }
+})
+
+vi.mock("@/db", () => ({
+  db: { select: mockSelect },
+}))
 
 // Import after mock is set up
 import { getListings } from "@/lib/listings-query"
@@ -27,23 +30,22 @@ describe("getListings", () => {
     vi.clearAllMocks()
   })
 
-  // Test 1: returns only active listings
-  it("returns only active listings", async () => {
+  // Test 1: returns only active listings (status eq condition always applied)
+  it("applies active status filter on every call", async () => {
     const rows = Array.from({ length: 3 }, (_, i) => makeRow(i))
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
 
     await getListings({})
 
-    const whereCall = chain.where.mock.calls[0][0]
-    // The where clause must exist (and() applied with at least status=active)
-    expect(whereCall).toBeDefined()
-    // where should have been called with conditions including status check
+    // where must have been called with the conditions (including status=active)
     expect(chain.where).toHaveBeenCalled()
+    // limit called with PAGE_SIZE + 1 (13)
+    expect(chain.limit).toHaveBeenCalledWith(13)
   })
 
   // Test 2: filters by type array
-  it("filters by type array", async () => {
+  it("calls where when type filter provided", async () => {
     const rows = [makeRow(0, { type: "suite" }), makeRow(1, { type: "flagship" })]
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
@@ -55,7 +57,7 @@ describe("getListings", () => {
   })
 
   // Test 3: filters by state array
-  it("filters by state array", async () => {
+  it("calls where when state filter provided", async () => {
     const rows = [makeRow(0), makeRow(1)]
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
@@ -67,7 +69,7 @@ describe("getListings", () => {
   })
 
   // Test 4: filters by price range
-  it("filters by price range (minPrice/maxPrice)", async () => {
+  it("calls where when price range provided", async () => {
     const rows = [makeRow(0, { askingPrice: 150000 })]
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
@@ -79,7 +81,7 @@ describe("getListings", () => {
   })
 
   // Test 5: sorts by newest first by default
-  it("sorts by newest first (default)", async () => {
+  it("calls orderBy on every query", async () => {
     const rows = [makeRow(0), makeRow(1)]
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
@@ -90,7 +92,7 @@ describe("getListings", () => {
   })
 
   // Test 6: cursor pagination — returns nextCursor when more exist
-  it("returns nextCursor when more items exist (PAGE_SIZE + 1 trick)", async () => {
+  it("returns nextCursor when PAGE_SIZE+1 rows returned (hasMore=true)", async () => {
     // Return PAGE_SIZE + 1 = 13 rows to signal hasMore
     const rows = Array.from({ length: 13 }, (_, i) => makeRow(i))
     const chain = makeQueryChain(rows)
@@ -100,9 +102,11 @@ describe("getListings", () => {
 
     expect(result.items).toHaveLength(12) // trimmed to PAGE_SIZE
     expect(result.nextCursor).not.toBeNull()
+    // nextCursor should be an ISO string of the last item's createdAt
+    expect(typeof result.nextCursor).toBe("string")
   })
 
-  it("returns null nextCursor when no more items", async () => {
+  it("returns null nextCursor when fewer than PAGE_SIZE rows returned", async () => {
     const rows = Array.from({ length: 5 }, (_, i) => makeRow(i))
     const chain = makeQueryChain(rows)
     mockSelect.mockReturnValue(chain)
@@ -113,7 +117,7 @@ describe("getListings", () => {
     expect(result.nextCursor).toBeNull()
   })
 
-  it("passes cursor as condition to limit results to before cursor", async () => {
+  it("includes cursor condition when cursor param provided", async () => {
     const cursorDate = new Date("2025-01-01T00:00:00Z").toISOString()
     const rows = [makeRow(0)]
     const chain = makeQueryChain(rows)
@@ -121,12 +125,11 @@ describe("getListings", () => {
 
     await getListings({ cursor: cursorDate })
 
-    // where must have been called with conditions including cursor
     expect(chain.where).toHaveBeenCalled()
   })
 
-  // Test 7: returns primary photo URL for each listing
-  it("returns primaryPhotoUrl via left join on listingPhotos", async () => {
+  // Test 7: returns primary photo URL via left join
+  it("returns primaryPhotoUrl from joined listingPhotos row", async () => {
     const rows = [
       makeRowWithPhoto(0, "https://example.com/photo.jpg"),
       makeRowWithPhoto(1, null),
@@ -138,8 +141,8 @@ describe("getListings", () => {
 
     expect(result.items[0].primaryPhotoUrl).toBe("https://example.com/photo.jpg")
     expect(result.items[1].primaryPhotoUrl).toBeNull()
-    // The join should have been called
-    expect(chain.leftJoin).toHaveBeenCalled()
+    // The left join should have been called twice (locations + photos)
+    expect(chain.leftJoin).toHaveBeenCalledTimes(2)
   })
 })
 
@@ -156,11 +159,8 @@ function makeRow(index: number, overrides: RowOverrides = {}) {
       id: `listing-${index}`,
       type: overrides.type ?? "suite",
       status: "active",
-      title: `Listing ${index}`,
       askingPrice: overrides.askingPrice ?? 100000,
-      ttmProfit: null,
       createdAt: new Date(`2025-0${(index % 9) + 1}-01T00:00:00Z`),
-      updatedAt: new Date(),
     },
     primaryLocation: {
       name: `Location ${index}`,
@@ -179,11 +179,8 @@ function makeRowWithPhoto(index: number, photoUrl: string | null) {
       id: `listing-${index}`,
       type: "suite",
       status: "active",
-      title: `Listing ${index}`,
       askingPrice: 100000,
-      ttmProfit: null,
       createdAt: new Date(`2025-0${(index % 9) + 1}-01T00:00:00Z`),
-      updatedAt: new Date(),
     },
     primaryLocation: {
       name: `Location ${index}`,
