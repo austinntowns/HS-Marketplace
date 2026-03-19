@@ -3,10 +3,11 @@
 import { auth } from '@/auth'
 import { db } from '@/db'
 import { listings, listingLocations, listingPhotos } from '@/db/schema/listings'
-import { eq, desc } from 'drizzle-orm'
+import { eq, desc, and } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { sendStatusChangeEmail } from '@/lib/email'
 import { canTransition } from '@/lib/listings/status-machine'
+import { triggerAlertMatching } from '@/lib/alert-actions'
 import type { ListingStatus, ListingFormData } from '@/lib/listings/types'
 
 async function requireAdmin() {
@@ -78,6 +79,24 @@ export async function approveListing(listingId: string) {
       newStatus: 'active',
     })
   }
+
+  // Trigger alert emails for buyers with matching alert criteria
+  // Fetch primary location for alert matching
+  const primaryLocation = await db.query.listingLocations.findFirst({
+    where: and(
+      eq(listingLocations.listingId, listingId),
+      eq(listingLocations.displayOrder, 0)
+    ),
+  })
+
+  await triggerAlertMatching({
+    id: listing.id,
+    type: listing.type,
+    city: primaryLocation?.city ?? null,
+    state: primaryLocation?.state ?? null,
+    askingPrice: listing.askingPrice,
+    locationName: primaryLocation?.name ?? listing.title ?? null,
+  })
 
   revalidatePath('/admin/queue')
   revalidatePath('/admin/listings')
