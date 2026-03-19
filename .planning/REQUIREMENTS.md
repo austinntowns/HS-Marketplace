@@ -44,12 +44,12 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Discovery
 
 - [x] **DISC-01**: Buyer can browse listings in list view (default sort: newest first)
-- [ ] **DISC-02**: Buyer can browse listings in map view
+- [x] **DISC-02**: Buyer can browse listings in map view
 - [x] **DISC-14**: Buyer can search listings by text (location name, city, description)
-- [ ] **DISC-03**: Buyer can filter by listing type (suite, flagship, territory, bundle)
-- [ ] **DISC-04**: Buyer can filter by state/region
-- [ ] **DISC-05**: Buyer can filter by price range
-- [ ] **DISC-06**: Buyer can filter by time location has been open
+- [x] **DISC-03**: Buyer can filter by listing type (suite, flagship, territory, bundle)
+- [x] **DISC-04**: Buyer can filter by state/region
+- [x] **DISC-05**: Buyer can filter by price range
+- [x] **DISC-06**: Buyer can filter by time location has been open
 - [x] **DISC-07**: Buyer can view listing detail page with all seller data and live KPIs
 - [x] **DISC-08**: Buyer can submit contact form to express interest in a listing (one per listing)
 - [x] **DISC-09**: Contact form auto-fills buyer info from profile
@@ -138,11 +138,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LIST-22 | Phase 2 | Pending |
 | LIST-23 | Phase 2 | Pending |
 | DISC-01 | Phase 3 | Complete |
-| DISC-02 | Phase 3 | Pending |
-| DISC-03 | Phase 3 | Pending |
-| DISC-04 | Phase 3 | Pending |
-| DISC-05 | Phase 3 | Pending |
-| DISC-06 | Phase 3 | Pending |
+| DISC-02 | Phase 3 | Complete |
+| DISC-03 | Phase 3 | Complete |
+| DISC-04 | Phase 3 | Complete |
+| DISC-05 | Phase 3 | Complete |
+| DISC-06 | Phase 3 | Complete |
 | DISC-07 | Phase 3 | Complete |
 | DISC-08 | Phase 3 | Complete |
 | DISC-09 | Phase 3 | Complete |
