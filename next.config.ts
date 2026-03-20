@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
-  cacheComponents: true, // Enable 'use cache' directive for KPI proxy
+  // cacheComponents disabled - requires Suspense boundaries on all auth pages
+  // KPI caching uses unstable_cache instead
 };
 
 export default nextConfig;

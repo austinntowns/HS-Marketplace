@@ -1,5 +1,5 @@
 import "server-only"
-import { cacheLife } from "next/cache"
+import { unstable_cache } from "next/cache"
 import { kpiResponseSchema, type KpiData } from "./schema"
 import { mockLocationKpi, generateMockBundleKpi } from "./mock-data"
 
@@ -13,18 +13,9 @@ function shouldUseMockData(): boolean {
 }
 
 /**
- * Fetch KPI data for a single location with 5-minute server cache.
- * Returns mock data in development when API credentials aren't configured.
- * Returns null on any error (network, non-200, validation) for graceful degradation.
+ * Internal fetch function (uncached).
  */
-export async function fetchLocationKpi(locationId: string): Promise<KpiData | null> {
-  "use cache"
-  cacheLife({
-    stale: 60, // 1 min client-side stale
-    revalidate: 300, // 5 min server background refresh
-    expire: 3600, // 1 hr hard expiry
-  })
-
+async function fetchLocationKpiInternal(locationId: string): Promise<KpiData | null> {
   // Return mock data when API credentials aren't configured
   if (shouldUseMockData()) {
     console.info("[KPI] Using mock data (API credentials not configured)")
@@ -44,7 +35,7 @@ export async function fetchLocationKpi(locationId: string): Promise<KpiData | nu
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      cache: "no-store", // bypass Next.js fetch cache; 'use cache' is the cache layer
+      cache: "no-store",
     })
 
     if (!res.ok) {
@@ -68,18 +59,22 @@ export async function fetchLocationKpi(locationId: string): Promise<KpiData | nu
 }
 
 /**
+ * Fetch KPI data for a single location with 5-minute server cache.
+ * Returns mock data in development when API credentials aren't configured.
+ * Returns null on any error (network, non-200, validation) for graceful degradation.
+ */
+export const fetchLocationKpi = unstable_cache(
+  fetchLocationKpiInternal,
+  ["kpi-location"],
+  { revalidate: 300 } // 5 min cache
+)
+
+/**
  * Fetch KPI data for multiple locations (bundle).
  * Returns mock data in development when API credentials aren't configured.
  * Returns object mapping locationId -> KpiData, excluding failed fetches.
  */
 export async function fetchBundleKpi(locationIds: string[]): Promise<Record<string, KpiData>> {
-  "use cache"
-  cacheLife({
-    stale: 60,
-    revalidate: 300,
-    expire: 3600,
-  })
-
   // Return mock bundle data when API credentials aren't configured
   if (shouldUseMockData()) {
     console.info("[KPI] Using mock bundle data (API credentials not configured)")
