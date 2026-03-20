@@ -1,16 +1,7 @@
 import Link from "next/link"
-import { redirect } from "next/navigation"
-import { auth } from "@/auth"
 
-export default async function HomePage() {
-  const session = await auth()
-
-  // Redirect authenticated users to browse
-  if (session?.user) {
-    redirect("/browse")
-  }
-
-  // Unauthenticated users see the landing page
+export default function HomePage() {
+  // Simplified - no auth check for debugging
   return (
     <main className="min-h-screen bg-white">
       {/* Navigation */}
