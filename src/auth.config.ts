@@ -20,12 +20,20 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request }) {
-      const isLoggedIn = !!auth?.user
-      const isAuthPage = request.nextUrl.pathname.startsWith("/login") ||
-                         request.nextUrl.pathname.startsWith("/access-denied")
-      const isApiAuth = request.nextUrl.pathname.startsWith("/api/auth")
+      const pathname = request.nextUrl.pathname
+      console.log("[AUTH:authorized]", { pathname, hasUser: !!auth?.user })
 
-      if (isAuthPage || isApiAuth) return true
+      const isLoggedIn = !!auth?.user
+      const isAuthPage = pathname.startsWith("/login") ||
+                         pathname.startsWith("/access-denied")
+      const isApiAuth = pathname.startsWith("/api/auth")
+      const isPreview = pathname.startsWith("/preview")
+
+      if (isAuthPage || isApiAuth || isPreview) {
+        console.log("[AUTH:authorized] Public route, allowing")
+        return true
+      }
+      console.log("[AUTH:authorized] Protected route, isLoggedIn:", isLoggedIn)
       return isLoggedIn
     },
   },

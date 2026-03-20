@@ -36,12 +36,13 @@ export function FinancialsStep({ onNext, onBack }: FinancialsStepProps) {
 
       {/* Seller-entered fields */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="askingPrice" className="block text-sm font-medium text-gray-700 mb-1">
           Asking Price <span className="text-red-500">*</span>
         </label>
         <div className="relative">
           <span className="absolute left-3 top-2 text-gray-500">$</span>
           <input
+            id="askingPrice"
             type="number"
             {...register('askingPrice', { valueAsNumber: true })}
             placeholder="0"
@@ -54,12 +55,13 @@ export function FinancialsStep({ onNext, onBack }: FinancialsStepProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="ttmProfit" className="block text-sm font-medium text-gray-700 mb-1">
           TTM Profit (optional)
         </label>
         <div className="relative">
           <span className="absolute left-3 top-2 text-gray-500">$</span>
           <input
+            id="ttmProfit"
             type="number"
             {...register('ttmProfit', { valueAsNumber: true })}
             placeholder="0"
@@ -69,10 +71,11 @@ export function FinancialsStep({ onNext, onBack }: FinancialsStepProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="reasonForSelling" className="block text-sm font-medium text-gray-700 mb-1">
           Reason for Selling (optional)
         </label>
         <textarea
+          id="reasonForSelling"
           {...register('reasonForSelling')}
           rows={3}
           maxLength={500}
@@ -86,14 +89,14 @@ export function FinancialsStep({ onNext, onBack }: FinancialsStepProps) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50"
+          className="px-6 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           Back
         </button>
         <button
           type="button"
           onClick={onNext}
-          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700"
+          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           Next
         </button>

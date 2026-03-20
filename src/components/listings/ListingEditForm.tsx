@@ -65,12 +65,13 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="askingPrice" className="block text-sm font-medium text-gray-700 mb-1">
                 Asking Price
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-2 text-gray-500">$</span>
                 <input
+                  id="askingPrice"
                   type="number"
                   {...register('askingPrice', { valueAsNumber: true })}
                   className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg"
@@ -82,12 +83,13 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="ttmProfit" className="block text-sm font-medium text-gray-700 mb-1">
                 TTM Profit
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-2 text-gray-500">$</span>
                 <input
+                  id="ttmProfit"
                   type="number"
                   {...register('ttmProfit', { valueAsNumber: true })}
                   className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded-lg"
@@ -97,10 +99,11 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
           </div>
 
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="reasonForSelling" className="block text-sm font-medium text-gray-700 mb-1">
               Reason for Selling
             </label>
             <textarea
+              id="reasonForSelling"
               {...register('reasonForSelling')}
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
@@ -142,16 +145,18 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <h3 className="text-lg font-medium mb-4">Included Assets</h3>
           <div className="space-y-3">
-            <label className="flex items-center gap-3">
+            <label htmlFor="inventoryIncluded" className="flex items-center gap-3">
               <input
+                id="inventoryIncluded"
                 type="checkbox"
                 {...register('inventoryIncluded')}
                 className="w-4 h-4 text-pink-600 rounded"
               />
               <span>Inventory included</span>
             </label>
-            <label className="flex items-center gap-3">
+            <label htmlFor="laserIncluded" className="flex items-center gap-3">
               <input
+                id="laserIncluded"
                 type="checkbox"
                 {...register('laserIncluded')}
                 className="w-4 h-4 text-pink-600 rounded"
@@ -160,10 +165,11 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
             </label>
           </div>
           <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="otherAssets" className="block text-sm font-medium text-gray-700 mb-1">
               Other Assets
             </label>
             <input
+              id="otherAssets"
               type="text"
               {...register('otherAssets')}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
@@ -186,14 +192,14 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-2 border border-gray-300 rounded-lg font-medium"
+            className="px-6 py-2 border border-gray-300 rounded-lg font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium disabled:opacity-50"
+            className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
           >
             {isSubmitting ? 'Saving...' : isRejected ? 'Save & Resubmit' : 'Save Changes'}
           </button>

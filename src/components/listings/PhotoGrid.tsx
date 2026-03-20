@@ -58,7 +58,7 @@ function SortablePhoto({ photo, isFirst, onRemove }: SortablePhotoProps) {
       <button
         type="button"
         onClick={() => onRemove(photo.id)}
-        className="absolute top-2 right-2 w-6 h-6 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-sm"
+        className="absolute top-2 right-2 w-6 h-6 bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-sm focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 focus-visible:opacity-100"
       >
         ×
       </button>

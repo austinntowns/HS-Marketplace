@@ -57,7 +57,7 @@ export default async function DashboardLayout({
               >
                 <button
                   type="submit"
-                  className="text-sm text-gray-600 hover:text-gray-900"
+                  className="text-sm text-gray-600 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
                 >
                   Sign out
                 </button>

@@ -38,8 +38,9 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       <input type="hidden" name="listingId" value={listingId} />
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Your Name</label>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Your Name</label>
         <input
+          id="name"
           name="name"
           defaultValue={buyerName ?? ''}
           readOnly
@@ -48,8 +49,9 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Your Email</label>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Your Email</label>
         <input
+          id="email"
           name="email"
           type="email"
           defaultValue={buyerEmail ?? ''}
@@ -59,8 +61,9 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Phone (optional)</label>
+        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone (optional)</label>
         <input
+          id="phone"
           name="phone"
           type="tel"
           placeholder="(555) 555-5555"
@@ -69,8 +72,9 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Message (optional)</label>
+        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message (optional)</label>
         <textarea
+          id="message"
           name="message"
           rows={4}
           placeholder="Tell the seller why you're interested..."
@@ -85,7 +89,7 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       <button
         type="submit"
         disabled={pending}
-        className="w-full bg-pink-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full bg-pink-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
       >
         {pending ? 'Sending...' : 'Send Message'}
       </button>

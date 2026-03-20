@@ -51,7 +51,7 @@ export function BundleKpiSection({
       <div className="flex justify-end">
         <button
           onClick={() => openOverlayModal('revenue')}
-          className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+          className="text-sm text-pink-600 hover:text-pink-700 font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           View all locations
         </button>
@@ -88,7 +88,7 @@ export function BundleKpiSection({
           <div className="relative bg-white rounded-xl shadow-xl w-full max-w-4xl mx-4 p-8">
             <button
               onClick={() => setOverlayModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
               aria-label="Close modal"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +106,7 @@ export function BundleKpiSection({
                 <button
                   key={key}
                   onClick={() => setOverlayMetric(key)}
-                  className={`px-3 py-1 text-sm rounded-full ${
+                  className={`px-3 py-1 text-sm rounded-full focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 ${
                     overlayMetric === key
                       ? 'bg-pink-600 text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

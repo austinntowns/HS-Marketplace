@@ -1,7 +1,7 @@
 import "server-only"
 import { cacheLife } from "next/cache"
 import { kpiResponseSchema, type KpiData } from "./schema"
-import { mockLocationKpi, mockBundleKpi } from "./mock-data"
+import { mockLocationKpi, generateMockBundleKpi } from "./mock-data"
 
 /**
  * Check if we should use mock data (dev mode without API credentials).
@@ -83,14 +83,7 @@ export async function fetchBundleKpi(locationIds: string[]): Promise<Record<stri
   // Return mock bundle data when API credentials aren't configured
   if (shouldUseMockData()) {
     console.info("[KPI] Using mock bundle data (API credentials not configured)")
-    // Map real location IDs to mock data, cycling through available mocks
-    const mockIds = Object.keys(mockBundleKpi)
-    const bundle: Record<string, KpiData> = {}
-    locationIds.forEach((id, i) => {
-      const mockId = mockIds[i % mockIds.length]
-      bundle[id] = mockBundleKpi[mockId]
-    })
-    return bundle
+    return generateMockBundleKpi(locationIds)
   }
 
   const results = await Promise.all(

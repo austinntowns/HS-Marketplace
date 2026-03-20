@@ -76,10 +76,11 @@ export function TerritoryPicker({
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="territoryName" className="block text-sm font-medium text-gray-700 mb-1">
           Territory Name
         </label>
         <input
+          id="territoryName"
           type="text"
           value={territoryName}
           onChange={(e) => onNameChange(e.target.value)}
@@ -126,10 +127,11 @@ export function TerritoryPicker({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="territoryRadius" className="block text-sm font-medium text-gray-700 mb-1">
           Radius: {(radius / 1000).toFixed(1)} km ({(radius / 1609).toFixed(1)} mi)
         </label>
         <input
+          id="territoryRadius"
           type="range"
           min={1000}
           max={50000}

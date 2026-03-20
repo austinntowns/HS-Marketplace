@@ -63,7 +63,7 @@ export function KpiTrendModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
           aria-label="Close modal"
         >
           <svg

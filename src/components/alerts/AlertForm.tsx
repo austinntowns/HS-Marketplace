@@ -107,7 +107,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
                   <button
                     type="button"
                     onClick={() => toggleState(code)}
-                    className="hover:text-pink-600 ml-1"
+                    className="hover:text-pink-600 ml-1 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
                     aria-label={`Remove ${state?.name ?? code}`}
                   >
                     &times;
@@ -147,7 +147,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           {submitting ? "Saving..." : alert ? "Update Alert" : "Create Alert"}
         </button>
@@ -155,7 +155,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
           <button
             type="button"
             onClick={onCancel}
-            className="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50"
+            className="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
           >
             Cancel
           </button>

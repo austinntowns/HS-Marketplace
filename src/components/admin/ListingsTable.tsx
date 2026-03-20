@@ -107,7 +107,7 @@ export function ListingsTable({ listings }: ListingsTableProps) {
                     <button
                       onClick={() => handleMarkSold(listing.id)}
                       disabled={processing === listing.id}
-                      className="text-sm text-green-600 hover:text-green-700 disabled:opacity-50"
+                      className="text-sm text-green-600 hover:text-green-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
                     >
                       Mark Sold
                     </button>

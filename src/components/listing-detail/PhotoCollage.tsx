@@ -36,7 +36,7 @@ export function PhotoCollage({ photos, onShowAll }: PhotoCollageProps) {
         />
         <button
           onClick={onShowAll}
-          className="absolute bottom-4 right-4 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm"
+          className="absolute bottom-4 right-4 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           Show all photos
         </button>
@@ -86,7 +86,7 @@ export function PhotoCollage({ photos, onShowAll }: PhotoCollageProps) {
 
       <button
         onClick={onShowAll}
-        className="absolute bottom-4 right-4 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm"
+        className="absolute bottom-4 right-4 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
       >
         Show all photos
       </button>

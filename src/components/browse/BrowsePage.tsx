@@ -14,7 +14,10 @@ const MapView = dynamic(() => import("./MapView").then((m) => m.MapView), {
   ssr: false,
   loading: () => (
     <div className="h-full w-full bg-gray-100 flex items-center justify-center">
-      <span className="text-gray-400 text-sm">Loading map...</span>
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 border-2 border-hs-red-600 border-t-transparent rounded-full animate-spin" />
+        <span className="text-gray-500 text-sm">Loading map...</span>
+      </div>
     </div>
   ),
 })
@@ -53,34 +56,71 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Header with branding */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-hs-red-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">HS</span>
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-gray-900 tracking-tight">
+                Browse Listings
+              </h1>
+              <p className="text-sm text-gray-500">
+                {initialListings.length} active listing{initialListings.length !== 1 ? 's' : ''}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Filter bar — sticky at top */}
       <FilterBar />
 
       {/* View controls + location search */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
           {/* View toggle */}
-          <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+          <div className="flex rounded-lg border border-gray-200 overflow-hidden shadow-sm">
             <button
               onClick={() => setViewMode("list")}
-              className={`px-4 py-1.5 text-sm font-medium transition-colors ${
-                viewMode === "list"
-                  ? "bg-pink-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-gray-50"
-              }`}
+              className={`
+                px-4 py-2 text-sm font-semibold transition-all duration-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+                ${
+                  viewMode === "list"
+                    ? "bg-gray-900 text-white"
+                    : "bg-white text-gray-600 hover:bg-gray-50"
+                }
+              `}
             >
-              List
+              <span className="flex items-center gap-2">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                </svg>
+                List
+              </span>
             </button>
             <button
               onClick={() => setViewMode("map")}
-              className={`px-4 py-1.5 text-sm font-medium transition-colors border-l border-gray-200 ${
-                viewMode === "map"
-                  ? "bg-pink-600 text-white"
-                  : "bg-white text-gray-600 hover:bg-gray-50"
-              }`}
+              className={`
+                px-4 py-2 text-sm font-semibold transition-all duration-200 border-l border-gray-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+                ${
+                  viewMode === "map"
+                    ? "bg-gray-900 text-white"
+                    : "bg-white text-gray-600 hover:bg-gray-50"
+                }
+              `}
             >
-              Map
+              <span className="flex items-center gap-2">
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+                Map
+              </span>
             </button>
           </div>
 
@@ -110,7 +150,7 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
           /* Map view — split screen (list left, map right) on desktop; toggle on mobile */
           <div className="flex h-[calc(100vh-200px)]">
             {/* List panel — hidden on mobile when in map view */}
-            <div className="hidden md:block w-1/2 overflow-y-auto border-r border-gray-200">
+            <div className="hidden md:block w-1/2 overflow-y-auto border-r border-gray-200 bg-white">
               <div className="px-4 py-4">
                 <ListingGrid
                   initialListings={initialListings}

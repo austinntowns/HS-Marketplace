@@ -10,7 +10,7 @@ export function StepIndicator({ current, total, labels }: StepIndicatorProps) {
   const defaultLabels = ['Location', 'Financials', 'Photos & Details']
 
   return (
-    <div className="flex items-center justify-center gap-2 mb-8">
+    <div className="flex items-center justify-center">
       {Array.from({ length: total }, (_, i) => {
         const step = i + 1
         const isComplete = step < current
@@ -18,25 +18,85 @@ export function StepIndicator({ current, total, labels }: StepIndicatorProps) {
 
         return (
           <div key={step} className="flex items-center">
-            <div
-              className={`
-                flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium
-                ${isComplete ? 'bg-pink-600 text-white' : ''}
-                ${isCurrent ? 'bg-pink-600 text-white ring-2 ring-pink-300' : ''}
-                ${!isComplete && !isCurrent ? 'bg-gray-200 text-gray-500' : ''}
-              `}
-            >
-              {isComplete ? '✓' : step}
+            {/* Step circle */}
+            <div className="flex flex-col items-center">
+              <div
+                className={`
+                  flex items-center justify-center w-10 h-10 rounded-full text-sm font-semibold
+                  transition-all duration-300
+                  ${isComplete ? 'bg-hs-red-600 text-white' : ''}
+                  ${isCurrent ? 'bg-hs-red-600 text-white ring-4 ring-hs-red-100' : ''}
+                  ${!isComplete && !isCurrent ? 'bg-gray-100 text-gray-400 border-2 border-gray-200' : ''}
+                `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
+              >
+                {isComplete ? (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                ) : (
+                  step
+                )}
+              </div>
+              {/* Label */}
+              <span
+                className={`
+                  mt-2 text-sm whitespace-nowrap
+                  ${isCurrent ? 'font-semibold text-gray-900' : ''}
+                  ${isComplete ? 'font-medium text-hs-red-600' : ''}
+                  ${!isComplete && !isCurrent ? 'text-gray-400' : ''}
+                `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
+              >
+                {(labels || defaultLabels)[i]}
+              </span>
             </div>
-            <span className={`ml-2 text-sm ${isCurrent ? 'font-medium text-gray-900' : 'text-gray-500'}`}>
-              {(labels || defaultLabels)[i]}
-            </span>
+
+            {/* Connector line */}
             {step < total && (
-              <div className={`w-12 h-0.5 mx-4 ${isComplete ? 'bg-pink-600' : 'bg-gray-200'}`} />
+              <div
+                className={`
+                  w-16 md:w-24 h-0.5 mx-2 mt-[-1.5rem]
+                  transition-colors duration-300
+                  ${isComplete ? 'bg-hs-red-600' : 'bg-gray-200'}
+                `
+                  .trim()
+                  .replace(/\s+/g, ' ')}
+              />
             )}
           </div>
         )
       })}
+    </div>
+  )
+}
+
+// Compact variant for mobile or tight spaces
+export function StepIndicatorCompact({ current, total }: { current: number; total: number }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-sm font-semibold text-hs-red-600">
+        Step {current}
+      </span>
+      <span className="text-sm text-gray-400">of {total}</span>
+      <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden ml-2">
+        <div
+          className="h-full bg-hs-red-600 rounded-full transition-all duration-500"
+          style={{ width: `${(current / total) * 100}%` }}
+        />
+      </div>
     </div>
   )
 }

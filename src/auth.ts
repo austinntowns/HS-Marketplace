@@ -16,12 +16,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     ...authConfig.callbacks,
     async signIn({ account, profile }) {
+      console.log("[AUTH] signIn callback", { provider: account?.provider, email: profile?.email, verified: profile?.email_verified })
+
       if (account?.provider !== "google") return false
-      if (!profile?.email_verified) return false
+      if (!profile?.email_verified) {
+        console.log("[AUTH] Email not verified, denying")
+        return false
+      }
 
       const email = profile.email as string
       const workspaceDomain = process.env.GOOGLE_WORKSPACE_DOMAIN || "hellosugar.salon"
       const isWorkspaceDomain = email.endsWith(`@${workspaceDomain}`)
+      console.log("[AUTH] Domain check", { email, workspaceDomain, isWorkspaceDomain })
 
       if (isWorkspaceDomain) {
         // Auto-authorize franchisees

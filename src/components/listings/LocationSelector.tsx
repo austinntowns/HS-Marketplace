@@ -48,7 +48,7 @@ export function LocationSelector({ value, onChange, userId }: LocationSelectorPr
               type="button"
               onClick={() => toggleLocation(loc)}
               className={`
-                p-4 rounded-lg border-2 text-left transition-colors
+                p-4 rounded-lg border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2
                 ${isSelected
                   ? 'border-pink-600 bg-pink-50'
                   : 'border-gray-200 hover:border-gray-300'

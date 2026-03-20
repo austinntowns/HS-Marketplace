@@ -39,7 +39,7 @@ export function SaveSearchButton({ states }: SaveSearchButtonProps) {
         onClick={handleSaveSearch}
         disabled={saving || saved}
         className={[
-          "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+          "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2",
           saved
             ? "bg-green-100 text-green-800"
             : "bg-white border border-gray-300 hover:bg-gray-50 text-gray-700",

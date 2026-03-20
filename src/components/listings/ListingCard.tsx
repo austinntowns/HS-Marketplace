@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { StatusBadge } from './StatusBadge'
+import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import type { ListingStatus, ListingType } from '@/lib/listings/types'
 
 interface ListingCardProps {
@@ -13,6 +14,13 @@ interface ListingCardProps {
   inquiryCount: number
   rejectionReason?: string | null
   createdAt: Date
+}
+
+const typeLabels: Record<ListingType, string> = {
+  suite: 'Suite',
+  flagship: 'Flagship',
+  territory: 'Territory',
+  bundle: 'Bundle',
 }
 
 export function ListingCard({
@@ -40,52 +48,146 @@ export function ListingCard({
   }).format(new Date(createdAt))
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+    <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300">
       {/* Rejection banner */}
       {status === 'rejected' && rejectionReason && (
-        <div className="bg-red-50 border-b border-red-200 px-4 py-3">
+        <div className="bg-red-50 border-b border-red-100 px-4 py-3">
           <p className="text-sm text-red-800">
-            <span className="font-medium">Rejected:</span> {rejectionReason}
+            <span className="font-semibold">Rejected:</span> {rejectionReason}
           </p>
           <Link
             href={`/seller/listings/${id}/edit`}
-            className="text-sm text-red-600 font-medium hover:underline"
+            className="inline-flex items-center gap-1 mt-1 text-sm font-semibold text-red-700 hover:text-red-800 hover:underline underline-offset-2 transition-colors"
           >
-            Edit to resubmit &rarr;
+            Edit to resubmit
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         </div>
       )}
 
       <Link href={`/seller/listings/${id}`} className="block">
         {/* Cover photo */}
-        <div className="aspect-video bg-gray-100 relative">
+        <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
           {coverPhotoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={coverPhotoUrl} alt="" className="w-full h-full object-cover" />
+            <img
+              src={coverPhotoUrl}
+              alt=""
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400">
-              No photo
-            </div>
+            <ImagePlaceholder className="w-full h-full" text="No photo" />
           )}
-          <div className="absolute top-2 right-2">
+
+          {/* Type badge */}
+          <div className="absolute top-3 left-3">
+            <span className="inline-flex items-center px-2.5 py-1 bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-semibold rounded-lg shadow-sm">
+              {typeLabels[type]}
+            </span>
+          </div>
+
+          {/* Status badge */}
+          <div className="absolute top-3 right-3">
             <StatusBadge status={status} />
           </div>
         </div>
 
         {/* Details */}
         <div className="p-4">
-          <h3 className="font-medium text-gray-900 truncate">{title}</h3>
-          <p className="text-sm text-gray-500 capitalize">{type}</p>
-          <p className="text-lg font-bold text-pink-600 mt-2">{formattedPrice}</p>
+          <h3 className="font-semibold text-gray-900 truncate group-hover:text-hs-red-600 transition-colors">
+            {title}
+          </h3>
+
+          <p className="text-2xl font-bold text-hs-red-600 mt-2 tracking-tight">
+            {formattedPrice}
+          </p>
 
           <div className="flex items-center gap-4 mt-3 text-sm text-gray-500">
-            <span>{viewCount} views</span>
-            <span>{inquiryCount} inquiries</span>
+            <span className="inline-flex items-center gap-1">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              {viewCount}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+              </svg>
+              {inquiryCount}
+            </span>
           </div>
 
-          <p className="text-xs text-gray-400 mt-2">Created {formattedDate}</p>
+          <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100">
+            Listed {formattedDate}
+          </p>
         </div>
       </Link>
     </div>
+  )
+}
+
+// Compact variant for list views
+export function ListingCardCompact({
+  id,
+  title,
+  type,
+  status,
+  askingPrice,
+  coverPhotoUrl,
+  createdAt,
+}: Omit<ListingCardProps, 'viewCount' | 'inquiryCount' | 'rejectionReason'>) {
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(askingPrice / 100)
+
+  return (
+    <Link
+      href={`/seller/listings/${id}`}
+      className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200"
+    >
+      {/* Thumbnail */}
+      <div className="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
+        {coverPhotoUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={coverPhotoUrl}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <ImagePlaceholder className="w-full h-full" />
+        )}
+      </div>
+
+      {/* Details */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+            {typeLabels[type]}
+          </span>
+          <StatusBadge status={status} size="sm" />
+        </div>
+        <h3 className="font-semibold text-gray-900 truncate group-hover:text-hs-red-600 transition-colors">
+          {title}
+        </h3>
+        <p className="text-lg font-bold text-hs-red-600">{formattedPrice}</p>
+      </div>
+
+      {/* Arrow */}
+      <svg
+        className="h-5 w-5 text-gray-400 group-hover:text-hs-red-600 group-hover:translate-x-1 transition-all"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </Link>
   )
 }

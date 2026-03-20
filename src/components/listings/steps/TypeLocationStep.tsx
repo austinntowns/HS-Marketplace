@@ -37,7 +37,7 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
               type="button"
               onClick={() => handleTypeSelect(opt.value)}
               className={`
-                p-4 rounded-lg border-2 text-left transition-colors
+                p-4 rounded-lg border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2
                 ${selectedType === opt.value
                   ? 'border-pink-600 bg-pink-50'
                   : 'border-gray-200 hover:border-gray-300'
@@ -118,7 +118,7 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
           type="button"
           onClick={onNext}
           disabled={!selectedType || locations.length === 0}
-          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
         >
           Next
         </button>

@@ -83,54 +83,103 @@ export function FilterBar() {
     })
   }
 
+  const selectBaseClass = `
+    text-sm border border-gray-300 rounded-lg px-3 py-2
+    bg-white text-gray-700
+    transition-all duration-150
+    focus:outline-none focus:ring-2 focus:ring-hs-red-500/20 focus:border-hs-red-500
+    hover:border-gray-400
+  `
+
   return (
-    <div className="bg-white border-b sticky top-0 z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex flex-wrap items-center gap-3">
+    <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex flex-wrap items-center gap-4">
           {/* Search */}
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Search:</span>
-            <input
-              type="text"
-              value={filters.query}
-              onChange={(e) => setFilters({ query: e.target.value || null })}
-              placeholder="Location, city..."
-              className="text-sm border border-gray-300 rounded-md px-3 py-1 w-40 focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
-          </div>
-
-          {/* Type filter */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Type:</span>
-            <div className="flex gap-1">
-              {LISTING_TYPES.map((type) => (
-                <button
-                  key={type.value}
-                  onClick={() => toggleType(type.value)}
-                  className={`px-3 py-1 text-sm rounded-full border transition-colors ${
-                    filters.types.includes(type.value)
-                      ? "bg-pink-600 text-white border-pink-600"
-                      : "bg-white text-gray-700 border-gray-300 hover:border-pink-400"
-                  }`}
-                >
-                  {type.label}
-                </button>
-              ))}
+            <label htmlFor="filter-search" className="text-sm font-semibold text-gray-900">
+              Search
+            </label>
+            <div className="relative">
+              <svg
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                id="filter-search"
+                type="text"
+                value={filters.query}
+                onChange={(e) => setFilters({ query: e.target.value || null })}
+                placeholder="City, location..."
+                className="
+                  text-sm border border-gray-300 rounded-lg pl-9 pr-3 py-2 w-44
+                  transition-all duration-150
+                  focus:outline-none focus:ring-2 focus:ring-hs-red-500/20 focus:border-hs-red-500
+                  hover:border-gray-400
+                  placeholder:text-gray-400
+                "
+              />
             </div>
           </div>
 
+          {/* Vertical divider */}
+          <div className="hidden sm:block h-8 w-px bg-gray-200" />
+
+          {/* Type filter */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-gray-900">Type</span>
+            <div className="flex gap-1.5">
+              {LISTING_TYPES.map((type) => {
+                const isActive = filters.types.includes(type.value)
+                return (
+                  <button
+                    key={type.value}
+                    onClick={() => toggleType(type.value)}
+                    className={`
+                      px-3 py-1.5 text-sm font-medium rounded-lg
+                      transition-all duration-200
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+                      ${
+                        isActive
+                          ? "bg-hs-red-600 text-white shadow-sm"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      }
+                    `}
+                  >
+                    {type.label}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Vertical divider */}
+          <div className="hidden sm:block h-8 w-px bg-gray-200" />
+
           {/* State filter */}
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">State:</span>
-            <div className="relative">
+            <label htmlFor="filter-states" className="text-sm font-semibold text-gray-900">
+              State
+            </label>
+            <div className="relative flex items-center">
               <select
+                id="filter-states"
                 multiple
                 value={filters.states}
                 onChange={(e) => {
                   const selected = Array.from(e.target.selectedOptions).map((o) => o.value)
                   setFilters({ states: selected })
                 }}
-                className="text-sm border border-gray-300 rounded-md px-2 py-1 pr-6 h-8 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className={`${selectBaseClass} h-9 min-w-[100px]`}
                 title="Hold Ctrl/Cmd to select multiple states"
               >
                 {US_STATES.map((s) => (
@@ -140,22 +189,28 @@ export function FilterBar() {
                 ))}
               </select>
               {filters.states.length > 0 && (
-                <span className="ml-1 text-xs text-pink-600 font-medium">
-                  {filters.states.length} selected
+                <span className="ml-2 inline-flex items-center px-2 py-0.5 bg-hs-red-100 text-hs-red-700 text-xs font-semibold rounded-full">
+                  {filters.states.length}
                 </span>
               )}
             </div>
           </div>
 
+          {/* Vertical divider */}
+          <div className="hidden sm:block h-8 w-px bg-gray-200" />
+
           {/* Price range */}
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Price:</span>
+            <label htmlFor="filter-min-price" className="text-sm font-semibold text-gray-900">
+              Price
+            </label>
             <select
+              id="filter-min-price"
               value={filters.minPrice ?? ""}
               onChange={(e) =>
                 setFilters({ minPrice: e.target.value ? Number(e.target.value) : null })
               }
-              className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className={selectBaseClass}
             >
               <option value="">Min</option>
               {PRICE_OPTIONS.filter((o) => o.value !== undefined).map((o) => (
@@ -164,13 +219,15 @@ export function FilterBar() {
                 </option>
               ))}
             </select>
-            <span className="text-gray-400 text-sm">–</span>
+            <span className="text-gray-400">–</span>
             <select
+              id="filter-max-price"
+              aria-label="Maximum price"
               value={filters.maxPrice ?? ""}
               onChange={(e) =>
                 setFilters({ maxPrice: e.target.value ? Number(e.target.value) : null })
               }
-              className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className={selectBaseClass}
             >
               <option value="">Max</option>
               {PRICE_OPTIONS.filter((o) => o.value !== undefined).map((o) => (
@@ -181,15 +238,19 @@ export function FilterBar() {
             </select>
           </div>
 
+          {/* Vertical divider */}
+          <div className="hidden lg:block h-8 w-px bg-gray-200" />
+
           {/* Time open */}
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Open:</span>
+            <label htmlFor="filter-years-open" className="text-sm font-semibold text-gray-900">
+              Years Open
+            </label>
             <select
+              id="filter-years-open"
               value={filters.minYearsOpen ?? 0}
-              onChange={(e) =>
-                setFilters({ minYearsOpen: Number(e.target.value) || null })
-              }
-              className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              onChange={(e) => setFilters({ minYearsOpen: Number(e.target.value) || null })}
+              className={selectBaseClass}
             >
               {TIME_OPEN_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -199,13 +260,19 @@ export function FilterBar() {
             </select>
           </div>
 
+          {/* Spacer */}
+          <div className="flex-1" />
+
           {/* Sort */}
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700">Sort:</span>
+            <label htmlFor="filter-sort" className="text-sm font-semibold text-gray-900">
+              Sort
+            </label>
             <select
+              id="filter-sort"
               value={filters.sort}
               onChange={(e) => setFilters({ sort: e.target.value })}
-              className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className={selectBaseClass}
             >
               {SORT_OPTIONS.map((o) => (
                 <option key={o.value} value={o.value}>
@@ -219,7 +286,15 @@ export function FilterBar() {
           {hasActiveFilters && (
             <button
               onClick={clearAll}
-              className="text-sm text-pink-600 hover:text-pink-800 underline"
+              className="
+                text-sm font-semibold text-hs-red-600
+                hover:text-hs-red-700
+                px-3 py-2
+                rounded-lg
+                transition-colors duration-150
+                hover:bg-hs-red-50
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+              "
             >
               Clear all
             </button>
