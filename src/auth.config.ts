@@ -6,7 +6,6 @@ export const authConfig: NextAuthConfig = {
     Google({
       authorization: {
         params: {
-          hd: process.env.GOOGLE_WORKSPACE_DOMAIN || "hellosugar.salon",
           prompt: "select_account",
           access_type: "offline",
           response_type: "code",
