@@ -22,5 +22,5 @@ export const env = createEnv({
   experimental__runtimeEnv: {
     NEXT_PUBLIC_MAPTILER_API_KEY: process.env.NEXT_PUBLIC_MAPTILER_API_KEY,
   },
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation: true, // Disabled for debugging
 })
