@@ -8,6 +8,7 @@ import { authConfig } from "./auth.config"
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   debug: true,
+  session: { strategy: "jwt" },
   adapter: DrizzleAdapter(db, {
     usersTable: users,
     accountsTable: accounts,
@@ -47,11 +48,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return true
     },
-    async session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id
-        session.user.role = (user as typeof user & { role?: "user" | "admin" }).role
-        session.user.sellerAccess = (user as typeof user & { sellerAccess?: boolean }).sellerAccess
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.role = (user as typeof user & { role?: "user" | "admin" }).role
+        token.sellerAccess = (user as typeof user & { sellerAccess?: boolean }).sellerAccess
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.id as string
+        session.user.role = token.role as "user" | "admin" | undefined
+        session.user.sellerAccess = token.sellerAccess as boolean | undefined
       }
       return session
     },
