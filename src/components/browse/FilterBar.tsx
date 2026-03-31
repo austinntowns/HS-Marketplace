@@ -16,6 +16,7 @@ const LISTING_TYPES = [
   { label: "Suite", value: "suite" },
   { label: "Flagship", value: "flagship" },
   { label: "Territory", value: "territory" },
+  { label: "Bundle", value: "bundle" },
 ]
 
 const SORT_OPTIONS = [
@@ -108,6 +109,7 @@ export function FilterBar() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"

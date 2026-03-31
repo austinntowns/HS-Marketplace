@@ -3,87 +3,84 @@
 import { useEffect, useRef } from 'react'
 
 interface ConfirmDialogProps {
-  isOpen: boolean
+  open: boolean
   title: string
   message: string
   confirmLabel?: string
   cancelLabel?: string
-  variant?: 'danger' | 'warning' | 'default'
   onConfirm: () => void
   onCancel: () => void
-  isProcessing?: boolean
+  variant?: 'danger' | 'default'
 }
 
 export function ConfirmDialog({
-  isOpen,
+  open,
   title,
   message,
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
-  variant = 'default',
   onConfirm,
   onCancel,
-  isProcessing,
+  variant = 'default',
 }: ConfirmDialogProps) {
-  const confirmRef = useRef<HTMLButtonElement>(null)
+  const titleId = 'confirm-dialog-title'
+  const cancelRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (isOpen) {
-      confirmRef.current?.focus()
-    }
-  }, [isOpen])
+    if (!open) return
 
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleKeyDown = (e: KeyboardEvent) => {
+    function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') onCancel()
     }
 
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, onCancel])
+    cancelRef.current?.focus()
 
-  if (!isOpen) return null
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [open, onCancel])
 
-  const confirmStyles = {
-    danger:
-      'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-500',
-    warning:
-      'bg-amber-600 text-white hover:bg-amber-700 focus-visible:ring-amber-500',
-    default:
-      'bg-hs-red-600 text-white hover:bg-hs-red-700 focus-visible:ring-hs-red-500',
-  }
+  if (!open) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-      onClick={onCancel}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
       <div
-        className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-6 shadow-lg"
-        onClick={(e) => e.stopPropagation()}
+        className="absolute inset-0 bg-black/50"
+        onClick={onCancel}
+        aria-hidden="true"
+      />
+
+      {/* Dialog */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="relative bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6"
       >
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        <h2 id={titleId} className="text-lg font-semibold text-gray-900">
+          {title}
+        </h2>
         <p className="mt-2 text-sm text-gray-600">{message}</p>
 
         <div className="mt-6 flex justify-end gap-3">
           <button
-            type="button"
+            ref={cancelRef}
             onClick={onCancel}
-            disabled={isProcessing}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500"
           >
             {cancelLabel}
           </button>
           <button
-            ref={confirmRef}
-            type="button"
             onClick={onConfirm}
-            disabled={isProcessing}
-            className={`rounded-lg px-4 py-2 text-sm font-medium disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-offset-2 ${confirmStyles[variant]}`}
+            className={`px-4 py-2 text-sm font-medium text-white rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+              variant === 'danger'
+                ? 'bg-red-600 hover:bg-red-700 focus-visible:ring-red-500'
+                : 'bg-hs-red-600 hover:bg-hs-red-700 focus-visible:ring-hs-red-500'
+            }`}
           >
-            {isProcessing ? 'Processing...' : confirmLabel}
+            {confirmLabel}
           </button>
         </div>
       </div>

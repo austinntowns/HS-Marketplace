@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getListingById } from '@/lib/listing-detail'
 import { hasContactedListing } from '@/lib/contact-actions'
+import { isFavorited } from '@/lib/favorites-actions'
 import { ListingPhotos } from './ListingPhotos'
 import { ContactForm } from './ContactForm'
 import { FavoriteButtonLarge } from './FavoriteButtonLarge'
@@ -44,7 +45,10 @@ export default async function ListingDetailPage({ params }: Props) {
     notFound()
   }
 
-  const contacted = await hasContactedListing(listing.id)
+  const [contacted, favorited] = await Promise.all([
+    hasContactedListing(listing.id),
+    isFavorited(listing.id),
+  ])
 
   // Primary salon location for display
   const primaryLocation = listing.locations.find(l => l.locationType === 'salon') ?? listing.locations[0]
@@ -55,7 +59,7 @@ export default async function ListingDetailPage({ params }: Props) {
   )
   const mapLat = mapLocation?.locationType === 'territory'
     ? mapLocation.territoryLat
-    : null // salon locations don't store lat/lng directly in this schema
+    : null
   const mapLng = mapLocation?.locationType === 'territory'
     ? mapLocation.territoryLng
     : null
@@ -65,7 +69,7 @@ export default async function ListingDetailPage({ params }: Props) {
   const photos = listing.photos.map(p => ({ id: p.id, url: p.url }))
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <main className="max-w-7xl mx-auto px-4 py-4 sm:py-8 pb-24 sm:pb-8">
       {/* Breadcrumb navigation */}
       <Breadcrumb
         items={[
@@ -79,17 +83,42 @@ export default async function ListingDetailPage({ params }: Props) {
       <ListingPhotos photos={photos} />
 
       {/* Header: Name, Type Badge, Location, Actions */}
-      <div className="mt-6">
+      <div className="mt-4 sm:mt-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <span className="inline-block px-3 py-1 text-sm font-medium bg-hs-red-100 text-hs-red-800 rounded-full capitalize">
-              {listing.type}
-            </span>
-            <h1 className="text-3xl font-display font-bold mt-2 text-gray-900">{displayName}</h1>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-block px-3 py-1.5 text-sm font-medium bg-hs-red-100 text-hs-red-800 rounded-lg capitalize">
+                {listing.type}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-lg">
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Verified by Hello Sugar
+              </span>
+              {listing.viewCount > 0 && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-gray-500 bg-gray-100 rounded-lg">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  {listing.viewCount} view{listing.viewCount !== 1 ? 's' : ''}
+                </span>
+              )}
+              {listing.inquiryCount > 0 && (
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-gray-500 bg-gray-100 rounded-lg">
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  {listing.inquiryCount} inquir{listing.inquiryCount !== 1 ? 'ies' : 'y'}
+                </span>
+              )}
+            </div>
+            <h1 className="text-display-lg mt-2 text-gray-900">{displayName}</h1>
           </div>
           <div className="flex items-center gap-2 shrink-0 pt-1">
             <ShareButton listingName={displayName} />
-            <FavoriteButtonLarge listingId={listing.id} />
+            <FavoriteButtonLarge listingId={listing.id} initialFavorited={favorited} />
           </div>
         </div>
         {listing.locations.length > 0 && (
@@ -116,7 +145,7 @@ export default async function ListingDetailPage({ params }: Props) {
             <FinancialsGrid listing={listing} />
           </section>
 
-          {/* Live KPI Section — renders nothing if territory or API unavailable */}
+          {/* Live KPI Section */}
           <KpiSection
             listingType={listing.type}
             locationId={
@@ -154,6 +183,19 @@ export default async function ListingDetailPage({ params }: Props) {
 
         {/* Sidebar - 1 col */}
         <div className="space-y-6">
+          {/* Sticky Contact Form Card — desktop only */}
+          <div className="hidden lg:block sticky top-4">
+            <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+              <h3 className="font-semibold text-gray-900 mb-4">Contact Seller</h3>
+              <ContactForm
+                listingId={listing.id}
+                buyerName={session.user.name ?? null}
+                buyerEmail={session.user.email ?? null}
+                hasContacted={contacted}
+              />
+            </div>
+          </div>
+
           {/* Map — only shown for territory listings which have lat/lng */}
           {mapLat && mapLng && (
             <DetailMap
@@ -183,11 +225,11 @@ export default async function ListingDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Floating Contact CTA */}
+      {/* Floating Contact CTA — mobile only */}
       <FloatingContactCta />
 
-      {/* Contact Form Section */}
-      <section id="contact" className="mt-12 pt-8 border-t border-gray-200">
+      {/* Contact Form Section — mobile fallback (hidden on desktop) */}
+      <section id="contact" className="lg:hidden mt-12 pt-8 border-t border-gray-200">
         <h2 className="text-xl font-display font-semibold mb-4 text-gray-900">Contact Seller</h2>
         <div className="max-w-md">
           <ContactForm
@@ -198,6 +240,6 @@ export default async function ListingDetailPage({ params }: Props) {
           />
         </div>
       </section>
-    </div>
+    </main>
   )
 }
