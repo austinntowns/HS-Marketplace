@@ -86,9 +86,10 @@ export function FilterBar() {
   const selectBaseClass = `
     text-sm border border-gray-300 rounded-lg px-3 py-2
     bg-white text-gray-700
-    transition-all duration-150
+    transition-all duration-200 ease-out
     focus:outline-none focus:ring-2 focus:ring-hs-red-500/20 focus:border-hs-red-500
     hover:border-gray-400
+    min-h-[44px]
   `
 
   return (
@@ -122,10 +123,11 @@ export function FilterBar() {
                 placeholder="City, location..."
                 className="
                   text-sm border border-gray-300 rounded-lg pl-9 pr-3 py-2 w-44
-                  transition-all duration-150
+                  transition-all duration-200 ease-out
                   focus:outline-none focus:ring-2 focus:ring-hs-red-500/20 focus:border-hs-red-500
                   hover:border-gray-400
                   placeholder:text-gray-400
+                  min-h-[44px]
                 "
               />
             </div>
@@ -145,8 +147,9 @@ export function FilterBar() {
                     key={type.value}
                     onClick={() => toggleType(type.value)}
                     className={`
-                      px-3 py-1.5 text-sm font-medium rounded-lg
-                      transition-all duration-200
+                      px-3 py-2 text-sm font-medium rounded-lg
+                      transition-all duration-200 ease-out
+                      min-h-[44px]
                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
                       ${
                         isActive
@@ -283,22 +286,24 @@ export function FilterBar() {
           </div>
 
           {/* Clear all */}
-          {hasActiveFilters && (
-            <button
-              onClick={clearAll}
-              className="
-                text-sm font-semibold text-hs-red-600
-                hover:text-hs-red-700
-                px-3 py-2
-                rounded-lg
-                transition-colors duration-150
-                hover:bg-hs-red-50
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
-              "
-            >
-              Clear all
-            </button>
-          )}
+          <button
+            onClick={clearAll}
+            className={`
+              text-sm font-semibold text-hs-red-600
+              hover:text-hs-red-700
+              px-3 py-2
+              rounded-lg
+              transition-all duration-200 ease-out
+              hover:bg-hs-red-50
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+              min-h-[44px]
+              ${hasActiveFilters ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2 pointer-events-none'}
+            `}
+            tabIndex={hasActiveFilters ? 0 : -1}
+            aria-hidden={!hasActiveFilters}
+          >
+            Clear all
+          </button>
         </div>
       </div>
     </div>

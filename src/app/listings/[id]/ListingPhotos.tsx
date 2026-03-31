@@ -15,17 +15,30 @@ interface ListingPhotosProps {
 
 export function ListingPhotos({ photos }: ListingPhotosProps) {
   const [galleryOpen, setGalleryOpen] = useState(false)
+  const [startIndex, setStartIndex] = useState(0)
+
+  function handlePhotoClick(index: number) {
+    setStartIndex(index)
+    setGalleryOpen(true)
+  }
+
+  function handleShowAll() {
+    setStartIndex(0)
+    setGalleryOpen(true)
+  }
 
   return (
     <>
       <PhotoCollage
         photos={photos}
-        onShowAll={() => setGalleryOpen(true)}
+        onShowAll={handleShowAll}
+        onPhotoClick={handlePhotoClick}
       />
       <FullGallery
         photos={photos}
         open={galleryOpen}
         onClose={() => setGalleryOpen(false)}
+        startIndex={startIndex}
       />
     </>
   )

@@ -5,10 +5,13 @@ import { getListingById } from '@/lib/listing-detail'
 import { hasContactedListing } from '@/lib/contact-actions'
 import { ListingPhotos } from './ListingPhotos'
 import { ContactForm } from './ContactForm'
+import { FavoriteButtonLarge } from './FavoriteButtonLarge'
+import { ShareButton } from './ShareButton'
 import { FinancialsGrid } from '@/components/listing-detail/FinancialsGrid'
 import { DetailMap } from '@/components/listing-detail/DetailMap'
 import { KpiSection } from '@/components/kpi/KpiSection'
 import { FloatingContactCta } from '@/components/listing-detail/FloatingContactCta'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -63,15 +66,32 @@ export default async function ListingDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Breadcrumb navigation */}
+      <Breadcrumb
+        items={[
+          { label: 'Marketplace', href: '/' },
+          { label: 'Browse', href: '/browse' },
+          { label: displayName },
+        ]}
+      />
+
       {/* Photo Gallery */}
       <ListingPhotos photos={photos} />
 
-      {/* Header: Name, Type Badge, Location */}
+      {/* Header: Name, Type Badge, Location, Actions */}
       <div className="mt-6">
-        <span className="inline-block px-3 py-1 text-sm font-medium bg-pink-100 text-pink-800 rounded-full capitalize">
-          {listing.type}
-        </span>
-        <h1 className="text-3xl font-bold mt-2 text-gray-900">{displayName}</h1>
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <span className="inline-block px-3 py-1 text-sm font-medium bg-pink-100 text-pink-800 rounded-full capitalize">
+              {listing.type}
+            </span>
+            <h1 className="text-3xl font-display font-bold mt-2 text-gray-900">{displayName}</h1>
+          </div>
+          <div className="flex items-center gap-2 shrink-0 pt-1">
+            <ShareButton listingName={displayName} />
+            <FavoriteButtonLarge listingId={listing.id} />
+          </div>
+        </div>
         {listing.locations.length > 0 && (
           <div className="mt-1 space-y-0.5">
             {listing.locations.map(loc => (
@@ -92,7 +112,7 @@ export default async function ListingDetailPage({ params }: Props) {
         <div className="lg:col-span-2 space-y-8">
           {/* Financials */}
           <section>
-            <h2 className="text-xl font-semibold mb-4 text-gray-900">Financials</h2>
+            <h2 className="text-xl font-display font-semibold mb-4 text-gray-900">Financials</h2>
             <FinancialsGrid listing={listing} />
           </section>
 
@@ -118,7 +138,7 @@ export default async function ListingDetailPage({ params }: Props) {
           {/* About / Notes */}
           {listing.notes && (
             <section>
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">About This Location</h2>
+              <h2 className="text-xl font-display font-semibold mb-4 text-gray-900">About This Location</h2>
               <p className="text-gray-700 whitespace-pre-wrap">{listing.notes}</p>
             </section>
           )}
@@ -126,7 +146,7 @@ export default async function ListingDetailPage({ params }: Props) {
           {/* Reason for Selling */}
           {listing.reasonForSelling && (
             <section>
-              <h2 className="text-xl font-semibold mb-4 text-gray-900">Reason for Selling</h2>
+              <h2 className="text-xl font-display font-semibold mb-4 text-gray-900">Reason for Selling</h2>
               <p className="text-gray-700">{listing.reasonForSelling}</p>
             </section>
           )}
@@ -168,7 +188,7 @@ export default async function ListingDetailPage({ params }: Props) {
 
       {/* Contact Form Section */}
       <section id="contact" className="mt-12 pt-8 border-t border-gray-200">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900">Contact Seller</h2>
+        <h2 className="text-xl font-display font-semibold mb-4 text-gray-900">Contact Seller</h2>
         <div className="max-w-md">
           <ContactForm
             listingId={listing.id}
