@@ -11,11 +11,11 @@ export default async function NewListingPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Create New Listing</h1>
-      <p className="text-gray-500 mb-8">
-        List your Hello Sugar location for sale. Your listing will be reviewed before going live.
+      <h1 className="text-2xl font-bold text-gray-900 mb-2">List your location for sale</h1>
+      <p className="text-gray-500 mb-6">
+        Financial data is pulled automatically from Hello Sugar -- buyers see verified numbers, not estimates.
       </p>
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
         <ListingWizard userId={session.user.id} />
       </div>
     </div>

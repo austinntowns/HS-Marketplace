@@ -8,6 +8,8 @@ import type { ListingFormData, ListingType } from '@/lib/listings/types'
 interface TypeLocationStepProps {
   userId: string
   onNext: () => void
+  onSaveAndExit: () => void
+  isSaving: boolean
 }
 
 const TYPE_OPTIONS: { value: ListingType; label: string; description: string }[] = [
@@ -16,7 +18,7 @@ const TYPE_OPTIONS: { value: ListingType; label: string; description: string }[]
   { value: 'territory', label: 'Territory', description: 'An unopened territory' },
 ]
 
-export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
+export function TypeLocationStep({ userId, onNext, onSaveAndExit, isSaving }: TypeLocationStepProps) {
   const { control, watch, setValue, formState: { errors } } = useFormContext<ListingFormData>()
   const selectedType = watch('type')
   const locations = watch('locations') || []
@@ -29,23 +31,24 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium mb-4">What are you selling?</h3>
-        <div className="grid grid-cols-3 gap-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">What are you selling?</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {TYPE_OPTIONS.map(opt => (
             <button
               key={opt.value}
               type="button"
               onClick={() => handleTypeSelect(opt.value)}
               className={`
-                p-4 rounded-lg border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2
+                p-4 rounded-lg border-2 text-left transition-all min-h-[44px]
+                focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
                 ${selectedType === opt.value
-                  ? 'border-pink-600 bg-pink-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-hs-red-600 bg-hs-red-50 shadow-sm'
+                  : 'border-gray-200 hover:border-gray-300 active:bg-gray-50'
                 }
               `}
             >
-              <div className="font-medium">{opt.label}</div>
-              <div className="text-sm text-gray-500">{opt.description}</div>
+              <div className="font-medium text-gray-900">{opt.label}</div>
+              <div className="text-sm text-gray-500 mt-0.5">{opt.description}</div>
             </button>
           ))}
         </div>
@@ -56,7 +59,7 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
 
       {selectedType && selectedType !== 'territory' && (
         <div>
-          <h3 className="text-lg font-medium mb-4">Select Location(s)</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Select Location(s)</h3>
           <Controller
             name="locations"
             control={control}
@@ -76,7 +79,7 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
 
       {selectedType === 'territory' && (
         <div>
-          <h3 className="text-lg font-medium mb-4">Define Territory</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Define Territory</h3>
           <Controller
             name="locations"
             control={control}
@@ -113,12 +116,20 @@ export function TypeLocationStep({ userId, onNext }: TypeLocationStepProps) {
         </div>
       )}
 
-      <div className="flex justify-end pt-4">
+      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+        <button
+          type="button"
+          onClick={onSaveAndExit}
+          disabled={isSaving}
+          className="px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors min-h-[44px] disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+        >
+          Save &amp; Exit
+        </button>
         <button
           type="button"
           onClick={onNext}
           disabled={!selectedType || locations.length === 0}
-          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+          className="px-6 py-2.5 bg-hs-red-600 text-white rounded-lg font-medium hover:bg-hs-red-700 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] transition-colors focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
         >
           Next
         </button>

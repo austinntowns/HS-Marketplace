@@ -89,7 +89,7 @@ export function PhotoUploader({ onUploadComplete, currentCount, maxCount }: Phot
         onDragOver={(e) => e.preventDefault()}
         className={`
           border-2 border-dashed rounded-lg p-8 text-center transition-colors
-          ${canUpload ? 'border-gray-300 hover:border-pink-400 cursor-pointer' : 'border-gray-200 bg-gray-50'}
+          ${canUpload ? 'border-gray-300 hover:border-hs-red-400 cursor-pointer' : 'border-gray-200 bg-gray-50'}
         `}
       >
         <input
@@ -101,17 +101,20 @@ export function PhotoUploader({ onUploadComplete, currentCount, maxCount }: Phot
           id="photo-upload"
           disabled={!canUpload}
         />
-        <label htmlFor="photo-upload" className={canUpload ? 'cursor-pointer' : 'cursor-not-allowed'}>
+        <label htmlFor="photo-upload" className={`block min-h-[44px] ${canUpload ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
           <div className="text-gray-500">
             {canUpload ? (
               <>
-                <p className="font-medium">Drop photos here or click to upload</p>
+                <svg className="w-8 h-8 mx-auto mb-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                </svg>
+                <p className="font-medium text-gray-700">Drop photos here or tap to upload</p>
                 <p className="text-sm mt-1">
-                  {currentCount}/{maxCount} photos • JPG, PNG, WebP up to 10MB
+                  {currentCount}/{maxCount} photos &middot; JPG, PNG, WebP up to 10MB
                 </p>
               </>
             ) : (
-              <p>Maximum {maxCount} photos reached</p>
+              <p className="text-gray-500">Maximum {maxCount} photos reached</p>
             )}
           </div>
         </label>
@@ -125,12 +128,12 @@ export function PhotoUploader({ onUploadComplete, currentCount, maxCount }: Phot
               {u.status === 'uploading' && (
                 <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-pink-600 transition-all"
+                    className="h-full bg-hs-red-600 transition-all"
                     style={{ width: `${u.percentage}%` }}
                   />
                 </div>
               )}
-              {u.status === 'complete' && <span className="text-green-600">✓</span>}
+              {u.status === 'complete' && <span className="text-green-600">Done</span>}
               {u.status === 'error' && <span className="text-red-600">Failed</span>}
             </div>
           ))}
