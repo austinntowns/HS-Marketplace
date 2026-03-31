@@ -53,7 +53,7 @@ export function TypeLocationStep({ userId, onNext, onSaveAndExit, isSaving }: Ty
           ))}
         </div>
         {errors.type && (
-          <p className="mt-2 text-sm text-red-600">{errors.type.message}</p>
+          <p className="mt-2 text-sm text-hs-red-600">{errors.type.message}</p>
         )}
       </div>
 
@@ -72,7 +72,7 @@ export function TypeLocationStep({ userId, onNext, onSaveAndExit, isSaving }: Ty
             )}
           />
           {errors.locations && (
-            <p className="mt-2 text-sm text-red-600">{errors.locations.message}</p>
+            <p className="mt-2 text-sm text-hs-red-600">{errors.locations.message}</p>
           )}
         </div>
       )}

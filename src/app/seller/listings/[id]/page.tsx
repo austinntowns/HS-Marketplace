@@ -131,7 +131,7 @@ export default async function SellerListingDetailPage({
         {/* Sidebar */}
         <div className="space-y-6">
           <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-pink-600">{formattedPrice}</p>
+            <p className="text-2xl font-bold text-hs-red-600">{formattedPrice}</p>
             <p className="text-gray-500 text-sm">Asking price</p>
           </div>
 

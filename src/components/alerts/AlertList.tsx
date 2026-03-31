@@ -37,13 +37,13 @@ export function AlertList({ alerts, onEdit, onDelete }: AlertListProps) {
           <div className="flex gap-3 ml-4 shrink-0">
             <button
               onClick={() => onEdit(alert)}
-              className="text-pink-600 hover:text-pink-700 text-sm font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+              className="text-hs-red-600 hover:text-hs-red-700 text-sm font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
             >
               Edit
             </button>
             <button
               onClick={() => onDelete(alert.id)}
-              className="text-red-600 hover:text-red-700 text-sm font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+              className="text-red-600 hover:text-red-700 text-sm font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
             >
               Delete
             </button>

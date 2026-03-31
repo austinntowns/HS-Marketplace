@@ -13,10 +13,10 @@ export function KpiCard({ name, metric, formatValue, onClick }: KpiCardProps) {
   return (
     <button
       onClick={onClick}
-      className="relative min-h-[120px] rounded-lg border border-gray-200 bg-white p-4 shadow-sm cursor-pointer hover:border-pink-300 hover:shadow-md transition-all text-left w-full focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+      className="relative min-h-[120px] rounded-lg border border-gray-200 bg-white p-4 shadow-sm cursor-pointer hover:border-hs-red-300 hover:shadow-md transition-all text-left w-full focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
     >
       {/* Live Badge - top right */}
-      <div className="absolute top-3 right-3 flex items-center gap-1 bg-pink-600 text-white text-xs px-2 py-0.5 rounded-full">
+      <div className="absolute top-3 right-3 flex items-center gap-1 bg-hs-red-600 text-white text-xs px-2 py-0.5 rounded-full">
         <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path
             fillRule="evenodd"

@@ -101,13 +101,13 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
               return (
                 <span
                   key={code}
-                  className="inline-flex items-center gap-1 px-2 py-1 bg-pink-100 text-pink-800 rounded text-sm"
+                  className="inline-flex items-center gap-1 px-2 py-1 bg-hs-red-100 text-hs-red-800 rounded text-sm"
                 >
                   {state?.name ?? code}
                   <button
                     type="button"
                     onClick={() => toggleState(code)}
-                    className="hover:text-pink-600 ml-1 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+                    className="hover:text-hs-red-600 ml-1 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
                     aria-label={`Remove ${state?.name ?? code}`}
                   >
                     &times;
@@ -127,7 +127,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
                   type="checkbox"
                   checked={selectedStates.includes(code)}
                   onChange={() => toggleState(code)}
-                  className="rounded border-gray-300 text-pink-600 focus:ring-pink-500"
+                  className="rounded border-gray-300 text-hs-red-600 focus:ring-hs-red-500"
                 />
                 <span className="text-gray-700">{name}</span>
               </label>
@@ -147,7 +147,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+          className="bg-hs-red-600 text-white px-4 py-2 rounded-lg hover:bg-hs-red-700 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
         >
           {submitting ? "Saving..." : alert ? "Update Alert" : "Create Alert"}
         </button>
@@ -155,7 +155,7 @@ export function AlertForm({ alert, onSubmit, onCancel }: AlertFormProps) {
           <button
             type="button"
             onClick={onCancel}
-            className="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+            className="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
           >
             Cancel
           </button>

@@ -65,7 +65,7 @@ export default async function ListingDetailPage({ params }: Props) {
   const photos = listing.photos.map(p => ({ id: p.id, url: p.url }))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Breadcrumb navigation */}
       <Breadcrumb
         items={[
@@ -82,7 +82,7 @@ export default async function ListingDetailPage({ params }: Props) {
       <div className="mt-6">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <span className="inline-block px-3 py-1 text-sm font-medium bg-pink-100 text-pink-800 rounded-full capitalize">
+            <span className="inline-block px-3 py-1 text-sm font-medium bg-hs-red-100 text-hs-red-800 rounded-full capitalize">
               {listing.type}
             </span>
             <h1 className="text-3xl font-display font-bold mt-2 text-gray-900">{displayName}</h1>

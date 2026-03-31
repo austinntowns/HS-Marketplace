@@ -85,7 +85,7 @@ export function TerritoryPicker({
           value={territoryName}
           onChange={(e) => onNameChange(e.target.value)}
           placeholder="e.g., North Atlanta Territory"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-hs-red-500 focus:border-hs-red-500"
         />
       </div>
 
@@ -138,7 +138,7 @@ export function TerritoryPicker({
           step={500}
           value={radius}
           onChange={(e) => handleRadiusChange(Number(e.target.value))}
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-pink-600"
+          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-hs-red-600"
         />
         <div className="flex justify-between text-xs text-gray-500 mt-1">
           <span>1 km</span>

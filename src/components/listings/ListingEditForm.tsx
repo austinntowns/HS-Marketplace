@@ -78,7 +78,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
                 />
               </div>
               {errors.askingPrice && (
-                <p className="mt-1 text-sm text-red-600">{errors.askingPrice.message}</p>
+                <p className="mt-1 text-sm text-hs-red-600">{errors.askingPrice.message}</p>
               )}
             </div>
 
@@ -137,7 +137,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
             )}
           />
           {errors.photos && (
-            <p className="mt-2 text-sm text-red-600">{errors.photos.message}</p>
+            <p className="mt-2 text-sm text-hs-red-600">{errors.photos.message}</p>
           )}
         </div>
 
@@ -150,7 +150,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
                 id="inventoryIncluded"
                 type="checkbox"
                 {...register('inventoryIncluded')}
-                className="w-4 h-4 text-pink-600 rounded"
+                className="w-4 h-4 text-hs-red-600 rounded"
               />
               <span>Inventory included</span>
             </label>
@@ -159,7 +159,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
                 id="laserIncluded"
                 type="checkbox"
                 {...register('laserIncluded')}
-                className="w-4 h-4 text-pink-600 rounded"
+                className="w-4 h-4 text-hs-red-600 rounded"
               />
               <span>Laser device included</span>
             </label>
@@ -192,14 +192,14 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-2 border border-gray-300 rounded-lg font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+            className="px-6 py-2 border border-gray-300 rounded-lg font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+            className="px-6 py-2 bg-hs-red-600 text-white rounded-lg font-medium disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
           >
             {isSubmitting ? 'Saving...' : isRejected ? 'Save & Resubmit' : 'Save Changes'}
           </button>

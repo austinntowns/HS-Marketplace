@@ -66,7 +66,7 @@ export function MapView({ listings, hoveredId, onHover, onListingClick, center }
       for (const listing of validListings) {
         const el = document.createElement("div")
         el.className =
-          "map-marker w-8 h-8 bg-pink-600 border-2 border-white rounded-full cursor-pointer flex items-center justify-center shadow-md transition-transform hover:scale-110"
+          "map-marker w-8 h-8 bg-hs-red-600 border-2 border-white rounded-full cursor-pointer flex items-center justify-center shadow-md transition-transform hover:scale-110"
         el.style.cssText = `
           width: 32px;
           height: 32px;

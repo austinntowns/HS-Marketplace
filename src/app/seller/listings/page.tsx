@@ -30,7 +30,7 @@ export default async function SellerListingsPage() {
         <p className="text-gray-500 mb-6">Create your first listing to start selling.</p>
         <Link
           href="/seller/listings/new"
-          className="inline-flex px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700"
+          className="inline-flex px-6 py-2 bg-hs-red-600 text-white rounded-lg font-medium hover:bg-hs-red-700"
         >
           Create Listing
         </Link>
@@ -51,7 +51,7 @@ export default async function SellerListingsPage() {
         <h1 className="text-2xl font-bold text-gray-900">My Listings</h1>
         <Link
           href="/seller/listings/new"
-          className="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-medium hover:bg-pink-700"
+          className="px-4 py-2 bg-hs-red-600 text-white rounded-lg text-sm font-medium hover:bg-hs-red-700"
         >
           Create Listing
         </Link>

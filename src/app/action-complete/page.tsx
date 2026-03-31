@@ -22,7 +22,7 @@ export default async function ActionCompletePage({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           ) : (
-            <svg className="w-8 h-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-8 h-8 text-hs-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           )}
@@ -35,7 +35,7 @@ export default async function ActionCompletePage({
 
         <Link
           href="/seller/listings"
-          className="inline-flex px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700"
+          className="inline-flex px-6 py-2 bg-hs-red-600 text-white rounded-lg font-medium hover:bg-hs-red-700"
         >
           Go to My Listings
         </Link>

@@ -59,7 +59,7 @@ export function BundleKpiTable({ locations, perLocationKpis }: BundleKpiTablePro
   const SortArrow = ({ columnKey }: { columnKey: SortKey }) => {
     if (sortKey !== columnKey) return null
     return (
-      <span className="ml-1 text-pink-600">
+      <span className="ml-1 text-hs-red-600">
         {sortDirection === 'asc' ? '\u2191' : '\u2193'}
       </span>
     )

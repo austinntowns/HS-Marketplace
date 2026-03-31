@@ -135,7 +135,7 @@ export function ListingWizard({ userId }: ListingWizardProps) {
               ${saveToast === 'idle' ? 'opacity-0' : 'opacity-100'}
               ${saveToast === 'saving' ? 'text-gray-500' : ''}
               ${saveToast === 'saved' ? 'text-emerald-600' : ''}
-              ${saveToast === 'error' ? 'text-red-600' : ''}
+              ${saveToast === 'error' ? 'text-hs-red-600' : ''}
             `.trim().replace(/\s+/g, ' ')}
             role="status"
             aria-live="polite"

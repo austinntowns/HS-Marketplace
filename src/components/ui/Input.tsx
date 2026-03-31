@@ -105,7 +105,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && (
           <p
             id={`${inputId}-error`}
-            className="text-sm text-red-600 flex items-center gap-1"
+            className="text-sm text-hs-red-600 flex items-center gap-1"
             role="alert"
           >
             <svg className="h-4 w-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">

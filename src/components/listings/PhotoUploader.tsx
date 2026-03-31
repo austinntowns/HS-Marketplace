@@ -134,7 +134,7 @@ export function PhotoUploader({ onUploadComplete, currentCount, maxCount }: Phot
                 </div>
               )}
               {u.status === 'complete' && <span className="text-green-600">Done</span>}
-              {u.status === 'error' && <span className="text-red-600">Failed</span>}
+              {u.status === 'error' && <span className="text-hs-red-600">Failed</span>}
             </div>
           ))}
         </div>

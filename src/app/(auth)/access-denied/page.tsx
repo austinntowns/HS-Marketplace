@@ -24,7 +24,7 @@ async function AccessDeniedContent({ searchParams }: AccessDeniedPageProps) {
             <p className="text-gray-600">
               Something went wrong during sign in.
             </p>
-            <p className="text-sm text-red-600 bg-red-50 rounded px-3 py-2">
+            <p className="text-sm text-hs-red-600 bg-hs-red-50 rounded px-3 py-2">
               Error: {error}
             </p>
           </div>
@@ -60,7 +60,7 @@ async function AccessDeniedContent({ searchParams }: AccessDeniedPageProps) {
             </p>
             <Link
               href="https://www.hellosugar.salon/franchise"
-              className="inline-block rounded-lg bg-pink-600 px-6 py-3 text-white font-medium hover:bg-pink-700 transition-colors"
+              className="inline-block rounded-lg bg-hs-red-600 px-6 py-3 text-white font-medium hover:bg-hs-red-700 transition-colors"
             >
               Learn About Franchising
             </Link>

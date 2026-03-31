@@ -48,9 +48,9 @@ export function LocationSelector({ value, onChange, userId }: LocationSelectorPr
               type="button"
               onClick={() => toggleLocation(loc)}
               className={`
-                p-4 rounded-lg border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2
+                p-4 rounded-lg border-2 text-left transition-colors focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
                 ${isSelected
-                  ? 'border-pink-600 bg-pink-50'
+                  ? 'border-hs-red-600 bg-hs-red-50'
                   : 'border-gray-200 hover:border-gray-300'
                 }
               `}
@@ -67,7 +67,7 @@ export function LocationSelector({ value, onChange, userId }: LocationSelectorPr
         })}
       </div>
       {value.length > 1 && (
-        <p className="text-sm text-pink-600 font-medium">
+        <p className="text-sm text-hs-red-600 font-medium">
           Bundle listing: {value.length} locations selected
         </p>
       )}

@@ -47,7 +47,7 @@ export function PhotosDetailsStep({ onSubmit, onBack, onSaveAndExit, isSubmittin
           )}
         />
         {errors.photos && (
-          <p className="mt-2 text-sm text-red-600">{errors.photos.message}</p>
+          <p className="mt-2 text-sm text-hs-red-600">{errors.photos.message}</p>
         )}
       </div>
 

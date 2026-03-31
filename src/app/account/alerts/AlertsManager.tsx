@@ -90,7 +90,7 @@ export function AlertsManager({
       ) : (
         <button
           onClick={() => setShowCreateForm(true)}
-          className="flex items-center gap-2 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+          className="flex items-center gap-2 bg-hs-red-600 text-white px-4 py-2 rounded-lg hover:bg-hs-red-700 font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
         >
           + Create New Alert
         </button>

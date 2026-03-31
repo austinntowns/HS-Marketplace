@@ -57,12 +57,12 @@ export function ListingActions({ listingId, availableActions }: ListingActionsPr
           onClick={() => handleAction(action, targetStatus)}
           disabled={isLoading}
           className={`
-            px-4 py-2 rounded-lg text-sm font-medium focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2
+            px-4 py-2 rounded-lg text-sm font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
             ${action === 'markSold'
               ? 'bg-green-600 text-white hover:bg-green-700'
               : action === 'delist'
                 ? 'bg-gray-600 text-white hover:bg-gray-700'
-                : 'bg-pink-600 text-white hover:bg-pink-700'
+                : 'bg-hs-red-600 text-white hover:bg-hs-red-700'
             }
             disabled:opacity-50
           `}

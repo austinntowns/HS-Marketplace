@@ -41,9 +41,9 @@ const variantStyles: Record<ButtonVariant, string> = {
     disabled:text-gray-400 disabled:hover:bg-transparent
   `,
   danger: `
-    bg-red-600 text-white
-    hover:bg-red-700
-    active:bg-red-800
+    bg-hs-red-600 text-white
+    hover:bg-hs-red-700
+    active:bg-hs-red-800
     disabled:bg-gray-300 disabled:text-gray-500
   `,
 }

@@ -100,7 +100,7 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
       </div>
 
       {state?.error && (
-        <p className="text-red-600 text-sm">{state.error}</p>
+        <p className="text-hs-red-600 text-sm">{state.error}</p>
       )}
 
       <button

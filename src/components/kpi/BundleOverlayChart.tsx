@@ -14,7 +14,7 @@ import type { KpiData, KpiMetric } from '@/lib/kpi/schema'
 
 // Color palette for overlay lines (from UI-SPEC)
 const PALETTE = [
-  '#db2777',  // pink-600 (brand)
+  '#dc2626',  // hs-red-600 (brand)
   '#2563eb',  // blue-600
   '#16a34a',  // green-600
   '#d97706',  // amber-600

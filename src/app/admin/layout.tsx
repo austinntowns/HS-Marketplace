@@ -27,7 +27,7 @@ export default async function AdminLayout({
             <div className="flex items-center gap-8">
               {/* Logo */}
               <Link href="/admin" className="flex items-center gap-2.5">
-                <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-hs-red-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-xs">HS</span>
                 </div>
                 <span className="font-semibold text-gray-900 tracking-tight">
