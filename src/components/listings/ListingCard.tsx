@@ -23,6 +23,15 @@ const typeLabels: Record<ListingType, string> = {
   bundle: 'Bundle',
 }
 
+const STATUS_BORDER: Record<ListingStatus, string> = {
+  draft: 'border-l-gray-400',
+  pending: 'border-l-amber-500',
+  active: 'border-l-emerald-500',
+  rejected: 'border-l-red-500',
+  sold: 'border-l-sky-500',
+  delisted: 'border-l-gray-300',
+}
+
 export function ListingCard({
   id,
   title,
@@ -48,7 +57,7 @@ export function ListingCard({
   }).format(new Date(createdAt))
 
   return (
-    <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300">
+    <div className={`group bg-white rounded-xl border border-gray-200 border-l-4 ${STATUS_BORDER[status]} overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
       {/* Rejection banner */}
       {status === 'rejected' && rejectionReason && (
         <div className="bg-red-50 border-b border-red-100 px-4 py-3">
@@ -57,12 +66,27 @@ export function ListingCard({
           </p>
           <Link
             href={`/seller/listings/${id}/edit`}
-            className="inline-flex items-center gap-1 mt-1 text-sm font-semibold text-red-700 hover:text-red-800 hover:underline underline-offset-2 transition-colors"
+            className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold text-red-700 hover:text-red-800 hover:underline underline-offset-2 transition-colors min-h-[44px] py-2"
           >
             Edit to resubmit
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
+          </Link>
+        </div>
+      )}
+
+      {/* Draft banner */}
+      {status === 'draft' && (
+        <div className="bg-gray-50 border-b border-gray-100 px-4 py-2.5">
+          <Link
+            href={`/seller/listings/${id}/edit`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors min-h-[44px] py-2"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            Continue editing this draft
           </Link>
         </div>
       )}
@@ -90,7 +114,7 @@ export function ListingCard({
 
           {/* Status badge */}
           <div className="absolute top-3 right-3">
-            <StatusBadge status={status} />
+            <StatusBadge status={status} size="md" />
           </div>
         </div>
 
@@ -110,13 +134,13 @@ export function ListingCard({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              {viewCount}
+              {viewCount} views
             </span>
             <span className="inline-flex items-center gap-1">
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
               </svg>
-              {inquiryCount}
+              {inquiryCount} inquiries
             </span>
           </div>
 
@@ -148,7 +172,7 @@ export function ListingCardCompact({
   return (
     <Link
       href={`/seller/listings/${id}`}
-      className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200"
+      className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200 min-h-[44px]"
     >
       {/* Thumbnail */}
       <div className="w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
@@ -180,7 +204,7 @@ export function ListingCardCompact({
 
       {/* Arrow */}
       <svg
-        className="h-5 w-5 text-gray-400 group-hover:text-hs-red-600 group-hover:translate-x-1 transition-all"
+        className="h-5 w-5 text-gray-400 group-hover:text-hs-red-600 group-hover:translate-x-1 transition-all flex-shrink-0"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"

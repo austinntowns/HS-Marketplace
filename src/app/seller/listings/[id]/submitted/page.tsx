@@ -11,41 +11,58 @@ export default async function ListingSubmittedPage({
   void id // param available for future use (e.g., fetching listing details)
 
   return (
-    <div className="text-center py-12">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-6">
-        <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="text-center py-12 sm:py-16">
+      {/* Success icon */}
+      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 mb-6">
+        <svg className="w-10 h-10 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">
-        Listing Submitted for Review
+
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+        You&apos;re all set!
       </h1>
-      <p className="text-gray-500 mb-8 max-w-md mx-auto">
-        Your listing has been submitted and is now pending admin approval.
-        You&apos;ll receive an email notification once it&apos;s reviewed.
+      <p className="text-lg text-gray-600 mb-2 max-w-md mx-auto">
+        Your listing has been submitted for review.
       </p>
-      <div className="flex justify-center gap-4">
+      <p className="text-gray-500 mb-8 max-w-md mx-auto">
+        We&apos;ll review it and email you when it&apos;s approved -- usually within 1-2 business days.
+      </p>
+
+      <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
         <Link
           href="/seller/listings"
-          className="px-6 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50"
+          className="inline-flex items-center justify-center px-6 py-2.5 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 min-h-[44px] transition-colors"
         >
           View My Listings
         </Link>
         <Link
           href="/seller/listings/new"
-          className="px-6 py-2 bg-pink-600 text-white rounded-lg font-medium hover:bg-pink-700"
+          className="inline-flex items-center justify-center px-6 py-2.5 bg-hs-red-600 text-white rounded-lg font-medium hover:bg-hs-red-700 min-h-[44px] transition-colors"
         >
-          Create Another
+          Create Another Listing
         </Link>
       </div>
 
-      <div className="mt-12 bg-gray-50 rounded-lg p-6 max-w-md mx-auto text-left">
-        <h3 className="font-medium text-gray-900 mb-3">What happens next?</h3>
-        <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
-          <li>Our team will review your listing within 1-2 business days</li>
-          <li>We&apos;ll verify ownership against our records</li>
-          <li>Once approved, your listing will be visible to potential buyers</li>
-          <li>Interested buyers will contact you directly via email</li>
+      <div className="mt-12 bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-8 max-w-lg mx-auto text-left">
+        <h3 className="font-semibold text-gray-900 mb-4 text-lg">What happens next?</h3>
+        <ol className="text-sm text-gray-600 space-y-4">
+          <li className="flex gap-3">
+            <span className="flex-shrink-0 w-6 h-6 bg-hs-red-100 text-hs-red-600 rounded-full flex items-center justify-center text-xs font-bold">1</span>
+            <span>We verify your ownership against Hello Sugar records</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="flex-shrink-0 w-6 h-6 bg-hs-red-100 text-hs-red-600 rounded-full flex items-center justify-center text-xs font-bold">2</span>
+            <span>Once approved, your listing goes live to the franchise network</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="flex-shrink-0 w-6 h-6 bg-hs-red-100 text-hs-red-600 rounded-full flex items-center justify-center text-xs font-bold">3</span>
+            <span>Interested buyers reach out -- you&apos;ll get an email notification</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="flex-shrink-0 w-6 h-6 bg-hs-red-100 text-hs-red-600 rounded-full flex items-center justify-center text-xs font-bold">4</span>
+            <span>You respond to inquiries and take it from there</span>
+          </li>
         </ol>
       </div>
     </div>
