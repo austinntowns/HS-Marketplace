@@ -28,7 +28,7 @@ function formatPrice(cents: number): string {
     return `$${(dollars / 1_000_000).toFixed(1)}M`
   }
   if (dollars >= 1_000) {
-    return `$${(dollars / 1_000).toFixed(0)}k`
+    return `$${Math.round(dollars).toLocaleString()}`
   }
   return `$${dollars.toLocaleString()}`
 }
@@ -39,9 +39,9 @@ export function ListingCard({ listing, isHovered, onHover }: ListingCardProps) {
       href={`/listings/${listing.id}`}
       className={`
         group block rounded-xl overflow-hidden border bg-white
-        transition-all duration-300
-        hover:shadow-lg hover:border-gray-300
-        ${isHovered ? "ring-2 ring-hs-red-500 shadow-lg border-hs-red-200" : "border-gray-200"}
+        transition-all duration-300 ease-out
+        hover:shadow-xl hover:-translate-y-1
+        ${isHovered ? "ring-2 ring-hs-red-500 shadow-xl border-hs-red-200 -translate-y-1" : "border-gray-200 shadow-sm"}
       `}
       onMouseEnter={() => onHover?.(listing.id)}
       onMouseLeave={() => onHover?.(null)}
@@ -53,7 +53,7 @@ export function ListingCard({ listing, isHovered, onHover }: ListingCardProps) {
             src={listing.primaryPhotoUrl}
             alt={listing.locationName ?? "Listing photo"}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
@@ -63,6 +63,9 @@ export function ListingCard({ listing, isHovered, onHover }: ListingCardProps) {
             </div>
           </div>
         )}
+
+        {/* Gradient overlay at bottom for text readability */}
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/25 to-transparent pointer-events-none" />
 
         {/* Type badge overlay */}
         <div className="absolute top-3 left-3">
@@ -84,7 +87,7 @@ export function ListingCard({ listing, isHovered, onHover }: ListingCardProps) {
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             {/* Price */}
-            <p className="text-xl font-bold text-hs-red-600 tracking-tight">
+            <p className="text-xl font-bold text-hs-red-600 tracking-tight tabular-nums">
               {formatPrice(listing.askingPrice)}
             </p>
 
@@ -105,9 +108,11 @@ export function ListingCard({ listing, isHovered, onHover }: ListingCardProps) {
 
         {/* View indicator on hover */}
         <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
-          <span className="text-xs text-gray-400">View details</span>
+          <span className="text-xs text-gray-400 group-hover:text-gray-600 transition-colors duration-200">
+            View details
+          </span>
           <svg
-            className="h-4 w-4 text-gray-400 group-hover:text-hs-red-600 group-hover:translate-x-1 transition-all"
+            className="h-4 w-4 text-gray-400 group-hover:text-hs-red-600 group-hover:translate-x-1 transition-all duration-200"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
