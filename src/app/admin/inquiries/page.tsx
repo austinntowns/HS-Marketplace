@@ -14,14 +14,14 @@ export default async function AdminInquiriesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Buyer Inquiries</h1>
+      <h1 className="font-display text-2xl font-bold text-gray-900">Buyer Inquiries</h1>
 
       {inquiries.length === 0 ? (
-        <div className="bg-white shadow rounded-lg p-8 text-center text-gray-500">
+        <div className="rounded-xl border border-gray-200 bg-white p-8 text-center text-gray-500">
           No inquiries yet.
         </div>
       ) : (
-        <div className="bg-white shadow rounded-lg overflow-hidden">
+        <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -64,7 +64,7 @@ export default async function AdminInquiriesPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <Link
                           href={`/listings/${inquiry.listingId}`}
-                          className="text-pink-600 hover:text-pink-700 hover:underline"
+                          className="text-hs-red-600 hover:text-hs-red-700 hover:underline"
                         >
                           {listingDisplay}
                         </Link>

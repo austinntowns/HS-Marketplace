@@ -48,7 +48,7 @@ export default async function AdminListingDetailPage({
       <div className="flex items-start justify-between mb-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl font-bold text-gray-900">{listing.title}</h1>
+            <h1 className="font-display text-2xl font-bold text-gray-900">{listing.title}</h1>
             <StatusBadge status={listing.status} size="md" />
           </div>
           <p className="text-gray-500">
@@ -57,7 +57,7 @@ export default async function AdminListingDetailPage({
         </div>
         <Link
           href={`/admin/listings/${listing.id}/edit`}
-          className="px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-medium hover:bg-pink-700"
+          className="px-4 py-2 bg-hs-red-600 text-white rounded-lg text-sm font-medium hover:bg-hs-red-700"
         >
           Edit Listing
         </Link>
@@ -67,7 +67,7 @@ export default async function AdminListingDetailPage({
         {/* Main content */}
         <div className="lg:col-span-2 space-y-6">
           {listing.photos.length > 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="rounded-xl border border-gray-200 bg-white p-4">
               <div className="grid grid-cols-3 gap-2">
                 {listing.photos.map((photo, i) => (
                   <div
@@ -82,7 +82,7 @@ export default async function AdminListingDetailPage({
             </div>
           )}
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="rounded-xl border border-gray-200 bg-white p-4">
             <h3 className="font-medium text-gray-900 mb-3">Locations</h3>
             <div className="space-y-3">
               {listing.locations.map(loc => (
@@ -99,12 +99,12 @@ export default async function AdminListingDetailPage({
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-2xl font-bold text-pink-600">{formattedPrice}</p>
+          <div className="rounded-xl border border-gray-200 bg-white p-4">
+            <p className="text-2xl font-bold text-hs-red-600">{formattedPrice}</p>
             <p className="text-gray-500 text-sm">Asking price</p>
           </div>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
+          <div className="rounded-xl border border-gray-200 bg-white p-4">
             <h3 className="font-medium text-gray-900 mb-3">Analytics</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>

@@ -24,26 +24,30 @@ export default async function AdminListingsPage({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">All Listings</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="font-display text-2xl font-bold text-gray-900">
+          All Listings
+        </h1>
         <span className="text-sm text-gray-500">
           {listings.length} listing{listings.length !== 1 ? 's' : ''}
         </span>
       </div>
 
       {/* Status filter tabs */}
-      <div className="flex gap-2 mb-6 overflow-x-auto">
-        {STATUS_FILTERS.map(filter => (
+      <div className="mb-6 flex gap-2 overflow-x-auto">
+        {STATUS_FILTERS.map((filter) => (
           <Link
             key={filter.value}
-            href={filter.value ? `/admin/listings?status=${filter.value}` : '/admin/listings'}
-            className={`
-              px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap
-              ${(status || '') === filter.value
-                ? 'bg-pink-600 text-white'
+            href={
+              filter.value
+                ? `/admin/listings?status=${filter.value}`
+                : '/admin/listings'
+            }
+            className={`whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium ${
+              (status || '') === filter.value
+                ? 'bg-hs-red-600 text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }
-            `}
+            }`}
           >
             {filter.label}
           </Link>
@@ -51,7 +55,7 @@ export default async function AdminListingsPage({
       </div>
 
       {listings.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
+        <div className="rounded-xl border border-gray-200 bg-white py-12 text-center">
           <p className="text-gray-500">No listings found.</p>
         </div>
       ) : (

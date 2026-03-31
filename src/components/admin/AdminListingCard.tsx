@@ -68,13 +68,13 @@ export function AdminListingCard({
           <div className="flex items-start justify-between">
             <div>
               <div className="flex items-center gap-2">
-                <Link href={`/admin/listings/${id}`} className="font-medium text-gray-900 hover:text-pink-600">
+                <Link href={`/admin/listings/${id}`} className="font-medium text-gray-900 hover:text-hs-red-600">
                   {title}
                 </Link>
                 <StatusBadge status={status} />
               </div>
               <p className="text-sm text-gray-500 capitalize">{type}</p>
-              <p className="text-lg font-bold text-pink-600">{formattedPrice}</p>
+              <p className="text-lg font-bold text-hs-red-600">{formattedPrice}</p>
             </div>
 
             {/* Actions */}
@@ -83,14 +83,14 @@ export function AdminListingCard({
                 <button
                   onClick={onApprove}
                   disabled={isProcessing}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
                 >
                   Approve
                 </button>
                 <button
                   onClick={onReject}
                   disabled={isProcessing}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
                 >
                   Reject
                 </button>
