@@ -21,6 +21,7 @@ export function ListingWizard({ userId }: ListingWizardProps) {
   const [step, setStep] = useState(1)
   const [listingId, setListingId] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const methods = useForm<ListingFormData>({
     resolver: zodResolver(listingSchema),
@@ -51,11 +52,32 @@ export function ListingWizard({ userId }: ListingWizardProps) {
     setStep(nextStep)
   }
 
+  const handleSaveAndExit = async () => {
+    const values = methods.getValues()
+    const hasType = !!values.type
+    const hasLocations = values.locations && values.locations.length > 0
+
+    // If no existing draft and no meaningful data, just navigate away
+    if (!listingId && !hasType && !hasLocations) {
+      router.push('/seller/listings')
+      return
+    }
+
+    // Only save if there's actual data worth saving
+    try {
+      await saveDraft(values, listingId || undefined)
+    } catch {
+      // Best-effort save; navigate regardless
+    }
+    router.push('/seller/listings')
+  }
+
   const handleSubmit = async () => {
     // Validate all fields
     const isValid = await methods.trigger()
     if (!isValid) return
 
+    setSubmitError(null)
     setIsSubmitting(true)
     try {
       // Save final draft
@@ -74,7 +96,7 @@ export function ListingWizard({ userId }: ListingWizardProps) {
       router.push(`/seller/listings/${finalListingId}/submitted`)
     } catch (error) {
       console.error('Submit failed:', error)
-      // TODO: Show error toast
+      setSubmitError('Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -83,6 +105,16 @@ export function ListingWizard({ userId }: ListingWizardProps) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={(e) => e.preventDefault()}>
+        <div className="flex justify-end mb-4">
+          <button
+            type="button"
+            onClick={handleSaveAndExit}
+            className="text-sm text-gray-600 hover:text-gray-900 underline underline-offset-2 focus-visible:ring-2 focus-visible:ring-pink-500 focus-visible:ring-offset-2 rounded"
+          >
+            Save &amp; Exit
+          </button>
+        </div>
+
         <StepIndicator current={step} total={3} />
 
         {step === 1 && (
@@ -100,11 +132,18 @@ export function ListingWizard({ userId }: ListingWizardProps) {
         )}
 
         {step === 3 && (
-          <PhotosDetailsStep
-            onSubmit={handleSubmit}
-            onBack={() => setStep(2)}
-            isSubmitting={isSubmitting}
-          />
+          <>
+            <PhotosDetailsStep
+              onSubmit={handleSubmit}
+              onBack={() => setStep(2)}
+              isSubmitting={isSubmitting}
+            />
+            {submitError && (
+              <div role="alert" className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                {submitError}
+              </div>
+            )}
+          </>
         )}
       </form>
     </FormProvider>

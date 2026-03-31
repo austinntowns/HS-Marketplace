@@ -21,6 +21,7 @@ interface ListingEditFormProps {
 export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = false }: ListingEditFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
 
   const methods = useForm<ListingFormData>({
     resolver: zodResolver(listingSchema),
@@ -31,6 +32,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
   const photos = watch('photos') || []
 
   const handleSubmit = async (data: ListingFormData) => {
+    setFormError(null)
     setIsSubmitting(true)
     try {
       if (isAdmin) {
@@ -42,7 +44,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
       }
       router.refresh()
     } catch (error) {
-      alert((error as Error).message)
+      setFormError((error as Error).message || 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -186,6 +188,13 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
           />
         </div>
+
+        {/* Error message */}
+        {formError && (
+          <div role="alert" className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+            {formError}
+          </div>
+        )}
 
         {/* Submit */}
         <div className="flex justify-end gap-4">
