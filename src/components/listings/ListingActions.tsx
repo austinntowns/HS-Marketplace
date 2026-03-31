@@ -11,6 +11,8 @@ interface ListingActionsProps {
 export function ListingActions({ listingId, availableActions }: ListingActionsProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [actionError, setActionError] = useState<string | null>(null)
+  const [pendingAction, setPendingAction] = useState<{ action: string; targetStatus: string } | null>(null)
 
   const actionLabels: Record<string, string> = {
     submit: 'Submit for Review',
@@ -19,11 +21,21 @@ export function ListingActions({ listingId, availableActions }: ListingActionsPr
     relist: 'Relist',
   }
 
-  const handleAction = async (action: string, targetStatus: string) => {
-    if (!confirm(`Are you sure you want to ${actionLabels[action]?.toLowerCase() || action}?`)) {
-      return
-    }
+  const requestAction = (action: string, targetStatus: string) => {
+    setActionError(null)
+    setPendingAction({ action, targetStatus })
+  }
 
+  const cancelAction = () => {
+    setPendingAction(null)
+  }
+
+  const confirmAction = async () => {
+    if (!pendingAction) return
+
+    const { action, targetStatus } = pendingAction
+    setPendingAction(null)
+    setActionError(null)
     setIsLoading(true)
     try {
       const res = await fetch(`/api/listings/${listingId}/status`, {
@@ -39,7 +51,7 @@ export function ListingActions({ listingId, availableActions }: ListingActionsPr
 
       router.refresh()
     } catch (error) {
-      alert((error as Error).message)
+      setActionError((error as Error).message || 'Something went wrong. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -50,26 +62,56 @@ export function ListingActions({ listingId, availableActions }: ListingActionsPr
   }
 
   return (
-    <div className="flex gap-2">
-      {availableActions.map(({ action, targetStatus }) => (
-        <button
-          key={action}
-          onClick={() => handleAction(action, targetStatus)}
-          disabled={isLoading}
-          className={`
-            px-4 py-2 rounded-lg text-sm font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
-            ${action === 'markSold'
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : action === 'delist'
-                ? 'bg-gray-600 text-white hover:bg-gray-700'
-                : 'bg-hs-red-600 text-white hover:bg-hs-red-700'
-            }
-            disabled:opacity-50
-          `}
-        >
-          {actionLabels[action] || action}
-        </button>
-      ))}
+    <div className="space-y-3">
+      {/* Confirmation bar */}
+      {pendingAction && (
+        <div className="flex items-center gap-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm">
+          <span className="text-yellow-800">
+            Are you sure you want to {actionLabels[pendingAction.action]?.toLowerCase() || pendingAction.action}?
+          </span>
+          <button
+            onClick={confirmAction}
+            className="px-3 py-1 bg-yellow-600 text-white rounded-md text-xs font-medium hover:bg-yellow-700 focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2"
+          >
+            Confirm
+          </button>
+          <button
+            onClick={cancelAction}
+            className="px-3 py-1 border border-yellow-300 text-yellow-800 rounded-md text-xs font-medium hover:bg-yellow-100 focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
+      {/* Error message */}
+      {actionError && (
+        <div role="alert" className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+          {actionError}
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        {availableActions.map(({ action, targetStatus }) => (
+          <button
+            key={action}
+            onClick={() => requestAction(action, targetStatus)}
+            disabled={isLoading || !!pendingAction}
+            className={`
+              px-4 py-2 rounded-lg text-sm font-medium focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2
+              ${action === 'markSold'
+                ? 'bg-green-600 text-white hover:bg-green-700'
+                : action === 'delist'
+                  ? 'bg-gray-600 text-white hover:bg-gray-700'
+                  : 'bg-hs-red-600 text-white hover:bg-hs-red-700'
+              }
+              disabled:opacity-50
+            `}
+          >
+            {actionLabels[action] || action}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

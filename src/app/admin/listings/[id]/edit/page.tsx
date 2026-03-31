@@ -50,8 +50,8 @@ export default async function AdminEditListingPage({
       territoryLng: loc.territoryLng || undefined,
       territoryRadius: loc.territoryRadius || undefined,
     })),
-    askingPrice: listing.askingPrice,
-    ttmProfit: listing.ttmProfit || undefined,
+    askingPrice: listing.askingPrice / 100,
+    ttmProfit: listing.ttmProfit ? listing.ttmProfit / 100 : undefined,
     reasonForSelling: listing.reasonForSelling || undefined,
     photos: listing.photos.map(p => ({
       id: p.id,
