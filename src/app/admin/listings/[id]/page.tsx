@@ -119,9 +119,9 @@ export default async function AdminListingDetailPage({
           </div>
 
           {listing.rejectionReason && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h3 className="font-medium text-red-800 mb-1">Rejection Reason</h3>
-              <p className="text-red-700 text-sm">{listing.rejectionReason}</p>
+            <div className="bg-hs-red-50 border border-hs-red-200 rounded-lg p-4">
+              <h3 className="font-medium text-hs-red-800 mb-1">Rejection Reason</h3>
+              <p className="text-hs-red-700 text-sm">{listing.rejectionReason}</p>
             </div>
           )}
         </div>

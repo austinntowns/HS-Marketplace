@@ -61,7 +61,7 @@ function SortablePhoto({ photo, isFirst, onRemove }: SortablePhotoProps) {
           e.stopPropagation()
           onRemove(photo.id)
         }}
-        className="absolute top-1.5 right-1.5 w-7 h-7 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center text-sm shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+        className="absolute top-1.5 right-1.5 w-7 h-7 bg-hs-red-600 hover:bg-hs-red-700 text-white rounded-full flex items-center justify-center text-sm shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
         aria-label={`Remove photo ${photo.filename || ''}`}
       >
         <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>

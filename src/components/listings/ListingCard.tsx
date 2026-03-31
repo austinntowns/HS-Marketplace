@@ -27,7 +27,7 @@ const STATUS_BORDER: Record<ListingStatus, string> = {
   draft: 'border-l-gray-400',
   pending: 'border-l-amber-500',
   active: 'border-l-emerald-500',
-  rejected: 'border-l-red-500',
+  rejected: 'border-l-hs-red-500',
   sold: 'border-l-sky-500',
   delisted: 'border-l-gray-300',
 }
@@ -60,13 +60,13 @@ export function ListingCard({
     <div className={`group bg-white rounded-xl border border-gray-200 border-l-4 ${STATUS_BORDER[status]} overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
       {/* Rejection banner */}
       {status === 'rejected' && rejectionReason && (
-        <div className="bg-red-50 border-b border-red-100 px-4 py-3">
-          <p className="text-sm text-red-800">
+        <div className="bg-hs-red-50 border-b border-hs-red-100 px-4 py-3">
+          <p className="text-sm text-hs-red-800">
             <span className="font-semibold">Rejected:</span> {rejectionReason}
           </p>
           <Link
             href={`/seller/listings/${id}/edit`}
-            className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold text-red-700 hover:text-red-800 hover:underline underline-offset-2 transition-colors min-h-[44px] py-2"
+            className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold text-hs-red-700 hover:text-hs-red-800 hover:underline underline-offset-2 transition-colors min-h-[44px] py-2"
           >
             Edit to resubmit
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

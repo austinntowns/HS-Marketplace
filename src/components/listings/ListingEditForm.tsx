@@ -191,7 +191,7 @@ export function ListingEditForm({ listingId, initialData, isRejected, isAdmin = 
 
         {/* Error message */}
         {formError && (
-          <div role="alert" className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+          <div role="alert" className="p-3 bg-hs-red-50 border border-hs-red-200 rounded-lg text-sm text-hs-red-700">
             {formError}
           </div>
         )}

@@ -48,7 +48,7 @@ export function RejectionModal({
         <div className="space-y-4">
           <div>
             <label htmlFor="rejectionReason" className="block text-sm font-medium text-gray-700 mb-1">
-              Reason <span className="text-red-500">*</span>
+              Reason <span className="text-hs-red-500">*</span>
             </label>
             <select
               id="rejectionReason"
@@ -89,7 +89,7 @@ export function RejectionModal({
           <button
             onClick={handleConfirm}
             disabled={!reason || isProcessing}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+            className="px-4 py-2 bg-hs-red-600 text-white rounded-lg font-medium hover:bg-hs-red-700 disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
           >
             {isProcessing ? 'Rejecting...' : 'Reject Listing'}
           </button>

@@ -76,7 +76,7 @@ export function ConfirmDialog({
             onClick={onConfirm}
             className={`px-4 py-2 text-sm font-medium text-white rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
               variant === 'danger'
-                ? 'bg-red-600 hover:bg-red-700 focus-visible:ring-red-500'
+                ? 'bg-hs-red-600 hover:bg-hs-red-700 focus-visible:ring-hs-red-500'
                 : 'bg-hs-red-600 hover:bg-hs-red-700 focus-visible:ring-hs-red-500'
             }`}
           >

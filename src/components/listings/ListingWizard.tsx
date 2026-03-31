@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -12,6 +12,8 @@ import { listingSchema, getFieldsForStep } from '@/lib/listings/schemas'
 import { saveDraft, submitListing } from '@/lib/listings/actions'
 import type { ListingFormData } from '@/lib/listings/types'
 
+type SaveToast = 'idle' | 'saving' | 'saved' | 'error'
+
 interface ListingWizardProps {
   userId: string
 }
@@ -22,6 +24,15 @@ export function ListingWizard({ userId }: ListingWizardProps) {
   const [listingId, setListingId] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [saveToast, setSaveToast] = useState<SaveToast>('idle')
+
+  // Auto-dismiss save toast
+  useEffect(() => {
+    if (saveToast === 'saved' || saveToast === 'error') {
+      const timer = setTimeout(() => setSaveToast('idle'), 2500)
+      return () => clearTimeout(timer)
+    }
+  }, [saveToast])
 
   const methods = useForm<ListingFormData>({
     resolver: zodResolver(listingSchema),
@@ -36,18 +47,30 @@ export function ListingWizard({ userId }: ListingWizardProps) {
     },
   })
 
+  const handleSaveDraft = useCallback(async (values: ListingFormData) => {
+    setSaveToast('saving')
+    try {
+      const result = await saveDraft(values, listingId || undefined)
+      if (result.listingId && !listingId) {
+        setListingId(result.listingId)
+      }
+      setSaveToast('saved')
+      return result
+    } catch {
+      setSaveToast('error')
+      return { listingId: null }
+    }
+  }, [listingId])
+
   const handleStepComplete = async (nextStep: number) => {
     // Validate current step fields
     const fieldsToValidate = getFieldsForStep(step)
     const isValid = await methods.trigger(fieldsToValidate)
     if (!isValid) return
 
-    // Auto-save draft
+    // Auto-save draft with toast
     const values = methods.getValues()
-    const result = await saveDraft(values, listingId || undefined)
-    if (result.listingId && !listingId) {
-      setListingId(result.listingId)
-    }
+    await handleSaveDraft(values)
 
     setStep(nextStep)
   }
@@ -65,7 +88,7 @@ export function ListingWizard({ userId }: ListingWizardProps) {
 
     // Only save if there's actual data worth saving
     try {
-      await saveDraft(values, listingId || undefined)
+      await handleSaveDraft(values)
     } catch {
       // Best-effort save; navigate regardless
     }
@@ -105,7 +128,43 @@ export function ListingWizard({ userId }: ListingWizardProps) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={(e) => e.preventDefault()}>
-        <div className="flex justify-end mb-4">
+        {/* Save status bar */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2 text-sm" aria-live="polite">
+            {saveToast === 'saving' && (
+              <span className="text-gray-500 flex items-center gap-1.5">
+                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Saving...
+              </span>
+            )}
+            {saveToast === 'saved' && (
+              <span className="text-green-600 flex items-center gap-1.5 animate-fade-in">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Draft saved
+              </span>
+            )}
+            {saveToast === 'error' && (
+              <span className="text-hs-red-600 flex items-center gap-1.5 animate-fade-in">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Save failed
+              </span>
+            )}
+            {saveToast === 'idle' && (
+              <span className="text-gray-400 flex items-center gap-1.5">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Progress saved automatically
+              </span>
+            )}
+          </div>
           <button
             type="button"
             onClick={handleSaveAndExit}
@@ -139,7 +198,7 @@ export function ListingWizard({ userId }: ListingWizardProps) {
               isSubmitting={isSubmitting}
             />
             {submitError && (
-              <div role="alert" className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+              <div role="alert" className="mt-4 p-3 bg-hs-red-50 border border-hs-red-200 rounded-lg text-sm text-hs-red-700">
                 {submitError}
               </div>
             )}

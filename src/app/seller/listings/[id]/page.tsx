@@ -49,13 +49,13 @@ export default async function SellerListingDetailPage({
     <div>
       {/* Rejection banner */}
       {listing.status === 'rejected' && listing.rejectionReason && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-          <p className="text-red-800">
+        <div className="bg-hs-red-50 border border-hs-red-200 rounded-lg p-4 mb-6">
+          <p className="text-hs-red-800">
             <span className="font-medium">Your listing was rejected:</span> {listing.rejectionReason}
           </p>
           <Link
             href={`/seller/listings/${listing.id}/edit`}
-            className="inline-flex mt-2 px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700"
+            className="inline-flex mt-2 px-4 py-2 bg-hs-red-600 text-white rounded-lg text-sm font-medium hover:bg-hs-red-700"
           >
             Edit to Resubmit
           </Link>

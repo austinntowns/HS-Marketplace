@@ -269,7 +269,7 @@ export function UsersManager({
                           })
                         }
                         disabled={isPending}
-                        className="text-sm text-red-600 hover:text-red-800 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+                        className="text-sm text-hs-red-600 hover:text-hs-red-800 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
                       >
                         Remove
                       </button>
@@ -341,7 +341,7 @@ export function UsersManager({
                       })
                     }
                     disabled={isPending}
-                    className="text-sm text-red-600 hover:text-red-800 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
+                    className="text-sm text-hs-red-600 hover:text-hs-red-800 focus-visible:ring-2 focus-visible:ring-hs-red-500 focus-visible:ring-offset-2"
                   >
                     Remove
                   </button>

@@ -24,9 +24,9 @@ const STATUS_CONFIG: Record<
   },
   rejected: {
     label: 'Rejected',
-    bgClass: 'bg-red-100',
-    textClass: 'text-red-800',
-    dotClass: 'bg-red-500',
+    bgClass: 'bg-hs-red-100',
+    textClass: 'text-hs-red-800',
+    dotClass: 'bg-hs-red-500',
   },
   sold: {
     label: 'Sold',

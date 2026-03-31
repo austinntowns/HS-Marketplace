@@ -39,7 +39,7 @@ export function FinancialsStep({ onNext, onBack, onSaveAndExit, isSaving }: Fina
       {/* Seller-entered fields */}
       <div>
         <label htmlFor="askingPrice" className="block text-sm font-medium text-gray-700 mb-1">
-          Asking Price <span className="text-red-500">*</span>
+          Asking Price <span className="text-hs-red-500">*</span>
         </label>
         <div className="relative">
           <span className="absolute left-3 top-2.5 text-gray-500">$</span>

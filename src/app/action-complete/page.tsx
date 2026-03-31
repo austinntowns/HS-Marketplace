@@ -15,7 +15,7 @@ export default async function ActionCompletePage({
       <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
         <div className={`
           inline-flex items-center justify-center w-16 h-16 rounded-full mb-6
-          ${success ? 'bg-green-100' : 'bg-red-100'}
+          ${success ? 'bg-green-100' : 'bg-hs-red-100'}
         `}>
           {success ? (
             <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -28,7 +28,7 @@ export default async function ActionCompletePage({
           )}
         </div>
 
-        <h1 className={`text-xl font-bold mb-2 ${success ? 'text-gray-900' : 'text-red-900'}`}>
+        <h1 className={`text-xl font-bold mb-2 ${success ? 'text-gray-900' : 'text-hs-red-900'}`}>
           {success ? 'Success!' : 'Action Failed'}
         </h1>
         <p className="text-gray-600 mb-6">{message}</p>
