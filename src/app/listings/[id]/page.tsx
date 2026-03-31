@@ -3,6 +3,8 @@ import { redirect, notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getListingById } from '@/lib/listing-detail'
 import { hasContactedListing } from '@/lib/contact-actions'
+import { isFavorited } from '@/lib/favorites-actions'
+import { FavoriteButtonLarge } from './FavoriteButtonLarge'
 import { ListingPhotos } from './ListingPhotos'
 import { ContactForm } from './ContactForm'
 import { FinancialsGrid } from '@/components/listing-detail/FinancialsGrid'
@@ -42,6 +44,7 @@ export default async function ListingDetailPage({ params }: Props) {
   }
 
   const contacted = await hasContactedListing(listing.id)
+  const favorited = await isFavorited(listing.id)
 
   // Primary salon location for display
   const primaryLocation = listing.locations.find(l => l.locationType === 'salon') ?? listing.locations[0]
@@ -62,7 +65,7 @@ export default async function ListingDetailPage({ params }: Props) {
   const photos = listing.photos.map(p => ({ id: p.id, url: p.url }))
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <main className="max-w-6xl mx-auto px-4 py-8">
       {/* Photo Gallery */}
       <ListingPhotos photos={photos} />
 
@@ -71,7 +74,10 @@ export default async function ListingDetailPage({ params }: Props) {
         <span className="inline-block px-3 py-1 text-sm font-medium bg-pink-100 text-pink-800 rounded-full capitalize">
           {listing.type}
         </span>
-        <h1 className="text-3xl font-bold mt-2 text-gray-900">{displayName}</h1>
+        <div className="flex items-center gap-3 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900">{displayName}</h1>
+          <FavoriteButtonLarge listingId={listing.id} initialFavorited={favorited} />
+        </div>
         {listing.locations.length > 0 && (
           <div className="mt-1 space-y-0.5">
             {listing.locations.map(loc => (
@@ -178,6 +184,6 @@ export default async function ListingDetailPage({ params }: Props) {
           />
         </div>
       </section>
-    </div>
+    </main>
   )
 }

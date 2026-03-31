@@ -16,7 +16,7 @@ interface FullGalleryProps {
 }
 
 export function FullGallery({ photos, open, onClose, startIndex = 0 }: FullGalleryProps) {
-  const slides = photos.map(p => ({ src: p.url }))
+  const slides = photos.map((p, i) => ({ src: p.url, alt: `Listing photo ${i + 1}` }))
 
   return (
     <Lightbox
