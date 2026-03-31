@@ -3,11 +3,12 @@
 import { useState } from "react"
 import dynamic from "next/dynamic"
 import { FilterBar, useListingFilters } from "./FilterBar"
+import { MobileFilterDrawer } from "./MobileFilterDrawer"
 import { ListingGrid } from "./ListingGrid"
 import { LocationSearch } from "./LocationSearch"
 import { SaveSearchButton } from "./SaveSearchButton"
+import { UserNav } from "./UserNav"
 import type { ListingCard } from "@/lib/listings-query"
-import { MobileFilterDrawer } from "./MobileFilterDrawer"
 import { useRouter } from "next/navigation"
 
 // Dynamic import for MapView avoids SSR issues with MapTiler SDK
@@ -25,9 +26,12 @@ const MapView = dynamic(() => import("./MapView").then((m) => m.MapView), {
 
 interface BrowsePageProps {
   initialListings: ListingCard[]
+  isAdmin?: boolean
+  hasSeller?: boolean
+  favoriteIds?: string[]
 }
 
-export function BrowsePage({ initialListings }: BrowsePageProps) {
+export function BrowsePage({ initialListings, isAdmin, hasSeller, favoriteIds = [] }: BrowsePageProps) {
   const [viewMode, setViewMode] = useState<"list" | "map">("list")
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [mapCenter, setMapCenter] = useState<{ lng: number; lat: number } | null>(null)
@@ -75,15 +79,29 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
               </p>
             </div>
           </div>
+          <UserNav isAdmin={isAdmin} hasSeller={hasSeller} />
         </div>
       </header>
 
-      {/* Filter bar — sticky at top */}
-      <FilterBar />
+      {/* Filter bar — desktop only, sticky at top */}
+      <div className="hidden md:block">
+        <FilterBar />
+      </div>
 
-      {/* View controls + location search */}
+      {/* View controls + mobile filter button */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3">
+          {/* Mobile: Filters button */}
+          <button
+            onClick={() => setMobileFiltersOpen(true)}
+            className="md:hidden flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors min-h-[44px]"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Filters
+          </button>
+
           {/* View toggle */}
           <div className="flex rounded-lg border border-gray-200 overflow-hidden shadow-sm">
             <button
@@ -128,8 +146,8 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
             </button>
           </div>
 
-          {/* Location search + Save search */}
-          <div className="flex items-center gap-3 flex-1 justify-end">
+          {/* Location search + Save search — hidden on mobile */}
+          <div className="hidden sm:flex items-center gap-3 flex-1 justify-end">
             <div className="max-w-sm flex-1">
               <LocationSearch onSelect={handleLocationSelect} />
             </div>
@@ -148,6 +166,7 @@ export function BrowsePage({ initialListings }: BrowsePageProps) {
               filters={filters}
               hoveredId={hoveredId}
               onHover={setHoveredId}
+              favoriteIds={favoriteIds}
             />
           </div>
         ) : (

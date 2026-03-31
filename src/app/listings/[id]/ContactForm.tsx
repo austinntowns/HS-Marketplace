@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState } from 'react'
+import Link from 'next/link'
 import { submitContactForm } from '@/lib/contact-actions'
 
 interface ContactFormProps {
@@ -41,10 +42,19 @@ export function ContactForm({ listingId, buyerName, buyerEmail, hasContacted }: 
         <p className="text-green-600 text-sm mt-2 max-w-xs mx-auto">
           The seller has been notified and will contact you directly. Keep an eye on your inbox.
         </p>
-        <div className="mt-4 pt-4 border-t border-green-200">
+        <div className="mt-4 pt-4 border-t border-green-200 space-y-3">
           <p className="text-xs text-green-500">
             Sent as {buyerName ?? 'Buyer'} ({buyerEmail ?? 'N/A'})
           </p>
+          <Link
+            href="/browse"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-green-700 hover:text-green-800 hover:underline underline-offset-2 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Browse more listings
+          </Link>
         </div>
       </div>
     )

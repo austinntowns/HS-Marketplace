@@ -13,9 +13,10 @@ interface TypeLocationStepProps {
 }
 
 const TYPE_OPTIONS: { value: ListingType; label: string; description: string }[] = [
-  { value: 'suite', label: 'Suite', description: 'A single suite location' },
-  { value: 'flagship', label: 'Flagship', description: 'A flagship location' },
-  { value: 'territory', label: 'Territory', description: 'An unopened territory' },
+  { value: 'suite', label: 'Suite', description: 'A single suite inside a shared space' },
+  { value: 'flagship', label: 'Flagship', description: 'A full standalone studio' },
+  { value: 'territory', label: 'Territory', description: 'Rights to open new locations' },
+  { value: 'bundle', label: 'Bundle', description: 'Two or more locations sold together' },
 ]
 
 export function TypeLocationStep({ userId, onNext, onSaveAndExit, isSaving }: TypeLocationStepProps) {

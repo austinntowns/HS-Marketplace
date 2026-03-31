@@ -180,6 +180,8 @@ export function ListingWizard({ userId }: ListingWizardProps) {
           <TypeLocationStep
             userId={userId}
             onNext={() => handleStepComplete(2)}
+            onSaveAndExit={handleSaveAndExit}
+            isSaving={saveToast === 'saving'}
           />
         )}
 
@@ -187,6 +189,8 @@ export function ListingWizard({ userId }: ListingWizardProps) {
           <FinancialsStep
             onNext={() => handleStepComplete(3)}
             onBack={() => setStep(1)}
+            onSaveAndExit={handleSaveAndExit}
+            isSaving={saveToast === 'saving'}
           />
         )}
 
@@ -195,7 +199,9 @@ export function ListingWizard({ userId }: ListingWizardProps) {
             <PhotosDetailsStep
               onSubmit={handleSubmit}
               onBack={() => setStep(2)}
+              onSaveAndExit={handleSaveAndExit}
               isSubmitting={isSubmitting}
+              isSaving={saveToast === 'saving'}
             />
             {submitError && (
               <div role="alert" className="mt-4 p-3 bg-hs-red-50 border border-hs-red-200 rounded-lg text-sm text-hs-red-700">
